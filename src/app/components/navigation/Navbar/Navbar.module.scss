@@ -1,0 +1,51 @@
+@use "@base/colors" as *;
+
+.navbar {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-inter);
+  width: 1200px;
+  height: 70px;
+  margin: 0 auto;
+  font-weight: 600;
+  font-size: 16px;
+
+  .navbarHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .navbarBtnsLeft {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+
+    margin: 0 80px;
+  }
+
+  .navbarBtnsRight {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-left: auto;
+
+    .tryForFreeBtn {
+      color: $base-color-1;
+      background-color: $base-color-2;
+      padding: 9px 20px;
+      border-radius: 12px;
+      filter: drop-shadow(0px 3px 7px rgba($base-color-2, 0.4));
+      display: flex;
+      transition: 0.3s;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+}

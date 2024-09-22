@@ -8,10 +8,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
+      // colors: {
+      //   background: "var(--background)",
+      //   foreground: "var(--foreground)",
+      // },
+    },
+    fontFamily: {
+      sans: ["Segoe UI", "Tahoma", "Geneva", "Verdana", "sans-serif"],
     },
   },
   plugins: [],

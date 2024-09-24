@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./Navbar.module.scss";
+import Button from "../../ui/Button";
 
 const Navbar = () => {
   return (
@@ -14,7 +15,7 @@ const Navbar = () => {
         <span>Modal Generator</span>
       </div>
 
-      <ul className={styles.navbarBtnsLeft}>
+      <ul className={styles.navbarLinks}>
         <li>
           <a href="#">Solutions</a>
         </li>
@@ -29,16 +30,12 @@ const Navbar = () => {
         </li>
       </ul>
 
-      <ul className={styles.navbarBtnsRight}>
-        <li>
+      <div className={styles.navbarBtns}>
+        <button>
           <a href="#">Sign in</a>
-        </li>
-        <li>
-          <a className={styles.tryForFreeBtn} href="#">
-            Try for free
-          </a>
-        </li>
-      </ul>
+        </button>
+        <Button size="medium">Try for free</Button>
+      </div>
     </nav>
   );
 };

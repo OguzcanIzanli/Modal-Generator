@@ -16,36 +16,17 @@
     gap: 10px;
   }
 
-  .navbarBtnsLeft {
+  .navbarLinks {
     display: flex;
     gap: 30px;
     align-items: center;
-
     margin: 0 80px;
   }
 
-  .navbarBtnsRight {
+  .navbarBtns {
     display: flex;
     align-items: center;
     gap: 30px;
     margin-left: auto;
-
-    .tryForFreeBtn {
-      color: $base-color-1;
-      background-color: $base-color-2;
-      padding: 9px 20px;
-      border-radius: 12px;
-      filter: drop-shadow(0px 3px 7px rgba($base-color-2, 0.4));
-      display: flex;
-      transition: 0.3s;
-
-      &:hover {
-        transform: scale(1.05);
-      }
-
-      &:active {
-        transform: scale(0.95);
-      }
-    }
   }
 }

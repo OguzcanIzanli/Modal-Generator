@@ -14,7 +14,7 @@ const config: Config = {
       // },
     },
     fontFamily: {
-      sans: ["Segoe UI", "Tahoma", "Geneva", "Verdana", "sans-serif"],
+      // sans: ["Segoe UI", "Tahoma", "Geneva", "Verdana", "sans-serif"],
     },
   },
   plugins: [],

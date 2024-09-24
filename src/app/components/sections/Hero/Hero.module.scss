@@ -1,14 +1,14 @@
 @use "@base/colors" as *;
+@use "@abstracts/mixins" as *;
 
 .hero {
-  width: 1200px;
+  @include container;
   margin: 90px auto;
-  display: flex;
   flex-direction: column;
 
   h1 {
     font-size: 72px;
-    font-weight: 600;
+    font-weight: 700;
     width: 600px;
     line-height: 80px;
   }
@@ -18,7 +18,7 @@
     margin: 20px 0 60px 0;
   }
 
-  ol {
+  ul {
     display: flex;
     margin: 50px 0;
     gap: 25px;

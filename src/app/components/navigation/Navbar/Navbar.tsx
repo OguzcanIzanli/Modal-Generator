@@ -6,12 +6,7 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbarHeader}>
-        <Image
-          src="/icon.png"
-          width={36}
-          height={36}
-          alt="Picture of the author"
-        />
+        <Image src="/icon.png" width={36} height={36} alt="" />
         <span>Modal Generator</span>
       </div>
 

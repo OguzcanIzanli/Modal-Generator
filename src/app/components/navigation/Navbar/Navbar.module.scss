@@ -1,12 +1,12 @@
 @use "@base/colors" as *;
+@use "@abstracts/mixins" as *;
 
 .navbar {
-  display: flex;
+  @include container;
   align-items: center;
-  font-family: var(--font-inter);
-  width: 1200px;
-  height: 70px;
   margin: 0 auto;
+  font-family: var(--font-inter);
+  height: 70px;
   font-weight: 600;
   font-size: 16px;
 
@@ -14,6 +14,8 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    font-size: 18px;
+    font-weight: 900;
   }
 
   .navbarLinks {

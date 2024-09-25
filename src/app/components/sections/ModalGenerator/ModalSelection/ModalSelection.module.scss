@@ -1,0 +1,19 @@
+@use "@base/colors" as *;
+
+.modalCardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  .modalCard {
+    width: calc(25% - 22.5px);
+    height: 200px;
+    background-color: $base-color-5;
+    border: 1px solid $base-color-6;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 80px;
+  }
+}

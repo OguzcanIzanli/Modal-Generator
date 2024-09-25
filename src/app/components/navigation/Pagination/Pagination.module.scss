@@ -1,0 +1,30 @@
+@use "@base/colors" as *;
+
+.paginationContainer {
+  display: inline-flex;
+  background-color: $base-color-5;
+  margin: 30px 0;
+  border-radius: 12px;
+  border: 3px solid $base-color-5;
+
+  li {
+    width: 42px;
+    height: 42px;
+    text-align: center;
+    align-content: center;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    color: $base-color-4;
+
+    &:hover:not(.active) {
+      background-color: $base-color-6;
+      transition: 0.3s;
+    }
+  }
+
+  .active {
+    background-color: white;
+    color: black;
+  }
+}

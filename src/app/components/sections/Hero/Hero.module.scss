@@ -3,7 +3,8 @@
 
 .hero {
   @include container;
-  margin: 90px auto;
+  display: flex;
+  margin-top: 90px;
   flex-direction: column;
 
   h1 {

@@ -1,9 +1,11 @@
 import IconClose from "@/app/components/ui/icons/IconClose";
 import Image from "next/image";
+import IconLightning from "../../ui/icons/IconLightning";
+import IconDollarSign from "../../ui/icons/IconDollarSign";
 
 const ExampleModal = () => {
   return (
-    <div className="w-2/3 bg-white flex rounded-3xl overflow-hidden">
+    <div className="w-2/3 bg-white flex rounded-3xl">
       <div className="w-1/2 flex flex-col items-center p-10">
         <Image
           className="mb-3"
@@ -40,6 +42,7 @@ const ExampleModal = () => {
           .
         </div>
       </div>
+
       <div className="w-1/2 relative">
         <Image
           src="/images/modal-images/Example-Modal.png"
@@ -48,10 +51,28 @@ const ExampleModal = () => {
           height={0}
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
+          className="rounded-e-3xl"
         />
-        <button className="absolute text-2xl top-6 right-6 bg-white p-2 rounded-full">
+        <div className="absolute left-8 bottom-8 text-white text-4xl font-semibold">
+          Mediterranean Sneakers®
+        </div>
+
+        <div className="absolute top-24 -right-28 flex items-center bg-neutral-50/75 py-3 px-5 rounded-xl font-semibold">
+          <div className="bg-amber-500 p-1 rounded-full text-xs text-white mr-2">
+            <IconLightning />
+          </div>
+          Grow email list
+        </div>
+        <div className="absolute top-40 -right-40 flex items-center bg-neutral-50/75 py-3 px-5 rounded-xl font-semibold">
+          <div className="bg-lime-500 p-1 rounded-full text-xs text-white mr-2">
+            <IconDollarSign />
+          </div>
+          Increase sales conversion
+        </div>
+
+        <div className="absolute text-2xl top-6 right-6 bg-white p-2 rounded-full">
           <IconClose />
-        </button>
+        </div>
       </div>
     </div>
   );

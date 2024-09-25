@@ -6,7 +6,7 @@ import IconDollarSign from "../../ui/icons/IconDollarSign";
 const ExampleModal = () => {
   return (
     <div className="w-2/3 bg-white flex rounded-3xl">
-      <div className="w-1/2 flex flex-col items-center p-10">
+      <div className="w-1/2 flex flex-col items-center p-9">
         <Image
           className="mb-3"
           src="/images/logos/Vector.png"

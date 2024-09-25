@@ -3,6 +3,7 @@
 
 .modalGenerator {
   @include container;
+  margin-top: 90px;
 
   h2 {
     font-size: 36px;
@@ -29,11 +30,29 @@
   }
 
   p {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .generatorTitle {
+    margin-bottom: 90px;
+  }
+
+  .generatorTitleContent {
     width: 33%;
     font-size: 16px;
   }
 
-  .generatorTitle {
-    margin: 90px 0;
+  .generatorContainer {
+    display: flex;
+    margin-bottom: 90px;
+
+    .modalPropertiesSelectionContainer {
+      width: calc(100% / 3);
+    }
+
+    .modalPreviewContainer {
+      width: calc(100% * (2 / 3));
+    }
   }
 }

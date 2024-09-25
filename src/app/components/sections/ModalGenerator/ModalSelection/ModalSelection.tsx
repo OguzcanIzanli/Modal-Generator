@@ -18,11 +18,11 @@ const ModalSelection = () => {
 
   const totalPages = Math.ceil(modalData.length / modalPerPage);
   for (let i = 1; i <= totalPages; i++) {
-    pageNumbers.push(i);
+    pageNumbers.push(i.toString());
   }
 
   return (
-    <div>
+    <div className={styles.appearanceContainer}>
       <h3>
         <span>1</span>Choose your template
       </h3>
@@ -34,9 +34,11 @@ const ModalSelection = () => {
               src={`/images/modals/${modal.id}.png`}
               width={200}
               height={200}
-              sizes="100vw"
               alt=""
             />
+            <button className={styles.templateSelectionButton}>
+              <span>Select template</span>
+            </button>
           </div>
         ))}
       </div>
@@ -45,6 +47,7 @@ const ModalSelection = () => {
         selectionArray={pageNumbers}
         setSelection={setCurrentPage}
         selection={currentPage}
+        size="small"
       />
     </div>
   );

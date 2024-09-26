@@ -18,19 +18,19 @@ const Appearance = () => {
   ];
 
   return (
-    <>
+    <div className={styles.appearanceContainer}>
       <h3>
         <span>2</span>Appearance (Size, colors, logo)
       </h3>
-      <p>Size</p>
+      <h4>Size</h4>
 
       <PaginationSize />
 
-      <p>Position</p>
+      <h4>Position</h4>
 
       <div className={styles.positionBoxesContainer}>{boxes}</div>
 
-      <p>Colors</p>
+      <h4>Colors</h4>
 
       <div className={styles.colorBoxesContainer}>
         {colors.map((color) => (
@@ -43,14 +43,14 @@ const Appearance = () => {
         ))}
       </div>
 
-      <p>Upload Logo</p>
+      <h4>Upload Logo</h4>
       <div className={styles.uploadLogoContainer}>
         <IconImage className={styles.iconImage} />
         <div className={styles.uploadLogo}>
           <IconUpload /> Drop your image here or upload
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,81 +1,85 @@
 @use "@base/colors" as *;
 
-.positionBoxesContainer {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
-  width: 94px;
-  margin-bottom: 30px;
+.appearanceContainer {
+  margin-bottom: 90px;
 
-  div {
-    width: 28px;
-    height: 18px;
-    border: 2px solid $base-color-4;
-    cursor: pointer;
+  .positionBoxesContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    width: 94px;
+    margin-bottom: 30px;
 
-    &:hover {
-      background-color: $base-color-6;
+    div {
+      width: 28px;
+      height: 18px;
+      border: 2px solid $base-color-4;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $base-color-6;
+      }
+
+      &:nth-child(1) {
+        border-top-left-radius: 6px;
+      }
+
+      &:nth-child(3) {
+        border-top-right-radius: 6px;
+      }
+
+      &:nth-child(7) {
+        border-bottom-left-radius: 6px;
+      }
+
+      &:nth-child(9) {
+        border-bottom-right-radius: 6px;
+      }
     }
 
-    &:nth-child(1) {
-      border-top-left-radius: 6px;
-    }
-
-    &:nth-child(3) {
-      border-top-right-radius: 6px;
-    }
-
-    &:nth-child(7) {
-      border-bottom-left-radius: 6px;
-    }
-
-    &:nth-child(9) {
-      border-bottom-right-radius: 6px;
-    }
+    // .active {
+    //   background-color: $base-color-2;
+    // }
   }
 
-  // .active {
-  //   background-color: $base-color-2;
-  // }
-}
-
-.colorBoxesContainer {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 30px;
-
-  .colorBox {
-    width: 42px;
-    height: 42px;
-    border-radius: 10px;
-    border: 2px solid $base-color-6;
-  }
-}
-
-.uploadLogoContainer {
-  width: 100%;
-  height: 180px;
-  border: 2px dashed $base-color-6;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  .iconImage {
-    width: 80px;
-    height: 80px;
-    border-radius: 10px;
-    color: $base-color-2;
-    background-color: rgba($base-color-2, 0.2);
-    padding: 25px;
-    margin-bottom: 20px;
-  }
-
-  .uploadLogo {
+  .colorBoxesContainer {
     display: flex;
-    gap: 4px;
+    gap: 8px;
+    margin-bottom: 30px;
+
+    .colorBox {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 2px solid $base-color-6;
+    }
+  }
+
+  .uploadLogoContainer {
+    width: 100%;
+    height: 180px;
+    border: 2px dashed $base-color-6;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    font-size: 14px;
+    flex-direction: column;
+
+    .iconImage {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      color: $base-color-2;
+      background-color: rgba($base-color-2, 0.2);
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+
+    .uploadLogo {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      font-size: 14px;
+    }
   }
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./styles/main.scss";
 import { inter, poppins } from "./components/lib/fonts";
+import { ModalProvider } from "./context/ModalContext";
 
 export const metadata: Metadata = {
   title: "Modal Generator",
@@ -15,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.variable} ${inter.variable} antialiased`}>
-        {children}
+        <ModalProvider>{children}</ModalProvider>
       </body>
     </html>
   );

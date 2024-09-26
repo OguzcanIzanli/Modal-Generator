@@ -1,15 +1,11 @@
 "use client";
 
 import styles from "./Appearance.module.scss";
-import Pagination from "@/app/components/navigation/Pagination";
+import PaginationSize from "@/app/components/navigation/Pagination/PaginationSize";
 import IconImage from "@/app/components/ui/icons/IconImage";
 import IconUpload from "@/app/components/ui/icons/IconUpload";
-import { useState } from "react";
 
 const Appearance = () => {
-  const sizeSelectionArray = ["Small", "Medium", "Large"];
-  const [size, setSize] = useState("Small");
-
   const boxes = Array.from({ length: 9 }, (_, i) => <div key={i}></div>);
 
   const colors = [
@@ -28,12 +24,7 @@ const Appearance = () => {
       </h3>
       <p>Size</p>
 
-      <Pagination
-        selectionArray={sizeSelectionArray}
-        setSelection={setSize}
-        selection={size}
-        size="large"
-      />
+      <PaginationSize />
 
       <p>Position</p>
 

@@ -1,14 +1,16 @@
 "use client";
 
-import Pagination from "@/app/components/navigation/Pagination";
+import PaginationPage from "@/app/components/navigation/Pagination/PaginationPage";
 import styles from "./ModalSelection.module.scss";
 import { modalData } from "@/app/data/modalData";
 import Image from "next/image";
 import { useState } from "react";
+import { useModal } from "@/app/context/ModalContext";
 
 const ModalSelection = () => {
   const pageNumbers = [];
-  const [currentPage, setCurrentPage] = useState("1");
+  const [currentPage, setCurrentPage] = useState(1);
+  const { setId } = useModal();
 
   const modalPerPage = 12;
 
@@ -18,7 +20,7 @@ const ModalSelection = () => {
 
   const totalPages = Math.ceil(modalData.length / modalPerPage);
   for (let i = 1; i <= totalPages; i++) {
-    pageNumbers.push(i.toString());
+    pageNumbers.push(i);
   }
 
   return (
@@ -36,14 +38,17 @@ const ModalSelection = () => {
               height={200}
               alt=""
             />
-            <button className={styles.templateSelectionButton}>
+            <button
+              onClick={() => setId(modal.id)}
+              className={styles.templateSelectionButton}
+            >
               <span>Select template</span>
             </button>
           </div>
         ))}
       </div>
 
-      <Pagination
+      <PaginationPage
         selectionArray={pageNumbers}
         setSelection={setCurrentPage}
         selection={currentPage}

@@ -1,13 +1,13 @@
 import styles from "./Pagination.module.scss";
 
-interface PaginationProps {
-  selectionArray: string[];
-  setSelection: (item: string) => void;
-  selection: string;
+interface PaginationPageProps {
+  selectionArray: number[];
+  setSelection: (item: number) => void;
+  selection: number;
   size: string;
 }
 
-const Pagination: React.FC<PaginationProps> = ({
+const PaginationPage: React.FC<PaginationPageProps> = ({
   selectionArray,
   setSelection,
   selection,
@@ -17,9 +17,9 @@ const Pagination: React.FC<PaginationProps> = ({
     <ul className={styles.paginationContainer}>
       {selectionArray.map((item) => (
         <li
-          onClick={() => setSelection(item.toString())}
+          onClick={() => setSelection(item)}
           className={`${styles[size]} ${
-            selection === item.toString() ? styles.active : ""
+            selection === item ? styles.active : ""
           }`}
           key={item}
         >
@@ -30,4 +30,4 @@ const Pagination: React.FC<PaginationProps> = ({
   );
 };
 
-export default Pagination;
+export default PaginationPage;

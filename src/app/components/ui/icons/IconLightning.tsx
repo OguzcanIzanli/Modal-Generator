@@ -1,3 +1,4 @@
+import React from "react";
 function IconLightning(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg

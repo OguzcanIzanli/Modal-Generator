@@ -1,3 +1,4 @@
+import React from "react";
 function IconDollarSign(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg

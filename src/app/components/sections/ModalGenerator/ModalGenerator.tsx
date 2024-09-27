@@ -1,3 +1,4 @@
+import React from "react";
 import Template1 from "../../modal/Templates";
 import Appearance from "./Appearance";
 import styles from "./ModalGenerator.module.scss";

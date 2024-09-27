@@ -1,3 +1,4 @@
+import React from "react";
 import Image from "next/image";
 import styles from "./Navbar.module.scss";
 import Button from "../../ui/Button";

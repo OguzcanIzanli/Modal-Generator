@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { createContext, useContext, ReactNode, useState } from "react";
 import { modalData } from "../data/modalData";
 

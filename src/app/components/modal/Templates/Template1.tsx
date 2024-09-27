@@ -1,6 +1,7 @@
 "use client";
 
-import { useModal } from "@/app/context/ModalContext";
+import React from "react";
+import { useModal } from "../../../context/ModalContext";
 import IconClose from "../../ui/icons/IconClose";
 import Image from "next/image";
 

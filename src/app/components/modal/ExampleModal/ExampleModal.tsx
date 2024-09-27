@@ -1,3 +1,4 @@
+import React from "react";
 import IconClose from "@/app/components/ui/icons/IconClose";
 import Image from "next/image";
 import IconLightning from "../../ui/icons/IconLightning";

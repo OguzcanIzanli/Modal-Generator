@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import PaginationPage from "@/app/components/navigation/Pagination/PaginationPage";
 import styles from "./ModalSelection.module.scss";
 import { modalData } from "@/app/data/modalData";

@@ -1,3 +1,4 @@
+import React from "react";
 function IconCheck(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg

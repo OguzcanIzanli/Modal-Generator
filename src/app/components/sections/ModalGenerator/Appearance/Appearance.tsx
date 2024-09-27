@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import styles from "./Appearance.module.scss";
 import PaginationSize from "@/app/components/navigation/Pagination/PaginationSize";
 import IconImage from "@/app/components/ui/icons/IconImage";

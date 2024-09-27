@@ -8,13 +8,13 @@ const PaginationPage = () => {
     "medium",
     "large",
   ];
-  const { size, setSize } = useModal();
+  const { modal, setModal } = useModal();
 
   return (
     <ul className={styles.paginationContainer}>
-      {sizeSelectionArray.map((item) => (
+      {Object.keys(modal.sizes).map((item) => (
         <li
-          onClick={() => setSize(item)}
+          onClick={() => setModal(item: modal.sizes.item)}
           className={`${styles.large} ${size === item ? styles.active : ""}`}
           key={item}
         >

@@ -15,17 +15,20 @@ const Template1 = () => {
           className={`relative flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] ${modal.container} ${modal.sizes[size]} sticky top-10`}
         >
           {/* Logo  */}
-          <div className={modal.logo}></div>
+
+          {modal.logo && <div className={modal.logo}></div>}
 
           {/* Image  */}
-          <Image
-            src={modal.image.url}
-            className={modal.image.style}
-            width={0}
-            height={0}
-            sizes="100vw"
-            alt=""
-          />
+          {modal.image && (
+            <Image
+              src={modal.image.url}
+              className={modal.image.style}
+              width={0}
+              height={0}
+              sizes="100vw"
+              alt=""
+            />
+          )}
 
           {/* Title  */}
           <div className={modal.title.style}>{modal.title.content}</div>
@@ -34,11 +37,13 @@ const Template1 = () => {
           <div className={modal.contents.style}>{modal.contents.content}</div>
 
           {/* Input  */}
-          <input
-            type="text"
-            className={`py-3 px-4 w-full rounded-xl mb-8 border-2 border-gray-300 ${modal.inputs.style}`}
-            placeholder={modal.inputs.placeholder}
-          />
+          {modal.inputs && (
+            <input
+              type="text"
+              className="py-3 px-4 w-full rounded-xl mb-8 border-2 border-gray-300"
+              placeholder={modal.inputs.placeholder}
+            />
+          )}
 
           {/* Button */}
           <div className={modal.buttons.style}>

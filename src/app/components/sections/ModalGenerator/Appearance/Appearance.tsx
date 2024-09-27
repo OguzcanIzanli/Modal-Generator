@@ -10,12 +10,12 @@ const Appearance = () => {
   const boxes = Array.from({ length: 9 }, (_, i) => <div key={i}></div>);
 
   const colors = [
-    "black",
-    "orange-600",
-    "violet-600",
-    "gray-600",
-    "gray-300",
-    "white",
+    "bg-black",
+    "bg-orange-600",
+    "bg-violet-600",
+    "bg-gray-600",
+    "bg-gray-300",
+    "bg-white",
   ];
 
   return (
@@ -39,7 +39,7 @@ const Appearance = () => {
             key={color}
             className="hover:drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition hover:scale-105"
           >
-            <button className={`${styles.colorBox} bg-${color}`}></button>
+            <button className={`${styles.colorBox} ${color}`}></button>
           </div>
         ))}
       </div>

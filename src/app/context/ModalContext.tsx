@@ -2,12 +2,9 @@
 
 import React from "react";
 import { createContext, useContext, ReactNode, useState } from "react";
-import { modalData } from "../data/modalData";
-import { initialModalData, ModalDataType } from "../data/types";
+import { ModalDataType, initialModalData } from "./types";
 
 interface ModalContextInterface {
-  selectedModal: number;
-  setSelectedModal: (id: number) => void;
   size: "small" | "medium" | "large";
   setSize: (size: "small" | "medium" | "large") => void;
   modal: ModalDataType;
@@ -19,8 +16,6 @@ interface ModalProviderProps {
 }
 
 const ModalContext = createContext<ModalContextInterface>({
-  selectedModal: 0,
-  setSelectedModal: () => {},
   size: "medium",
   setSize: () => {},
   modal: initialModalData,
@@ -28,16 +23,14 @@ const ModalContext = createContext<ModalContextInterface>({
 });
 
 export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
-  const [selectedModal, setSelectedModal] = useState(0);
   const [size, setSize] = useState<"small" | "medium" | "large">("medium");
-  const modal = modalData[selectedModal - 1];
+  const [modal, setModal] = useState<ModalDataType>(initialModalData);
 
   const values = {
-    selectedModal,
-    setSelectedModal,
     size,
     setSize,
     modal,
+    setModal,
   };
 
   return (

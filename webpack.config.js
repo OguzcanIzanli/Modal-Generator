@@ -1,14 +1,19 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require("path");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const webpack = require("webpack");
 
 module.exports = {
   mode: "production",
   entry: "./src/app/components/modal/Templates/Template1.tsx",
   output: {
     filename: "script.js",
-    path: path.resolve(__dirname, "dist"),
-    library: "MyModal", // Global değişken adı (isteğe bağlı)
-    libraryTarget: "umd", // Kütüphane hedefi
+    path: path.resolve(__dirname, "public/dist"),
+    publicPath: "/dist/", // Public path ayarı
+    library: {
+      name: "MyModal",
+      type: "window", // veya "var" ya da "commonjs2"
+    },
     umdNamedDefine: true,
   },
   module: {
@@ -39,4 +44,9 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env": JSON.stringify(process.env),
+    }),
+  ],
 };

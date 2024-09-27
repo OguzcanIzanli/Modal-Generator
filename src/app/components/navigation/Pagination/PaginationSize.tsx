@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Pagination.module.scss";
 import { useModal } from "@/app/context/ModalContext";
+// import { modalData } from "@/app/data/modalData";
 
 const PaginationPage = () => {
   const sizeSelectionArray: Array<"small" | "medium" | "large"> = [
@@ -8,13 +9,13 @@ const PaginationPage = () => {
     "medium",
     "large",
   ];
-  const { modal, setModal } = useModal();
+  const { size, setSize } = useModal();
 
   return (
     <ul className={styles.paginationContainer}>
-      {Object.keys(modal.sizes).map((item) => (
+      {sizeSelectionArray.map((item) => (
         <li
-          onClick={() => setModal(item: modal.sizes.item)}
+          onClick={() => setSize(item)}
           className={`${styles.large} ${size === item ? styles.active : ""}`}
           key={item}
         >

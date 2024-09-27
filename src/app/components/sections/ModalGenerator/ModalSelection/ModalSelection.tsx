@@ -11,7 +11,7 @@ import { useModal } from "@/app/context/ModalContext";
 const ModalSelection = () => {
   const pageNumbers = [];
   const [currentPage, setCurrentPage] = useState(1);
-  const { setSelectedModal } = useModal();
+  const { setModal } = useModal();
 
   const modalPerPage = 12;
 
@@ -40,7 +40,7 @@ const ModalSelection = () => {
               alt=""
             />
             <button
-              onClick={() => setSelectedModal(modal.id)}
+              onClick={() => setModal(modal)}
               className={styles.templateSelectionButton}
             >
               <span>Select template</span>

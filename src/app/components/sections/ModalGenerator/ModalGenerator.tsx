@@ -1,8 +1,11 @@
+"use client";
+
 import React from "react";
 import Template1 from "../../modal/Templates";
 import Appearance from "./Appearance";
 import styles from "./ModalGenerator.module.scss";
 import ModalSelection from "./ModalSelection";
+import EmbedCode from "../../modal/EmbedCode";
 
 const ModalGenerator = () => {
   return (
@@ -23,6 +26,9 @@ const ModalGenerator = () => {
         </div>
         <div className={styles.modalPreviewContainer}>
           <Template1 />
+        </div>
+        <div>
+          <EmbedCode />
         </div>
       </div>
     </div>

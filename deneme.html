@@ -4,19 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link
+    <!-- <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
-    />
+    /> -->
   </head>
   <body>
-    <script type="text/javascript" src="./dist/script.js"></script>
+    <script type="text/javascript" src="/public/dist/script.js"></script>
     <script>
       window.MyModal.init({
+        id: "2",
         container: "items-center flex-col w-[480px]",
-        logo: "undefined",
+        logo: "",
         images: {
-          url: "/images/modal-images/modal2.png",
+          url: "http://localhost:3000/images/modal-images/modal2.png",
           style: "w-full h-1/2 rounded-t-xl mb-10",
         },
         title: {
@@ -27,13 +28,10 @@
           content: "We’ve gone native, try it!",
           style: "text-xl mb-10 px-16",
         },
-        inputs: { placeholder: "undefined" },
+        inputs: { placeholder: "" },
         buttons: {
           button1: { content: "Continue", style: "text-white bg-violet-600" },
-          button2: {
-            content: "border-2 border-gray-300 ",
-            style: "border-2 border-gray-300 ",
-          },
+          button2: { content: "Not now", style: "border-2 border-gray-300 " },
           style: "flex flex-col w-full gap-4 text-base pb-10 px-16",
         },
         sizes: "scale-100",

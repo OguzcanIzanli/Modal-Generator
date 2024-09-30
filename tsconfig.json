@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -18,11 +22,25 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@base/*": ["./src/app/styles/base/*"],
-      "@abstracts/*": ["./src/app/styles/abstracts/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@base/*": [
+        "./src/app/styles/base/*"
+      ],
+      "@abstracts/*": [
+        "./src/app/styles/abstracts/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

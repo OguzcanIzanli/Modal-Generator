@@ -1,8 +1,8 @@
-interface ModalDataType {
+export interface ModalDataType {
   id: number;
   container: string;
   logo?: string;
-  image?: { url: string; style: string };
+  images?: { url: string; style: string };
   title: { content: string; style: string };
   contents: { content: string; style: string };
   inputs?: { placeholder: string };
@@ -11,15 +11,16 @@ interface ModalDataType {
     button2: { content: string; style: string };
     style: string;
   };
-  sizes: { small: string; medium: string; large: string };
+  sizes: string;
+  color: { background: string; text: string };
 }
 
 export const modalData: ModalDataType[] = [
   {
     id: 1,
     container: "items-center flex-col py-10 px-16 w-[480px] bg-white",
-    logo: "rounded-full w-[90px] h-[90px] bg-violet-600 mb-7",
-    title: { content: "Security Code", style: "text-3xl font-bold mb-6" },
+    logo: "rounded-full w-[90px] h-[90px] mb-7",
+    title: { content: "Security Code", style: "" },
     contents: {
       content: "This code expires in 24 hours",
       style: "text-xl mb-10",
@@ -34,26 +35,23 @@ export const modalData: ModalDataType[] = [
       },
       button2: {
         content: "Continue",
-        style: "bg-violet-600 text-white",
+        style: "text-white",
       },
       style: "flex justify-between w-full gap-4 text-base",
     },
-    sizes: {
-      small: "scale-75",
-      medium: "scale-100",
-      large: "scale-125",
-    },
+    sizes: "scale-100",
+    color: { background: "bg-violet-600", text: "" },
   },
   {
     id: 2,
     container: "items-center flex-col w-[480px]",
-    image: {
-      url: "/images/modal-images/modal2.png",
+    images: {
+      url: "http://localhost:3000/images/modal-images/modal2.png",
       style: "w-full h-1/2 rounded-t-xl mb-10",
     },
     title: {
       content: "Install local now",
-      style: "text-3xl font-bold mb-6 px-16",
+      style: "",
     },
     contents: {
       content: "We’ve gone native, try it!",
@@ -70,11 +68,8 @@ export const modalData: ModalDataType[] = [
       },
       style: "flex flex-col w-full gap-4 text-base pb-10 px-16",
     },
-    sizes: {
-      small: "scale-75",
-      medium: "scale-100",
-      large: "scale-125",
-    },
+    sizes: "scale-100",
+    color: { background: "bg-violet-600", text: "" },
   },
   // {
   //   id: 3,

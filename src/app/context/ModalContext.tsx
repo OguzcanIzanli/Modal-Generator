@@ -2,11 +2,26 @@
 
 import React from "react";
 import { createContext, useContext, ReactNode, useState } from "react";
-import { ModalDataType, initialModalData } from "./types";
+import { ModalDataType } from "../data/modalData";
+
+export const initialModalData = {
+  id: NaN,
+  container: "",
+  logo: "",
+  images: { url: "", style: "" },
+  title: { content: "", style: "" },
+  contents: { content: "", style: "" },
+  inputs: { placeholder: "" },
+  buttons: {
+    button1: { content: "", style: "" },
+    button2: { content: "", style: "" },
+    style: "",
+  },
+  sizes: "",
+  color: { background: "", text: "" },
+};
 
 interface ModalContextInterface {
-  size: "small" | "medium" | "large";
-  setSize: (size: "small" | "medium" | "large") => void;
   modal: ModalDataType;
   setModal: (modal: ModalDataType) => void;
 }
@@ -16,19 +31,16 @@ interface ModalProviderProps {
 }
 
 const ModalContext = createContext<ModalContextInterface>({
-  size: "medium",
-  setSize: () => {},
   modal: initialModalData,
   setModal: () => {},
 });
 
 export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
-  const [size, setSize] = useState<"small" | "medium" | "large">("medium");
   const [modal, setModal] = useState<ModalDataType>(initialModalData);
 
   const values = {
-    size,
-    setSize,
+    // size,
+    // setSize,
     modal,
     setModal,
   };

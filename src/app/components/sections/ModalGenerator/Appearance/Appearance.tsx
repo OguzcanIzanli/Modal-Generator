@@ -5,17 +5,19 @@ import styles from "./Appearance.module.scss";
 import PaginationSize from "@/app/components/navigation/Pagination/PaginationSize";
 import IconImage from "@/app/components/ui/icons/IconImage";
 import IconUpload from "@/app/components/ui/icons/IconUpload";
+import { useModal } from "@/app/context/ModalContext";
 
 const Appearance = () => {
   const boxes = Array.from({ length: 9 }, (_, i) => <div key={i}></div>);
+  const { modal, setModal } = useModal();
 
   const colors = [
-    "bg-black",
-    "bg-orange-600",
-    "bg-violet-600",
-    "bg-gray-600",
-    "bg-gray-300",
-    "bg-white",
+    { background: "bg-black", text: "text-white" },
+    { background: "bg-orange-600", text: "text-white" },
+    { background: "bg-violet-600", text: "text-white" },
+    { background: "bg-gray-600", text: "text-white" },
+    { background: "bg-gray-300", text: "text-white" },
+    { background: "bg-white", text: "text-black" },
   ];
 
   return (
@@ -35,12 +37,19 @@ const Appearance = () => {
 
       <div className={styles.colorBoxesContainer}>
         {colors.map((color) => (
-          <div
-            key={color}
-            className="hover:drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition hover:scale-105"
-          >
-            <button className={`${styles.colorBox} ${color}`}></button>
-          </div>
+          <button
+            key={color.background}
+            className={`${styles.colorBox} ${color.background}`}
+            onClick={() =>
+              setModal({
+                ...modal,
+                color: {
+                  background: color.background,
+                  text: color.text,
+                },
+              })
+            }
+          ></button>
         ))}
       </div>
 

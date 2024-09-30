@@ -1,22 +1,32 @@
 import React from "react";
 import styles from "./Pagination.module.scss";
 import { useModal } from "@/app/context/ModalContext";
-// import { modalData } from "@/app/data/modalData";
 
-const PaginationPage = () => {
-  const sizeSelectionArray: Array<"small" | "medium" | "large"> = [
-    "small",
-    "medium",
-    "large",
-  ];
-  const { size, setSize } = useModal();
+interface SizesType {
+  small: string;
+  medium: string;
+  large: string;
+}
+
+const PaginationSize = () => {
+  const sizes: SizesType = {
+    small: "scale-75",
+    medium: "scale-100",
+    large: "scale-125",
+  };
+
+  const { setModal, modal } = useModal();
 
   return (
     <ul className={styles.paginationContainer}>
-      {sizeSelectionArray.map((item) => (
+      {Object.keys(sizes).map((item) => (
         <li
-          onClick={() => setSize(item)}
-          className={`${styles.large} ${size === item ? styles.active : ""}`}
+          onClick={() =>
+            setModal({ ...modal, sizes: sizes[item as keyof SizesType] })
+          }
+          className={`${styles.large} ${
+            modal.sizes === sizes[item as keyof SizesType] ? styles.active : ""
+          }`}
           key={item}
         >
           {item}
@@ -26,4 +36,4 @@ const PaginationPage = () => {
   );
 };
 
-export default PaginationPage;
+export default PaginationSize;

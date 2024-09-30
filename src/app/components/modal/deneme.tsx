@@ -3,7 +3,7 @@
 import ReactDOM from "react-dom/client";
 import Template1 from "./Templates";
 import React from "react";
-import { ModalDataType } from "../../context/types";
+import { ModalDataType } from "@/app/data/modalData";
 import "../../styles/output.css";
 
 if (typeof window !== "undefined") {

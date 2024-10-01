@@ -1,0 +1,56 @@
+"use client";
+
+import React from "react";
+import IconClose from "../../ui/icons/IconClose";
+import Image from "next/image";
+import { ModalDataType } from "@/app/data/modalData";
+
+interface Template1Props {
+  modalData: ModalDataType;
+}
+const Template1: React.FC<Template1Props> = ({ modalData }) => {
+  if (Number.isNaN(modalData.id)) return null;
+
+  return (
+    <div
+      className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center flex-col w-[480px] bg-white ${modalData.sizes} sticky top-10`}
+    >
+      {/* Image  */}
+      <Image
+        src={modalData.url ? modalData?.url : ""}
+        className="w-full h-1/2 rounded-t-xl mb-10"
+        width={0}
+        height={0}
+        unoptimized
+        alt=""
+      />
+
+      {/* Title  */}
+      <div className="text-3xl font-bold mb-6">{modalData.title.content}</div>
+
+      {/* Content  */}
+      <div className="text-xl mb-10 px-16">{modalData.contents.content1}</div>
+
+      {/* Button */}
+      <div className="flex flex-col w-full gap-4 text-base pb-10 px-16">
+        <button
+          className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition ${modalData.color.background} ${modalData.color.text}`}
+        >
+          {modalData.buttons.button1}
+        </button>
+        <button
+          className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-300 `}
+        >
+          {modalData.buttons.button2}
+        </button>
+      </div>
+
+      {/* Close Button  */}
+      <button className="absolute text-2xl top-6 right-6 border-2 text-gray-400 border-gray-400 rounded-full hover:scale-105 active:scale-95">
+        <IconClose />
+      </button>
+    </div>
+  );
+};
+
+export default Template1;

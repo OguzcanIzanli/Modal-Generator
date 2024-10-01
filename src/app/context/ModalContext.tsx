@@ -8,19 +8,17 @@ export const initialModalData = {
   id: NaN,
   container: "",
   logo: "",
-  images: { url: "", style: "" },
-  title: { content: "", style: "" },
-  contents: { content: "", style: "" },
+  url: "",
+  title: { content: "" },
+  contents: { content1: "" },
   inputs: { placeholder: "" },
   buttons: {
-    button1: { content: "", style: "" },
-    button2: { content: "", style: "" },
-    style: "",
+    button1: "",
+    button2: "",
   },
   sizes: "",
   color: { background: "", text: "" },
 };
-
 interface ModalContextInterface {
   modal: ModalDataType;
   setModal: (modal: ModalDataType) => void;
@@ -39,8 +37,6 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   const [modal, setModal] = useState<ModalDataType>(initialModalData);
 
   const values = {
-    // size,
-    // setSize,
     modal,
     setModal,
   };

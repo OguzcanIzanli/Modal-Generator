@@ -12,12 +12,18 @@ const Appearance = () => {
   const { modal, setModal } = useModal();
 
   const colors = [
-    { background: "bg-black", text: "text-white" },
-    { background: "bg-orange-600", text: "text-white" },
-    { background: "bg-violet-600", text: "text-white" },
-    { background: "bg-gray-600", text: "text-white" },
-    { background: "bg-gray-300", text: "text-white" },
-    { background: "bg-white", text: "text-black" },
+    { background: "bg-black border-2 border-black", text: "text-white" },
+    {
+      background: "bg-orange-600 border-2 border-orange-600",
+      text: "text-white",
+    },
+    {
+      background: "bg-violet-600 border-2 border-violet-600",
+      text: "text-white",
+    },
+    { background: "bg-gray-600 border-2 border-gray-600", text: "text-white" },
+    { background: "bg-gray-300 border-2 border-gray-300", text: "text-black" },
+    { background: "bg-white border-2 border-gray-300", text: "text-black" },
   ];
 
   return (

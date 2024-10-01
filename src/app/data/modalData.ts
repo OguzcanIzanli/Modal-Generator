@@ -1,15 +1,13 @@
 export interface ModalDataType {
   id: number;
-  container: string;
   logo?: string;
-  images?: { url: string; style: string };
-  title: { content: string; style: string };
-  contents: { content: string; style: string };
+  url?: string;
+  title: { content: string };
+  contents: { content1: string };
   inputs?: { placeholder: string };
   buttons: {
-    button1: { content: string; style: string };
-    button2: { content: string; style: string };
-    style: string;
+    button1: string;
+    button2: string;
   };
   sizes: string;
   color: { background: string; text: string };
@@ -18,58 +16,42 @@ export interface ModalDataType {
 export const modalData: ModalDataType[] = [
   {
     id: 1,
-    container: "items-center flex-col py-10 px-16 w-[480px] bg-white",
-    logo: "rounded-full w-[90px] h-[90px] mb-7",
-    title: { content: "Security Code", style: "" },
+    logo: "",
+    title: { content: "Security Code" },
     contents: {
-      content: "This code expires in 24 hours",
-      style: "text-xl mb-10",
+      content1: "This code expires in 24 hours",
     },
     inputs: {
       placeholder: "Code",
     },
     buttons: {
-      button1: {
-        content: "Cancel",
-        style: "border-2 border-gray-300",
-      },
-      button2: {
-        content: "Continue",
-        style: "text-white",
-      },
-      style: "flex justify-between w-full gap-4 text-base",
+      button1: "Cancel",
+      button2: "Continue",
     },
     sizes: "scale-100",
-    color: { background: "bg-violet-600", text: "" },
+    color: {
+      background: "bg-violet-600 border-2 border-violet-600",
+      text: "text-white",
+    },
   },
   {
     id: 2,
-    container: "items-center flex-col w-[480px]",
-    images: {
-      url: "http://localhost:3000/images/modal-images/modal2.png",
-      style: "w-full h-1/2 rounded-t-xl mb-10",
-    },
+    url: "http://localhost:3000/images/modal-images/modal2.png",
     title: {
       content: "Install local now",
-      style: "",
     },
     contents: {
-      content: "We’ve gone native, try it!",
-      style: "text-xl mb-10 px-16",
+      content1: "We’ve gone native, try it!",
     },
     buttons: {
-      button1: {
-        content: "Continue",
-        style: "text-white bg-violet-600",
-      },
-      button2: {
-        content: "Not now",
-        style: "border-2 border-gray-300 ",
-      },
-      style: "flex flex-col w-full gap-4 text-base pb-10 px-16",
+      button1: "Continue",
+      button2: "Not now",
     },
     sizes: "scale-100",
-    color: { background: "bg-violet-600", text: "" },
+    color: {
+      background: "bg-violet-600 border-2 border-violet-600",
+      text: "text-white",
+    },
   },
   // {
   //   id: 3,

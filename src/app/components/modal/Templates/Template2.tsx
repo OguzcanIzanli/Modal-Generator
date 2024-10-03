@@ -2,7 +2,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-import IconClose from "../../ui/Icons/IconClose";
+import IconClose from "../../../../../public/images/Icons/IconClose";
 import Image from "next/image";
 import { ModalDataType } from "@/app/data/modalData";
 import "../../../styles/output.css";

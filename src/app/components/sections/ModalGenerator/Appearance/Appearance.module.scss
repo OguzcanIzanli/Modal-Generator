@@ -54,7 +54,7 @@
       border: 2px solid $base-color-6;
       transition: 0.3s;
       &:hover {
-        filter: drop-shadow(0_4px_4px_rgba (0, 0, 0, 0.25));
+        filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.25));
         transform: scale(1.05);
       }
 

@@ -10,9 +10,9 @@ interface SizesType {
 
 const PaginationSize = () => {
   const sizes: SizesType = {
-    small: "scale-75",
-    medium: "scale-100",
-    large: "scale-125",
+    small: "w-[320px]",
+    medium: "w-[480px]",
+    large: "w-[640px]",
   };
 
   const { setModal, modal } = useModal();

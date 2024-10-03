@@ -14,7 +14,7 @@ const GenerateButton = () => {
     setError("");
     try {
       const modalConfig = {
-        entry: modal.template,
+        entry: modal.id,
         title: modal.title,
         logo: modal.logo,
         imageUrl: modal.imageUrl,

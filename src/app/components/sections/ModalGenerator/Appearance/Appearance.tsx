@@ -3,8 +3,8 @@
 import React from "react";
 import styles from "./Appearance.module.scss";
 import PaginationSize from "@/app/components/navigation/Pagination/PaginationSize";
-import IconImage from "@/app/components/ui/Icons/IconImage";
-import IconUpload from "@/app/components/ui/Icons/IconUpload";
+import IconImage from "../../../../../../public/images/Icons/IconImage";
+import IconUpload from "../../../../../../public/images/Icons/IconUpload";
 import { useModal } from "@/app/context/ModalContext";
 
 const Appearance = () => {

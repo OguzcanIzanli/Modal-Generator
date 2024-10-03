@@ -3,7 +3,7 @@ const path = require("path");
 const webpack = require("webpack");
 
 module.exports = (env) => {
-  const entryFile = `./src/app/components/modal/Templates/${env.entry}.tsx`;
+  const entryFile = `./src/app/components/modal/Templates/Template${env.entry}.tsx`;
 
   return {
     target: "web",

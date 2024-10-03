@@ -2,7 +2,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-import IconClose from "../../ui/Icons/IconClose";
+import IconClose from "../../../../../public/images/Icons/IconClose";
 import { ModalDataType } from "@/app/data/modalData";
 import "../../../styles/output.css";
 
@@ -12,7 +12,7 @@ interface TemplateProps {
 const Template1: React.FC<TemplateProps> = ({ modalData }) => {
   return (
     <div
-      className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center flex-col w-[480px] bg-white py-10 px-16 ${modalData.sizes} sticky top-10`}
+      className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center flex-col bg-white py-10 px-16 ${modalData.sizes} sticky top-10`}
     >
       {/* Logo  */}
       <div

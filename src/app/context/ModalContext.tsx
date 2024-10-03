@@ -6,7 +6,6 @@ import { ModalDataType } from "../data/modalData";
 
 export const initialModalData = {
   id: NaN,
-  template: "",
   title: "",
   logo: "",
   imageUrl: "",

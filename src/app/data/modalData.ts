@@ -1,6 +1,5 @@
 export interface ModalDataType {
   id: number;
-  template: string;
   title: string;
   logo?: string;
   imageUrl?: string;
@@ -17,7 +16,6 @@ export interface ModalDataType {
 export const modalData: ModalDataType[] = [
   {
     id: 1,
-    template: "Template1",
     title: "Security Code",
     logo: "logo",
     contents: {
@@ -30,7 +28,7 @@ export const modalData: ModalDataType[] = [
       button1: "Cancel",
       button2: "Continue",
     },
-    sizes: "scale-100",
+    sizes: "w-[480px]",
     color: {
       background: "bg-violet-600 border-2 border-violet-600",
       text: "text-white",
@@ -38,7 +36,6 @@ export const modalData: ModalDataType[] = [
   },
   {
     id: 2,
-    template: "Template2",
     title: "Install local now",
     imageUrl: "http://localhost:3000/images/modal-images/modal2.png",
     contents: {

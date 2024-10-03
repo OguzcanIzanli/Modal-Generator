@@ -13,12 +13,12 @@ const TemplateSelector = () => {
   const { modal } = useModal();
 
   const SelectedTemplate = dynamic<TemplateProps>(
-    () => import(`../../../modal/Templates/${modal.template}`),
+    () => import(`../../../modal/Templates/Template${modal.id}`),
     { suspense: true, ssr: true }
   );
 
-  return modal.template ? (
-    <Suspense fallback={<div>Loading template...</div>}>
+  return modal.id ? (
+    <Suspense>
       <SelectedTemplate modalData={modal} />
     </Suspense>
   ) : (

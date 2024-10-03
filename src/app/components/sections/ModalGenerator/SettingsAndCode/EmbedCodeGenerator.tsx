@@ -46,7 +46,7 @@ const GenerateButton = () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       // console.error("Error generating modal:", err);
-      setError("An error occurred." || err.message);
+      setError("An error occurred.");
     } finally {
       setLoading(false);
     }

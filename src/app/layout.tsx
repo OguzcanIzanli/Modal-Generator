@@ -1,7 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
 import "./styles/main.scss";
-// import { inter, poppins } from "./components/lib/fonts";
 import { ModalProvider } from "./context/ModalContext";
 
 export const metadata: Metadata = {

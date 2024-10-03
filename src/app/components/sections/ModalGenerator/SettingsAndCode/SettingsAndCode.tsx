@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./SettingsAndCode.module.scss";
+import GenerateButton from "./EmbedCodeGenerator";
 
 const SettingsAndCode = () => {
   return (
@@ -21,6 +22,7 @@ const SettingsAndCode = () => {
         placeholder="Your Webhook URL"
         className={styles.inputWebhookURL}
       />
+      <GenerateButton />
     </div>
   );
 };

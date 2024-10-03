@@ -1,16 +1,13 @@
 "use client";
 
 import React from "react";
-import Appearance from "./Appearance";
 import styles from "./ModalGenerator.module.scss";
 import ModalSelection from "./ModalSelection";
-import EmbedCode from "../../modal/EmbedCode";
-import { useModal } from "@/app/context/ModalContext";
+import Appearance from "./Appearance";
 import SettingsAndCode from "./SettingsAndCode";
-import TemplateSelector from "../../modal/TemplateSelector";
+import TemplateSelector from "./TemplateSelector";
 
 const ModalGenerator = () => {
-  const { modal } = useModal();
   return (
     <div className={styles.modalGenerator}>
       <div className={styles.generatorTitle}>
@@ -29,10 +26,7 @@ const ModalGenerator = () => {
           <SettingsAndCode />
         </div>
         <div className={styles.modalPreviewContainer}>
-          <TemplateSelector modalData={modal} />
-        </div>
-        <div>
-          <EmbedCode />
+          <TemplateSelector />
         </div>
       </div>
     </div>

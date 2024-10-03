@@ -6,24 +6,20 @@
     <title>Document</title>
   </head>
   <body>
-    <script type="text/javascript" src="public/dist/script.js"></script>
+    <script
+      type="text/javascript"
+      src="http://localhost:3000/dist/script.js"
+    ></script>
     <script>
       window.MyModal.init({
-        id: 1,
-        url: "http://localhost:3000/images/modal-images/modal2.png",
-        title: {
-          content: "Install local now",
-        },
-        contents: {
-          content1: "We’ve gone native, try it!",
-        },
-        buttons: {
-          button1: "Continue",
-          button2: "Not now wasd",
-        },
-        sizes: "scale-100",
+        title: "Security Code",
+        logo: "logo",
+        contents: { content1: "This code expires in 24 hours" },
+        placeholder: "Code",
+        buttons: { button1: "Cancel", button2: "Continue" },
+        sizes: "scale-75",
         color: {
-          background: "bg-violet-600 border-2 border-violet-600",
+          background: "bg-gray-600 border-2 border-gray-600",
           text: "text-white",
         },
       });

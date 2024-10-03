@@ -6,10 +6,10 @@ import { ModalDataType } from "../data/modalData";
 
 export const initialModalData = {
   id: NaN,
-  container: "",
+  template: "",
+  title: "",
   logo: "",
-  url: "",
-  title: { content: "" },
+  imageUrl: "",
   contents: { content1: "" },
   inputs: { placeholder: "" },
   buttons: {
@@ -19,6 +19,7 @@ export const initialModalData = {
   sizes: "",
   color: { background: "", text: "" },
 };
+
 interface ModalContextInterface {
   modal: ModalDataType;
   setModal: (modal: ModalDataType) => void;

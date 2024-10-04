@@ -12,10 +12,12 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-
     "target": "ES6",
     "module": "commonjs",
-    "lib": ["ES6", "DOM"],
+    "lib": [
+      "ES6",
+      "DOM"
+    ],
     "forceConsistentCasingInFileNames": true,
     "outDir": "build",
     "baseUrl": ".",
@@ -25,10 +27,17 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@base/*": ["./src/app/styles/base/*"],
-      "@abstracts/*": ["./src/app/styles/abstracts/*"]
-    }
+      "@/*": [
+        "./src/*"
+      ],
+      "@base/*": [
+        "./src/app/styles/base/*"
+      ],
+      "@abstracts/*": [
+        "./src/app/styles/abstracts/*"
+      ]
+    },
+    "moduleResolution": "node"
   },
   "include": [
     "next-env.d.ts",
@@ -39,5 +48,7 @@
     "public/images/Icons",
     "netlify/functions/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

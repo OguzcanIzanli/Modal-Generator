@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && next export",
+    "deploy": "next build",
     "build:css": "tailwindcss build src/app/styles/main.scss -o src/output.css"
   },
   "dependencies": {

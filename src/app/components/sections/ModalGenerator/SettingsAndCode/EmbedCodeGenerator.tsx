@@ -1,6 +1,4 @@
-// components/GenerateButton.tsx
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useModal } from "@/app/context/ModalContext";
 
 const GenerateButton = () => {
@@ -12,6 +10,7 @@ const GenerateButton = () => {
   const handleGenerateClick = async () => {
     setLoading(true);
     setError("");
+
     try {
       const modalConfig = {
         entry: modal.id,
@@ -25,16 +24,18 @@ const GenerateButton = () => {
           button2: modal.buttons.button2,
         },
         sizes: modal.sizes,
-        color: { background: modal.color.background, text: modal.color.text },
+        color: {
+          background: modal.color.background,
+          text: modal.color.text,
+        },
         webhookUrl:
           "https://hook.eu2.make.com/owgs6fu2vf8fr4m2m4zfe6grgmvt6me7",
       };
 
-      const response = await fetch("/api/generate-modal", {
+      // Netlify function endpointine istek atıyoruz
+      const response = await fetch("/.netlify/functions/generate-modal", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(modalConfig),
       });
 
@@ -47,8 +48,7 @@ const GenerateButton = () => {
       setEmbedCode(data.embedCode);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      // console.error("Error generating modal:", err);
-      setError("An error occurred.");
+      setError(err.message || "An error occurred.");
     } finally {
       setLoading(false);
     }
@@ -59,9 +59,7 @@ const GenerateButton = () => {
       <button onClick={handleGenerateClick} disabled={loading}>
         {loading ? "Generating..." : "Get your Code"}
       </button>
-
       {error && <p style={{ color: "red" }}>{error}</p>}
-
       {embedCode && (
         <div>
           <h3>Your Embed Code:</h3>

@@ -1,2 +1,9 @@
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+[build]
+  command = "npm run build"
+  publish = "out" # Next.js export ile 'out' dizini kullanılır
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200

@@ -1,28 +1,40 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { NextResponse } from "next/server";
+// netlify/functions/generate-modal.ts
+import { Handler } from "@netlify/functions";
 import { exec } from "child_process";
 import path from "path";
 
-export async function POST(request: Request) {
+const handler: Handler = async (event) => {
+  if (event.httpMethod !== "POST") {
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ message: "Method Not Allowed" }),
+    };
+  }
+
   try {
-    const userConfig = await request.json();
+    const userConfig = JSON.parse(event.body || "{}");
     const embedCode = generateEmbedCode(userConfig);
 
     await triggerWebpackBuild(userConfig.entry);
 
-    return NextResponse.json({ embedCode });
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ embedCode }),
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    console.error("API route error:", error);
-    return NextResponse.json(
-      { error: error.message || "Internal Server Error" },
-      { status: 500 }
-    );
+    console.error("Function error:", error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: error.message || "Internal Server Error" }),
+    };
   }
-}
+};
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function generateEmbedCode(config: any) {
   return `
-    <script type="text/javascript" src="http://localhost:3000/dist/script.js"></script>
+    <script type="text/javascript" src="/dist/script.js"></script>
     <script>
       window.MyModal.init({
         title: "${config.title}",
@@ -67,3 +79,5 @@ async function triggerWebpackBuild(entry: string) {
     );
   });
 }
+
+export { handler };

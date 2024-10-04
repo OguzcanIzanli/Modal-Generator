@@ -29,9 +29,9 @@ export async function POST(request: Request) {
         userConfig.color.text
       }" },
     });
-    </script>`.trim();
-
-    const singleLineEmbedCode = embedCode.replace(/\s\s+/g, " ").trim();
+    </script>`
+        .replace(/\s\s+/g, " ")
+        .trim();
 
     // Trigger webpack build
     const webpackPath = path.resolve(process.cwd(), "webpack.config.js");
@@ -45,9 +45,11 @@ export async function POST(request: Request) {
           `npx webpack --config ${webpackPath} --env entry=${entry}`,
           (error, stdout, stderr) => {
             if (error) {
+              console.error(`Webpack derleme hatası: ${stderr}`); // Hata log'u
               reject(error);
               return;
             }
+            console.log(stdout); // Başarılı sonuç log'u
             resolve({ stdout, stderr });
           }
         );
@@ -62,7 +64,7 @@ export async function POST(request: Request) {
 
     // Embed code
     return NextResponse.json({
-      embedCode: singleLineEmbedCode,
+      embedCode: embedCode,
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
@@ -73,28 +75,3 @@ export async function POST(request: Request) {
     );
   }
 }
-
-// // İstek gövdesini JSON olarak al
-// const userConfig = await request.json();
-// console.log("Received userConfig:", userConfig);
-
-// // index.tsx dosyasının yolunu belirle
-// const indexPath = path.resolve(process.cwd(), "src/index.tsx");
-
-// // Kullanıcı ayarlarına bağlı olarak index.tsx içeriğini oluştur
-// const indexContent = `
-//   import React from 'react';
-//   import ReactDOM from 'react-dom';
-//   import Modal from './template';
-
-//   const webhookUrl = "${userConfig.webhookUrl}";
-//   // Diğer konfigürasyonlar burada eklenebilir
-
-//   const App = () => <Modal webhookUrl={webhookUrl} />;
-
-//   ReactDOM.render(<App />, document.getElementById('root'));
-// `;
-
-// // index.tsx dosyasını güncelle
-// await fs.writeFile(indexPath, indexContent, "utf8");
-// console.log("index.tsx güncellendi.");

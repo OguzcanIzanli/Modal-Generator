@@ -7,7 +7,7 @@ module.exports = (env) => {
 
   return {
     target: "web",
-    mode: "development",
+    mode: "production",
     entry: path.resolve(__dirname, entryFile),
     entry: entryFile,
     output: {

@@ -26,6 +26,8 @@ const GenerateButton = () => {
         },
         sizes: modal.sizes,
         color: { background: modal.color.background, text: modal.color.text },
+        webhookUrl:
+          "https://hook.eu2.make.com/owgs6fu2vf8fr4m2m4zfe6grgmvt6me7",
       };
 
       const response = await fetch("/api/generate-modal", {

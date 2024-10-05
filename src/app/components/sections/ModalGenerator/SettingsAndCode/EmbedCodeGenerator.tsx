@@ -36,7 +36,7 @@ const EmbedCodeGenerator = () => {
       };
 
       const response = await fetch(
-        "http://modal-generator.netlify.app/api/generate-modal",
+        "https://modal-generator.netlify.app/api/generate-modal",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

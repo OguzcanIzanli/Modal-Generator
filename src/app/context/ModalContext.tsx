@@ -6,15 +6,13 @@ import { ModalDataType } from "../data/modalData";
 
 export const initialModalData = {
   id: NaN,
-  title: "",
+  title: null,
   logoUrl: "",
   imageUrl: "",
-  contents: { content1: "" },
+  content1: null,
   inputs: { placeholder: "" },
-  buttons: {
-    button1: "",
-    button2: "",
-  },
+  button1: "",
+  button2: "",
   sizes: "",
   position: "",
   color: { background: "", text: "" },

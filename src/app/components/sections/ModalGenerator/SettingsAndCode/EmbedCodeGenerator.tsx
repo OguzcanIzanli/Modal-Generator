@@ -19,12 +19,10 @@ const EmbedCodeGenerator = () => {
         title: modal.title,
         logoUrl: modal.logoUrl,
         imageUrl: modal.imageUrl,
-        contents: { content1: modal.contents.content1 },
+        content1: modal.content1,
         inputs: { placeholder: modal.inputs?.placeholder },
-        buttons: {
-          button1: modal.buttons.button1,
-          button2: modal.buttons.button2,
-        },
+        button1: modal.button1,
+        button2: modal.button2,
         sizes: modal.sizes,
         position: modal.position,
         color: {
@@ -35,14 +33,11 @@ const EmbedCodeGenerator = () => {
           "https://hook.eu2.make.com/owgs6fu2vf8fr4m2m4zfe6grgmvt6me7",
       };
 
-      const response = await fetch(
-        "https://modal-generator.netlify.app/api/generate-modal",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(modalConfig),
-        }
-      );
+      const response = await fetch("http://localhost:3000/api/generate-modal", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(modalConfig),
+      });
 
       if (!response.ok) {
         throw new Error(

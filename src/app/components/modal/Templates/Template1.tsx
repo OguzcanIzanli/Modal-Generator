@@ -11,7 +11,6 @@ interface TemplateProps {
   modalData: ModalDataType;
 }
 const Template1: React.FC<TemplateProps> = ({ modalData }) => {
-  console.log(modalData.logoUrl);
   return (
     <div
       className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white p-10 aspect-[1/1] ${
@@ -33,13 +32,13 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
       </div>
 
       {/* Title  */}
-      <div className="text-3xl font-bold text-center mb-[6%]">
+      <div className="text-3xl font-bold text-center mb-[6%] w-full break-words text-wrap">
         {modalData.title}
       </div>
 
       {/* Content  */}
-      <div className="text-xl text-center mb-[6%]">
-        {modalData.contents.content1}
+      <div className="text-xl text-center mb-[6%] w-full break-words text-wrap">
+        {modalData.content1}
       </div>
 
       {/* Input  */}
@@ -50,14 +49,14 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
       />
 
       {/* Button */}
-      <div className="flex w-full gap-4 text-base justify-between">
-        <button className="w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-300">
-          {modalData.buttons.button1}
+      <div className="flex w-full gap-4 text-base justify-between break-words text-wrap">
+        <button className="w-1/2 py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-300">
+          {modalData.button1}
         </button>
         <button
-          className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition ${modalData.color.background} ${modalData.color.text}`}
+          className={`w-1/2 py-3 rounded-xl hover:scale-105 active:scale-95 transition ${modalData.color.background} ${modalData.color.text}`}
         >
-          {modalData.buttons.button2}
+          {modalData.button2}
         </button>
       </div>
 

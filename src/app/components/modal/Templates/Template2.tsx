@@ -36,18 +36,18 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
 
       {/* Content  */}
       <div className="text-xl text-center mb-[6%] px-10">
-        {modalData.contents.content1}
+        {modalData.content1}
       </div>
 
       {/* Button */}
-      <div className="flex w-full gap-4 text-base pb-10 px-10 flex-col">
+      <div className="flex w-full gap-4 text-base pb-10 px-10 flex-col break-words text-wrap">
         <button
           className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition ${modalData.color.background} ${modalData.color.text}`}
         >
-          {modalData.buttons.button1}
+          {modalData.button1}
         </button>
         <button className="w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-300">
-          {modalData.buttons.button2}
+          {modalData.button2}
         </button>
       </div>
 

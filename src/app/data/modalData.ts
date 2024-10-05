@@ -1,14 +1,12 @@
 export interface ModalDataType {
   id: number;
-  title: string;
+  title: string | null;
   logoUrl?: string;
   imageUrl?: string;
-  contents: { content1: string };
+  content1: string | null;
   inputs?: { placeholder: string };
-  buttons: {
-    button1: string;
-    button2: string;
-  };
+  button1: string;
+  button2: string;
   sizes: string;
   position: string;
   color: { background: string; text: string };
@@ -20,16 +18,12 @@ export const modalData: ModalDataType[] = [
     title: "Security Code",
     logoUrl:
       "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2FSecure.png?alt=media&token=9b57cafe-8462-44a6-bee6-536899822a85",
-    contents: {
-      content1: "This code expires in 24 hours",
-    },
+    content1: "This code expires in 24 hours",
     inputs: {
       placeholder: "Code",
     },
-    buttons: {
-      button1: "Cancel",
-      button2: "Continue",
-    },
+    button1: "Cancel",
+    button2: "Continue",
     sizes: "w-[480px]",
     position: "",
     color: {
@@ -42,13 +36,9 @@ export const modalData: ModalDataType[] = [
     title: "Install local now",
     imageUrl:
       "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal2.png?alt=media&token=16a564ba-c07d-4c04-93b5-93adda03c245",
-    contents: {
-      content1: "We’ve gone native, try it!",
-    },
-    buttons: {
-      button1: "Continue",
-      button2: "Not now",
-    },
+    content1: "We’ve gone native, try it!",
+    button1: "Continue",
+    button2: "Not now",
     sizes: "w-[480px]",
     position: "",
     color: {

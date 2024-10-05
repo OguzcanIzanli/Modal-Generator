@@ -6,8 +6,11 @@ import ModalSelection from "./ModalSelection";
 import Appearance from "./Appearance";
 import SettingsAndCode from "./SettingsAndCode";
 import TemplateSelector from "./TemplateSelector";
+import Content from "./Content";
+import { useModal } from "../../../context/ModalContext";
 
 const ModalGenerator = () => {
+  const { modal } = useModal();
   return (
     <div className={styles.modalGenerator}>
       <div className={styles.generatorTitle}>
@@ -22,8 +25,15 @@ const ModalGenerator = () => {
 
       <div className={styles.generatorContainer}>
         <div className={styles.modalPropertiesSelectionContainer}>
-          <Appearance />
-          <SettingsAndCode />
+          {modal.id ? (
+            <>
+              <Appearance />
+              <Content />
+              <SettingsAndCode />
+            </>
+          ) : (
+            <></>
+          )}
         </div>
         <div className={styles.modalPreviewContainer}>
           <TemplateSelector />

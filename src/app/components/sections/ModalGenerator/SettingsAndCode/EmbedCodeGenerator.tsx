@@ -35,11 +35,14 @@ const EmbedCodeGenerator = () => {
           "https://hook.eu2.make.com/owgs6fu2vf8fr4m2m4zfe6grgmvt6me7",
       };
 
-      const response = await fetch("http://localhost:3000/api/generate-modal", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(modalConfig),
-      });
+      const response = await fetch(
+        "http://modal-generator.netlify.app/api/generate-modal",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(modalConfig),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(

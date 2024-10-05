@@ -7,7 +7,7 @@ import { ModalDataType } from "../data/modalData";
 export const initialModalData = {
   id: NaN,
   title: "",
-  logo: "",
+  logoUrl: "",
   imageUrl: "",
   contents: { content1: "" },
   inputs: { placeholder: "" },
@@ -16,12 +16,13 @@ export const initialModalData = {
     button2: "",
   },
   sizes: "",
+  position: "",
   color: { background: "", text: "" },
 };
 
 interface ModalContextInterface {
   modal: ModalDataType;
-  setModal: (modal: ModalDataType) => void;
+  setModal: React.Dispatch<React.SetStateAction<ModalDataType>>;
 }
 
 interface ModalProviderProps {

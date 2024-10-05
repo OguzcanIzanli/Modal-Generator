@@ -1,7 +1,7 @@
 export interface ModalDataType {
   id: number;
   title: string;
-  logo?: string;
+  logoUrl?: string;
   imageUrl?: string;
   contents: { content1: string };
   inputs?: { placeholder: string };
@@ -18,7 +18,7 @@ export const modalData: ModalDataType[] = [
   {
     id: 1,
     title: "Security Code",
-    logo: "logo",
+    logoUrl: "/images/logos/Secure.png",
     contents: {
       content1: "This code expires in 24 hours",
     },
@@ -39,7 +39,7 @@ export const modalData: ModalDataType[] = [
   {
     id: 2,
     title: "Install local now",
-    imageUrl: "http://localhost:3000/images/modal-images/modal2.png",
+    imageUrl: "/images/modal-images/modal2.png",
     contents: {
       content1: "We’ve gone native, try it!",
     },

@@ -21,13 +21,13 @@ const PaginationSize = () => {
     <ul className={styles.paginationContainer}>
       {Object.keys(sizes).map((item) => (
         <li
+          key={item}
           onClick={() =>
             setModal({ ...modal, sizes: sizes[item as keyof SizesType] })
           }
           className={`${styles.large} ${
             modal.sizes === sizes[item as keyof SizesType] ? styles.active : ""
           }`}
-          key={item}
         >
           {item}
         </li>

@@ -54,9 +54,8 @@
     .modalPreviewContainer {
       width: calc(100% * (2 / 3));
       position: relative;
-      border: 2px solid $base-color-2;
+      // border: 2px solid $base-color-2;
       margin-left: 10px;
-      border-radius: 12px;
     }
   }
 }

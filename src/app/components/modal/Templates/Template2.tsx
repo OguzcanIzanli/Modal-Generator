@@ -2,7 +2,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-import IconClose from "../../../../../public/images/Icons/IconClose";
+import IconClose from "../../../../../public/images/icons/IconClose";
 import Image from "next/image";
 import { ModalDataType } from "@/app/data/modalData";
 import "../../../styles/output.css";
@@ -15,7 +15,9 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
 
   return (
     <div
-      className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white aspect-[3/4] ${modalData.sizes} sticky top-10`}
+      className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white aspect-[3/4] ${
+        modalData.sizes
+      } ${modalData.id && "sticky top-10 left-1/2"}`}
     >
       {/* Image  */}
       <Image
@@ -66,6 +68,7 @@ if (typeof window !== "undefined") {
 
       const container = document.createElement("div");
       document.body.appendChild(container);
+      container.className = `fixed ${modalData.position}`;
       console.log("Container created and appended.");
 
       const root = ReactDOM.createRoot(container);

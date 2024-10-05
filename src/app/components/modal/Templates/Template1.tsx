@@ -2,22 +2,35 @@
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-import IconClose from "../../../../../public/images/Icons/IconClose";
+import IconClose from "../../../../../public/images/icons/IconClose";
 import { ModalDataType } from "@/app/data/modalData";
 import "../../../styles/output.css";
+import Image from "next/image";
 
 interface TemplateProps {
   modalData: ModalDataType;
 }
 const Template1: React.FC<TemplateProps> = ({ modalData }) => {
+  console.log(modalData.logoUrl);
   return (
     <div
-      className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white p-10 aspect-[1/1] ${modalData.sizes}`}
+      className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white p-10 aspect-[1/1] ${
+        modalData.sizes
+      } ${modalData.id && "sticky top-10 left-1/2"}`}
     >
       {/* Logo  */}
       <div
-        className={`rounded-full w-[25%] aspect-[1/1] mb-[8%] ${modalData.color.background}`}
-      ></div>
+        className={`rounded-full flex items-center justify-center w-[25%] aspect-[1/1] mb-[8%] ${modalData.color.background}`}
+      >
+        <Image
+          src={modalData.logoUrl ? modalData?.logoUrl : ""}
+          className="w-2/3"
+          width={0}
+          height={0}
+          unoptimized
+          alt=""
+        />
+      </div>
 
       {/* Title  */}
       <div className="text-3xl font-bold text-center mb-[6%]">

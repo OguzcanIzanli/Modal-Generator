@@ -1,8 +1,8 @@
 import React from "react";
-import IconClose from "../../../../../public/images/Icons/IconClose";
+import IconClose from "../../../../../public/images/icons/IconClose";
 import Image from "next/image";
-import IconLightning from "../../../../../public/images/Icons/IconLightning";
-import IconDollarSign from "../../../../../public/images/Icons/IconDollarSign";
+import IconLightning from "../../../../../public/images/icons/IconLightning";
+import IconDollarSign from "../../../../../public/images/icons/IconDollarSign";
 
 const ExampleModal = () => {
   return (

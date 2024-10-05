@@ -29,7 +29,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src",
-    "public/images/Icons"
+    "public/images/icons"
   ],
   "exclude": ["node_modules"]
 }

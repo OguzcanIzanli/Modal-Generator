@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     <script>
     window.MyModal.init({
       title: "${userConfig.title}",
-      ${userConfig.logo ? `logo: "${userConfig.logo}",` : ""}
+      ${userConfig.logoUrl ? `logo: "${userConfig.logoUrl}",` : ""}
       ${userConfig.imageUrl ? `imageUrl: "${userConfig.imageUrl}",` : ""}
       contents: { content1: "${userConfig.contents.content1}" },
       ${
@@ -26,7 +26,11 @@ export async function POST(request: Request) {
           button2: "${userConfig.buttons.button2}",
         },
         sizes: "${userConfig.sizes}",
-        position: "${userConfig.position}",
+       ${
+         userConfig.position
+           ? `position: "${userConfig.position}",`
+           : `position: "bottom-5 right-5",`
+       }
         color: { background: "${userConfig.color.background}", text: "${
         userConfig.color.text
       }" },

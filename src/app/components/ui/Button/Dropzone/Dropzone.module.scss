@@ -1,0 +1,38 @@
+@use "@base/colors" as *;
+
+.uploadImgContainer {
+  width: 100%;
+  height: 180px;
+  border: 2px dashed $base-color-6;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+
+  .iconImage {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    color: $base-color-2;
+    background-color: rgba($base-color-2, 0.2);
+    padding: 25px;
+    margin-bottom: 20px;
+  }
+
+  .uploadedImg {
+    margin-bottom: 20px;
+    background-color: rgba($base-color-2, 0.2);
+    border-radius: 10px;
+    width: 80px;
+    height: auto;
+  }
+
+  .uploadImg {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    font-size: 14px;
+  }
+}

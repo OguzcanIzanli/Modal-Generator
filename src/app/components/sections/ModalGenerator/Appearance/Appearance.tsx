@@ -3,9 +3,8 @@
 import React from "react";
 import styles from "./Appearance.module.scss";
 import PaginationSize from "@/app/components/navigation/Pagination/PaginationSize";
-import IconImage from "../../../../../../public/images/Icons/IconImage";
-import IconUpload from "../../../../../../public/images/Icons/IconUpload";
 import { useModal } from "@/app/context/ModalContext";
+import Dropzone from "@/app/components/ui/Button/Dropzone";
 
 const Appearance = () => {
   // const boxes = Array.from({ length: 9 }, (_, i) => <div key={i}></div>);
@@ -38,14 +37,14 @@ const Appearance = () => {
     { background: "bg-gray-300 border-2 border-gray-300", text: "text-black" },
     { background: "bg-white border-2 border-gray-300", text: "text-black" },
   ];
-  console.log(modal.position);
+
   return (
     <div className={styles.appearanceContainer}>
       <h3>
         <span>2</span>Appearance (Size, colors, logo)
       </h3>
-      <h4>Size</h4>
 
+      <h4>Size</h4>
       <PaginationSize />
 
       <h4>Position</h4>
@@ -54,6 +53,7 @@ const Appearance = () => {
         {positions.map((position) => (
           <div
             key={position}
+            className={`${modal.position === position ? styles.active : ""}`}
             onClick={() =>
               setModal({
                 ...modal,
@@ -70,7 +70,9 @@ const Appearance = () => {
         {colors.map((color) => (
           <button
             key={color.background}
-            className={`${styles.colorBox} ${color.background}`}
+            className={`${styles.colorBox} ${color.background} ${
+              modal.color.background === color.background ? styles.active : ""
+            }`}
             onClick={() =>
               setModal({
                 ...modal,
@@ -85,12 +87,8 @@ const Appearance = () => {
       </div>
 
       <h4>Upload Logo</h4>
-      <div className={styles.uploadLogoContainer}>
-        <IconImage className={styles.iconImage} />
-        <div className={styles.uploadLogo}>
-          <IconUpload /> Drop your image here or upload
-        </div>
-      </div>
+
+      <Dropzone dropzone="logo" />
     </div>
   );
 };

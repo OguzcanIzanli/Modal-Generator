@@ -15,7 +15,7 @@ const GenerateButton = () => {
       const modalConfig = {
         entry: modal.id,
         title: modal.title,
-        logo: modal.logo,
+        logoUrl: modal.logoUrl,
         imageUrl: modal.imageUrl,
         contents: { content1: modal.contents.content1 },
         inputs: { placeholder: modal.inputs?.placeholder },

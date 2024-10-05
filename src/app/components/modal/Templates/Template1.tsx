@@ -12,23 +12,27 @@ interface TemplateProps {
 const Template1: React.FC<TemplateProps> = ({ modalData }) => {
   return (
     <div
-      className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center flex-col bg-white py-10 px-16 ${modalData.sizes} sticky top-10`}
+      className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white p-10 aspect-[1/1] ${modalData.sizes}`}
     >
       {/* Logo  */}
       <div
-        className={`rounded-full w-[90px] h-[90px] mb-7 ${modalData.color.background}`}
+        className={`rounded-full w-[25%] aspect-[1/1] mb-[8%] ${modalData.color.background}`}
       ></div>
 
       {/* Title  */}
-      <div className="text-3xl font-bold mb-6">{modalData.title}</div>
+      <div className="text-3xl font-bold text-center mb-[6%]">
+        {modalData.title}
+      </div>
 
       {/* Content  */}
-      <div className="text-xl mb-10">{modalData.contents.content1}</div>
+      <div className="text-xl text-center mb-[6%]">
+        {modalData.contents.content1}
+      </div>
 
       {/* Input  */}
       <input
         type="text"
-        className="py-3 px-4 w-full rounded-xl mb-8 border-2 border-gray-300"
+        className="py-3 px-4 text-base w-full rounded-xl mb-[6%] border-2 border-gray-300"
         placeholder={modalData.inputs?.placeholder}
       />
 
@@ -61,6 +65,7 @@ if (typeof window !== "undefined") {
 
       const container = document.createElement("div");
       document.body.appendChild(container);
+      container.className = `fixed ${modalData.position}`;
       console.log("Container created and appended.");
 
       const root = ReactDOM.createRoot(container);

@@ -8,7 +8,20 @@ import IconUpload from "../../../../../../public/images/Icons/IconUpload";
 import { useModal } from "@/app/context/ModalContext";
 
 const Appearance = () => {
-  const boxes = Array.from({ length: 9 }, (_, i) => <div key={i}></div>);
+  // const boxes = Array.from({ length: 9 }, (_, i) => <div key={i}></div>);
+
+  const positions = [
+    "top-5 left-5",
+    "top-5 left-1/2 -translate-x-2/4",
+    "top-5 right-5",
+    "left-5 bottom-1/2 translate-y-2/4",
+    "bottom-1/2 left-1/2 -translate-x-2/4 translate-y-2/4",
+    "right-5 bottom-1/2 translate-y-2/4",
+    "bottom-5 left-5",
+    "bottom-5 left-1/2 -translate-x-2/4",
+    "bottom-5 right-5",
+  ];
+
   const { modal, setModal } = useModal();
 
   const colors = [
@@ -25,7 +38,7 @@ const Appearance = () => {
     { background: "bg-gray-300 border-2 border-gray-300", text: "text-black" },
     { background: "bg-white border-2 border-gray-300", text: "text-black" },
   ];
-
+  console.log(modal.position);
   return (
     <div className={styles.appearanceContainer}>
       <h3>
@@ -37,7 +50,19 @@ const Appearance = () => {
 
       <h4>Position</h4>
 
-      <div className={styles.positionBoxesContainer}>{boxes}</div>
+      <div className={styles.positionBoxesContainer}>
+        {positions.map((position) => (
+          <div
+            key={position}
+            onClick={() =>
+              setModal({
+                ...modal,
+                position: position,
+              })
+            }
+          ></div>
+        ))}
+      </div>
 
       <h4>Colors</h4>
 

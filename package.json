@@ -7,12 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build",
-    "build:css": "tailwindcss build src/app/styles/main.scss -o src/output.css"
+    "build:css": "tailwindcss build src/app/styles/main.scss -o src/app/styles/output.css"
   },
   "dependencies": {
     "autoprefixer": "^10.4.20",
     "next": "14.2.11",
+    "node-fetch": "^3.3.2",
     "react": "^18",
     "react-dom": "^18",
     "sass": "^1.79.3"
@@ -23,8 +23,6 @@
     "@babel/preset-env": "^7.25.4",
     "@babel/preset-react": "^7.24.7",
     "@babel/preset-typescript": "^7.24.7",
-    "@netlify/functions": "^2.8.2",
-    "@netlify/plugin-nextjs": "^5.7.3",
     "@types/node": "^20.16.10",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -39,8 +37,5 @@
     "typescript": "^5",
     "webpack": "^5.95.0",
     "webpack-cli": "^5.1.4"
-  },
-  "engines": {
-    "node": ">=14.0.0"
   }
 }

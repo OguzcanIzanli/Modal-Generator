@@ -10,6 +10,7 @@ export interface ModalDataType {
     button2: string;
   };
   sizes: string;
+  position: string;
   color: { background: string; text: string };
 }
 
@@ -29,6 +30,7 @@ export const modalData: ModalDataType[] = [
       button2: "Continue",
     },
     sizes: "w-[480px]",
+    position: "",
     color: {
       background: "bg-violet-600 border-2 border-violet-600",
       text: "text-white",
@@ -45,7 +47,8 @@ export const modalData: ModalDataType[] = [
       button1: "Continue",
       button2: "Not now",
     },
-    sizes: "scale-100",
+    sizes: "w-[480px]",
+    position: "",
     color: {
       background: "bg-violet-600 border-2 border-violet-600",
       text: "text-white",

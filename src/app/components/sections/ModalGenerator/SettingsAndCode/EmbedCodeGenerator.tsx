@@ -24,6 +24,7 @@ const GenerateButton = () => {
           button2: modal.buttons.button2,
         },
         sizes: modal.sizes,
+        position: modal.position,
         color: {
           background: modal.color.background,
           text: modal.color.text,
@@ -32,23 +33,22 @@ const GenerateButton = () => {
           "https://hook.eu2.make.com/owgs6fu2vf8fr4m2m4zfe6grgmvt6me7",
       };
 
-      // Netlify function endpointine istek atıyoruz
-      const response = await fetch("/.netlify/functions/generate-modal", {
+      const response = await fetch("http://localhost:3000/api/generate-modal", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(modalConfig),
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Modal generation failed!");
+        throw new Error(
+          (await response.json()).error || "Modal generation failed!"
+        );
       }
 
       const data = await response.json();
       setEmbedCode(data.embedCode);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      setError(err.message || "An error occurred.");
+    } catch {
+      setError("An error occurred.");
     } finally {
       setLoading(false);
     }

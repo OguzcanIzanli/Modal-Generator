@@ -4,22 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      body {
+        height: 4000px;
+      }
+    </style>
   </head>
   <body>
     <script
       type="text/javascript"
-      src="http://localhost:3000/dist/script.js"
+      src="http://localhost:3000/dist/template1.js"
     ></script>
     <script>
       window.MyModal.init({
         title: "Security Code",
         logo: "logo",
         contents: { content1: "This code expires in 24 hours" },
-        placeholder: "Code",
+        inputs: { placeholder: "Code" },
         buttons: { button1: "Cancel", button2: "Continue" },
         sizes: "w-[320px]",
+        position: "top-5 right-5",
         color: {
-          background: "bg-gray-600 border-2 border-gray-600",
+          background: "bg-orange-600 border-2 border-orange-600",
           text: "text-white",
         },
       });

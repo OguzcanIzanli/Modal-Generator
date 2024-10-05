@@ -11,7 +11,7 @@ module.exports = (env) => {
     entry: path.resolve(__dirname, entryFile),
     entry: entryFile,
     output: {
-      filename: "script.js",
+      filename: `template${env.entry}.js`,
       path: path.resolve(__dirname, "public/dist"),
       publicPath: "/dist/",
       umdNamedDefine: true,

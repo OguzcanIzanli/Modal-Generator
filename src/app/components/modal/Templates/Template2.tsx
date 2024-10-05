@@ -15,12 +15,12 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
 
   return (
     <div
-      className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center flex-col w-[480px] bg-white ${modalData.sizes} sticky top-10`}
+      className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white aspect-[3/4] ${modalData.sizes} sticky top-10`}
     >
       {/* Image  */}
       <Image
         src={modalData.imageUrl ? modalData?.imageUrl : ""}
-        className="w-full h-1/2 rounded-t-xl mb-10"
+        className="w-full h-1/2 rounded-t-xl mb-[6%]"
         width={0}
         height={0}
         unoptimized
@@ -28,13 +28,17 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
       />
 
       {/* Title  */}
-      <div className="text-3xl font-bold mb-6">{modalData.title}</div>
+      <div className="text-3xl font-bold text-center mb-[6%]">
+        {modalData.title}
+      </div>
 
       {/* Content  */}
-      <div className="text-xl mb-10 px-16">{modalData.contents.content1}</div>
+      <div className="text-xl text-center mb-[6%] px-10">
+        {modalData.contents.content1}
+      </div>
 
       {/* Button */}
-      <div className="flex w-full gap-4 text-base pb-10 px-16 flex-col">
+      <div className="flex w-full gap-4 text-base pb-10 px-10 flex-col">
         <button
           className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition ${modalData.color.background} ${modalData.color.text}`}
         >

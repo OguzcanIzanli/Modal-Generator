@@ -1,43 +1,27 @@
 {
   "compilerOptions": {
-    // "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
-    // "module": "esnext",
-    // "moduleResolution": "bundler",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "target": "ES6",
-    "module": "commonjs",
-    "lib": [
-      "ES6",
-      "DOM"
-    ],
-    "forceConsistentCasingInFileNames": true,
-    "outDir": "build",
-    "baseUrl": ".",
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@base/*": [
-        "./src/app/styles/base/*"
-      ],
-      "@abstracts/*": [
-        "./src/app/styles/abstracts/*"
-      ]
-    },
-    "moduleResolution": "node"
+      "@/*": ["./src/*"],
+      "@base/*": ["./src/app/styles/base/*"],
+      "@abstracts/*": ["./src/app/styles/abstracts/*"]
+    }
   },
   "include": [
     "next-env.d.ts",
@@ -45,10 +29,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src",
-    "public/images/Icons",
-    "netlify/functions/**/*.ts"
+    "public/images/Icons"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

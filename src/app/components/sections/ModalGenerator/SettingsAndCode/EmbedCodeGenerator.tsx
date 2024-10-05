@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useModal } from "@/app/context/ModalContext";
+import Button from "@/app/components/ui/Button";
+import styles from "./SettingsAndCode.module.scss";
 
-const GenerateButton = () => {
+const EmbedCodeGenerator = () => {
   const [embedCode, setEmbedCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -56,21 +58,25 @@ const GenerateButton = () => {
 
   return (
     <div>
-      <button onClick={handleGenerateClick} disabled={loading}>
+      <Button onClick={handleGenerateClick} size="large" disabled={loading}>
         {loading ? "Generating..." : "Get your Code"}
-      </button>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {embedCode && (
-        <div>
-          <h3>Your Embed Code:</h3>
-          <pre>{embedCode}</pre>
-          <button onClick={() => navigator.clipboard.writeText(embedCode)}>
+      </Button>
+
+      <div className={styles.embedCodeContainer}>
+        <pre>{embedCode}</pre>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+
+        <div className={styles.copyEmbedCodeBtn}>
+          <Button
+            onClick={() => navigator.clipboard.writeText(embedCode)}
+            size="small"
+          >
             Copy Code
-          </button>
+          </Button>
         </div>
-      )}
+      </div>
     </div>
   );
 };
 
-export default GenerateButton;
+export default EmbedCodeGenerator;

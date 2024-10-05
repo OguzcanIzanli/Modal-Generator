@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useDropzone, FileRejection, FileWithPath } from "react-dropzone";
+import { useDropzone, FileWithPath } from "react-dropzone";
 import { useModal } from "@/app/context/ModalContext";
-import IconImage from "../../../../../../public/images/icons/IconImage";
-import IconUpload from "../../../../../../public/images/icons/IconUpload";
+import IconImage from "../../../../../public/images/icons/IconImage";
+import IconUpload from "../../../../../public/images/icons/IconUpload";
 import styles from "./Dropzone.module.scss";
 import Image from "next/image";
+import uploadImage from "../../../firebase/uploadImage";
 
 interface UploadedFile extends FileWithPath {
   preview: string;
@@ -17,23 +18,33 @@ interface DropzoneProps {
 const Dropzone: React.FC<DropzoneProps> = ({ dropzone }) => {
   const { setModal } = useModal();
   const [uploadedImg, setUploadedImg] = useState<UploadedFile[]>([]);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
 
   const onDrop = useCallback(
-    (acceptedFiles: FileWithPath[], fileRejections: FileRejection[]) => {
+    async (acceptedFiles: FileWithPath[]) => {
+      // Preview image
       const filesWithPreview = acceptedFiles.map((file) =>
         Object.assign(file, { preview: URL.createObjectURL(file) })
       ) as UploadedFile[];
 
       setUploadedImg(filesWithPreview);
 
-      // Handling rejected file errors
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const rejectionErrors = fileRejections.flatMap((rejection) =>
-        rejection.errors.map((err) => err.message)
-      );
-      //   console.log(rejectionErrors);
+      if (filesWithPreview.length > 0) {
+        setIsUploading(true);
+        const file = acceptedFiles[0];
+        const downloadURL = await uploadImage(file);
+
+        if (downloadURL) {
+          setModal((prevModal) => ({
+            ...prevModal,
+            logoUrl: downloadURL,
+          }));
+        }
+
+        setIsUploading(false);
+      }
     },
-    []
+    [setModal]
   );
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -82,9 +93,14 @@ const Dropzone: React.FC<DropzoneProps> = ({ dropzone }) => {
       )}
 
       <div className={styles.uploadImg}>
-        <IconUpload /> Drop your image here or{" "}
+        <IconUpload /> Drop your image here or
         <span style={{ fontWeight: 700 }}>upload</span>
       </div>
+
+      {isUploading && <p className={styles.status}>Uploaded...</p>}
+      {!isUploading && uploadedImg.length > 0 && (
+        <p className={styles.status}>Uploaded successful!</p>
+      )}
     </div>
   );
 };

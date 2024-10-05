@@ -22,7 +22,7 @@
   }
 
   .uploadedImg {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     background-color: rgba($base-color-2, 0.2);
     border-radius: 10px;
     width: 80px;
@@ -33,6 +33,10 @@
     display: flex;
     gap: 4px;
     align-items: center;
+    font-size: 14px;
+  }
+
+  .status {
     font-size: 14px;
   }
 }

@@ -18,7 +18,8 @@ export const modalData: ModalDataType[] = [
   {
     id: 1,
     title: "Security Code",
-    logoUrl: "/images/logos/Secure.png",
+    logoUrl:
+      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2FSecure.png?alt=media&token=9b57cafe-8462-44a6-bee6-536899822a85",
     contents: {
       content1: "This code expires in 24 hours",
     },
@@ -39,7 +40,8 @@ export const modalData: ModalDataType[] = [
   {
     id: 2,
     title: "Install local now",
-    imageUrl: "/images/modal-images/modal2.png",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal2.png?alt=media&token=16a564ba-c07d-4c04-93b5-93adda03c245",
     contents: {
       content1: "We’ve gone native, try it!",
     },

@@ -4,7 +4,7 @@ import React from "react";
 import styles from "./Appearance.module.scss";
 import PaginationSize from "@/app/components/navigation/Pagination/PaginationSize";
 import { useModal } from "@/app/context/ModalContext";
-import Dropzone from "@/app/components/ui/Button/Dropzone";
+import Dropzone from "@/app/components/ui/Dropzone";
 
 const Appearance = () => {
   // const boxes = Array.from({ length: 9 }, (_, i) => <div key={i}></div>);
@@ -86,9 +86,11 @@ const Appearance = () => {
         ))}
       </div>
 
-      <h4>Upload Logo</h4>
-
-      <Dropzone dropzone="logo" />
+      {modal.logoUrl && (
+        <>
+          <h4>Upload Logo</h4> <Dropzone dropzone="logo" />
+        </>
+      )}
     </div>
   );
 };

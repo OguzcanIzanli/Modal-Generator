@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useDropzone, FileWithPath } from "react-dropzone";
 import { useModal } from "@/app/context/ModalContext";
-import IconImage from "../../../../../public/images/icons/IconImage";
-import IconUpload from "../../../../../public/images/icons/IconUpload";
+import IconImage from "../icons/IconImage";
+import IconUpload from "../icons/IconUpload";
 import styles from "./Dropzone.module.scss";
 import Image from "next/image";
 import uploadImage from "../../../firebase/uploadImage";

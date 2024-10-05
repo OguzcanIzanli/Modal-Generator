@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Hero.module.scss";
 import Button from "../../ui/Button";
-import IconCheck from "../../../../../public/images/icons/IconCheck";
+import IconCheck from "../../ui/icons/IconCheck";
 import ExampleModal from "../../modal/ExampleModal";
 
 const Hero = () => {

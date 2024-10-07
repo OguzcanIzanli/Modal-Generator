@@ -15,21 +15,23 @@
       type="text/javascript"
       src="http://localhost:3000/dist/template1.js"
     ></script>
+
     <script>
       window.MyModal.init({
         title: "Security Code",
-        logo: "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2FSecure.png?alt=media&token=9b57cafe-8462-44a6-bee6-536899822a85",
+        logoUrl:
+          "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2FSecure.png?alt=media&token=9b57cafe-8462-44a6-bee6-536899822a85",
         content1: "This code expires in 24 hours",
         inputs: { placeholder: "Code" },
         button1: "Cancel",
         button2: "Continue",
-        sizes: "w-[480px]",
+        sizes: "w-[320px]",
         position: "bottom-5 right-5",
         color: {
-          background: "bg-violet-600 border-2 border-violet-600",
+          background: "bg-gray-600 border-2 border-gray-600",
           text: "text-white",
         },
-        afterSeconds: 1,
+        afterSeconds: 0,
         afterScroll: 0,
       });
     </script>

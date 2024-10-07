@@ -16,6 +16,7 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
   const isModalTriggered = useScrollModal({
     percentage: modalData.afterScroll,
   });
+
   return (
     <>
       {isModalTriggered && (
@@ -85,16 +86,34 @@ if (typeof window !== "undefined") {
       console.log("Initializing modal...");
 
       setTimeout(() => {
+        // const container = document.createElement("div");
+        // document.body.appendChild(container);
+        // container.className = `fixed ${modalData.position} ${modalData.device}`;
+        // console.log("Container created and appended.");
+
+        // const root = ReactDOM.createRoot(container);
+        // console.log("ReactDOM root created.");
+
+        // root.render(<Template1 modalData={modalData} />);
+        // console.log("Template1 rendered.");
         const container = document.createElement("div");
+        const shadow = container.attachShadow({ mode: "open" });
         document.body.appendChild(container);
-        container.className = `fixed ${modalData.position} ${modalData.device}`;
-        console.log("Container created and appended.");
 
-        const root = ReactDOM.createRoot(container);
-        console.log("ReactDOM root created.");
+        // Tailwind CSS dosyasını shadow DOM içine ekleyin
+        const styleElement = document.createElement("style");
+        styleElement.textContent = `
+  @import url("https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css");
+`;
+        shadow.appendChild(styleElement);
 
+        // Shadow DOM içine modalı render edin
+        const modal = document.createElement("div");
+        modal.className = `fixed ${modalData.position} ${modalData.device}`;
+        shadow.appendChild(modal);
+
+        const root = ReactDOM.createRoot(modal);
         root.render(<Template1 modalData={modalData} />);
-        console.log("Template1 rendered.");
       }, modalData.afterSeconds * 1000);
     },
   };

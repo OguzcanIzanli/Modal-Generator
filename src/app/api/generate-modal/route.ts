@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { exec } from "child_process";
-import path from "path";
+// import { exec } from "child_process";
+// import path from "path";
 export async function POST(request: Request) {
   try {
     const userConfig = await request.json();
@@ -39,33 +39,33 @@ export async function POST(request: Request) {
         .trim();
 
     // DEVELOPMENT
-    // Trigger webpack build
-    const webpackPath = path.resolve(process.cwd(), "webpack.config.js");
-    console.log(`Webpack path: ${webpackPath}`);
+    // // Trigger webpack build
+    // const webpackPath = path.resolve(process.cwd(), "webpack.config.js");
+    // console.log(`Webpack path: ${webpackPath}`);
 
-    // Promise-based build to run Webpack
-    const buildResult = await new Promise<{ stdout: string; stderr: string }>(
-      (resolve, reject) => {
-        const entry = userConfig.entry || "";
-        exec(
-          `npx webpack --config ${webpackPath} --env entry=${entry}`,
-          (error, stdout, stderr) => {
-            if (error) {
-              reject(error);
-              return;
-            }
-            resolve({ stdout, stderr });
-          }
-        );
-      }
-    );
+    // // Promise-based build to run Webpack
+    // const buildResult = await new Promise<{ stdout: string; stderr: string }>(
+    //   (resolve, reject) => {
+    //     const entry = userConfig.entry || "";
+    //     exec(
+    //       `npx webpack --config ${webpackPath} --env entry=${entry}`,
+    //       (error, stdout, stderr) => {
+    //         if (error) {
+    //           reject(error);
+    //           return;
+    //         }
+    //         resolve({ stdout, stderr });
+    //       }
+    //     );
+    //   }
+    // );
 
-    console.log("Webpack build completed.");
-    console.log("stdout:", buildResult.stdout);
+    // console.log("Webpack build completed.");
+    // console.log("stdout:", buildResult.stdout);
 
-    if (buildResult.stderr) {
-      console.error("stderr:", buildResult.stderr);
-    }
+    // if (buildResult.stderr) {
+    //   console.error("stderr:", buildResult.stderr);
+    // }
     // DEVELOPMENT
 
     // Embed code

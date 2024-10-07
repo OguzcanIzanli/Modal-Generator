@@ -7,8 +7,6 @@ import { useModal } from "@/app/context/ModalContext";
 import Dropzone from "@/app/components/ui/Dropzone";
 
 const Appearance = () => {
-  // const boxes = Array.from({ length: 9 }, (_, i) => <div key={i}></div>);
-
   const positions = [
     "top-5 left-5",
     "top-5 left-1/2 -translate-x-2/4",
@@ -88,7 +86,7 @@ const Appearance = () => {
 
       {modal.logoUrl && (
         <>
-          <h4>Upload Logo</h4> <Dropzone dropzone="logo" />
+          <h4>Upload Logo</h4> <Dropzone dropzone="logoUrl" />
         </>
       )}
     </div>

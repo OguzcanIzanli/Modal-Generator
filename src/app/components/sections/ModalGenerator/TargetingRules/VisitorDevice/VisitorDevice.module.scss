@@ -1,0 +1,25 @@
+@use "@base/colors" as *;
+
+.deviceSelectionContainer {
+  display: flex;
+  gap: 20px;
+  overflow: hidden;
+  transition: 0.3s;
+
+  .devices {
+    width: 100%;
+    background-color: $base-color-5;
+    height: 48px;
+    font-size: 14px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+  }
+
+  .iconDevices {
+    font-size: 18px;
+    margin-right: 5px;
+    color: $base-color-4;
+  }
+}

@@ -32,6 +32,7 @@ export async function POST(request: Request) {
       color: { background: "${userConfig.color.background}", text: "${
         userConfig.color.text
       }" },
+      ${userConfig.device === "" ? "" : `device: "${userConfig.device}"`}
     });
     </script>`
         .replace(/\s\s+/g, " ")

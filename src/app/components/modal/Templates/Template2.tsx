@@ -4,8 +4,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import IconClose from "../../ui/icons/IconClose";
 import Image from "next/image";
+import "tailwindcss/tailwind.css";
 import { ModalDataType } from "@/app/data/modalData";
-import "../../../styles/output.css";
 
 interface TemplateProps {
   modalData: ModalDataType;

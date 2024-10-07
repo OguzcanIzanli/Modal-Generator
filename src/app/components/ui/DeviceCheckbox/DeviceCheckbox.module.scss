@@ -1,0 +1,48 @@
+@use "@base/colors" as *;
+
+.checkboxContainer {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.csscheckbox {
+  position: absolute;
+  opacity: 0;
+  margin-right: 10px;
+}
+
+.customcheckbox {
+  width: 18px;
+  height: 18px;
+  background-color: transparent;
+  border: 1px solid $base-color-4;
+  border-radius: 4px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.csscheckbox:checked + .customcheckbox {
+  background-color: #7d4aea;
+  border-color: #7d4aea;
+}
+
+.customcheckbox::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  top: 1px;
+  left: 5px;
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.csscheckbox:checked + .customcheckbox::after {
+  opacity: 1;
+}

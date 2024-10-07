@@ -16,6 +16,7 @@ export const initialModalData = {
   sizes: "",
   position: "",
   color: { background: "", text: "" },
+  device: null,
 };
 
 interface ModalContextInterface {

@@ -37,14 +37,14 @@ const Dropzone: React.FC<DropzoneProps> = ({ dropzone }) => {
         if (downloadURL) {
           setModal((prevModal) => ({
             ...prevModal,
-            logoUrl: downloadURL,
+            [dropzone]: downloadURL,
           }));
         }
 
         setIsUploading(false);
       }
     },
-    [setModal]
+    [setModal, dropzone]
   );
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -61,12 +61,10 @@ const Dropzone: React.FC<DropzoneProps> = ({ dropzone }) => {
     if (uploadedImg.length > 0) {
       const latestFile = uploadedImg[0];
 
-      dropzone === "logo"
-        ? setModal((prevModal) => ({
-            ...prevModal,
-            logoUrl: latestFile.preview,
-          }))
-        : "";
+      setModal((prevModal) => ({
+        ...prevModal,
+        [dropzone]: latestFile.preview,
+      }));
     }
 
     // Cleaning up generated URLs to prevent memory leaks

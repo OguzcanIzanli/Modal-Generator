@@ -10,6 +10,7 @@ export interface ModalDataType {
   sizes: string;
   position: string;
   color: { background: string; text: string };
+  device: string | null;
 }
 
 export const modalData: ModalDataType[] = [
@@ -30,6 +31,7 @@ export const modalData: ModalDataType[] = [
       background: "bg-violet-600 border-2 border-violet-600",
       text: "text-white",
     },
+    device: "",
   },
   {
     id: 2,
@@ -45,6 +47,7 @@ export const modalData: ModalDataType[] = [
       background: "bg-violet-600 border-2 border-violet-600",
       text: "text-white",
     },
+    device: "",
   },
   // {
   //   id: 3,

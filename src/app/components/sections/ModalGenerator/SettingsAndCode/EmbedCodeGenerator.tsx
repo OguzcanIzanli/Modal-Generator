@@ -29,15 +29,19 @@ const EmbedCodeGenerator = () => {
           background: modal.color.background,
           text: modal.color.text,
         },
+        device: modal.device,
         webhookUrl:
           "https://hook.eu2.make.com/owgs6fu2vf8fr4m2m4zfe6grgmvt6me7",
       };
 
-      const response = await fetch("http://localhost:3000/api/generate-modal", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(modalConfig),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/generate-modal`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(modalConfig),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(

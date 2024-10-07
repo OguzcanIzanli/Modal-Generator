@@ -1,0 +1,44 @@
+@use "@base/colors" as *;
+
+.toggleContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+
+  .toggleTitle {
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .toggleInput {
+    position: relative;
+    appearance: none;
+    width: 38px;
+    height: 22px;
+    background-color: $base-color-6;
+    border-radius: 999px;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+  .toggleInput::after {
+    content: "";
+    position: absolute;
+    background-color: white;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    transition: 0.3s;
+  }
+
+  .toggleInput:checked {
+    background-color: $base-color-2;
+
+    &:checked::after {
+      left: 70%;
+    }
+  }
+}

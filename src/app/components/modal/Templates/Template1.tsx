@@ -4,7 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import IconClose from "../../ui/icons/IconClose";
 import { ModalDataType } from "@/app/data/modalData";
-import "../../../styles/output.css";
+import "tailwindcss/tailwind.css";
 import Image from "next/image";
 
 interface TemplateProps {
@@ -15,7 +15,7 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
     <div
       className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white p-10 aspect-[1/1] ${
         modalData.sizes
-      } ${modalData.id && "sticky top-10 left-1/2"}`}
+      } ${modalData.id ? "sticky top-10 left-1/2" : ""}`}
     >
       {/* Logo  */}
       <div
@@ -77,9 +77,9 @@ if (typeof window !== "undefined") {
 
       const container = document.createElement("div");
       document.body.appendChild(container);
-      container.className = `fixed ${modalData.position}`;
+      container.className = `fixed ${modalData.position} ${modalData.device}`;
       console.log("Container created and appended.");
-
+      console.log(modalData.device);
       const root = ReactDOM.createRoot(container);
       console.log("ReactDOM root created.");
 

@@ -8,6 +8,7 @@ import SettingsAndCode from "./SettingsAndCode";
 import TemplateSelector from "./TemplateSelector";
 import Content from "./Content";
 import { useModal } from "../../../context/ModalContext";
+import TargetingRules from "./TargetingRules";
 
 const ModalGenerator = () => {
   const { modal } = useModal();
@@ -29,6 +30,7 @@ const ModalGenerator = () => {
             <>
               <Appearance />
               <Content />
+              <TargetingRules />
               <SettingsAndCode />
             </>
           ) : (

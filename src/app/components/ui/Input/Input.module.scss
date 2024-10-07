@@ -1,0 +1,16 @@
+@use "@base/colors" as *;
+
+.input {
+  width: 100%;
+  font-size: 14px;
+  padding: 9px 12px;
+  border: 1px solid $base-color-6;
+  border-radius: 8px;
+  outline: none;
+  margin-bottom: 15px;
+
+  &:focus {
+    outline: 2px solid rgba($base-color-2, 0.5);
+    border: 1px solid $base-color-2;
+  }
+}

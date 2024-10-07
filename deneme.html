@@ -17,18 +17,20 @@
     ></script>
     <script>
       window.MyModal.init({
-        title: "Security Coded",
+        title: "Security Code",
         logo: "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2FSecure.png?alt=media&token=9b57cafe-8462-44a6-bee6-536899822a85",
-        content1: "This code expires in 24 hoursd",
+        content1: "This code expires in 24 hours",
         inputs: { placeholder: "Code" },
-        button1: "Canceld",
-        button2: "Continued",
+        button1: "Cancel",
+        button2: "Continue",
         sizes: "w-[480px]",
-        position: "bottom-5 left-1/2 -translate-x-2/4",
+        position: "bottom-5 right-5",
         color: {
-          background: "bg-orange-600 border-2 border-orange-600",
+          background: "bg-violet-600 border-2 border-violet-600",
           text: "text-white",
         },
+        afterSeconds: 1,
+        afterScroll: 0,
       });
     </script>
   </body>

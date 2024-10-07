@@ -30,6 +30,8 @@ const EmbedCodeGenerator = () => {
           text: modal.color.text,
         },
         device: modal.device,
+        afterSeconds: modal.afterSeconds,
+        afterScroll: modal.afterScroll,
         webhookUrl:
           "https://hook.eu2.make.com/owgs6fu2vf8fr4m2m4zfe6grgmvt6me7",
       };

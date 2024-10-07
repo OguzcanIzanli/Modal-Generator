@@ -15,10 +15,10 @@ const Content = () => {
 
       <h4>Edit your content</h4>
 
-      <Input name="title" content={modal.title} />
-      <Input name="content1" content={modal.content1} />
-      <Input name="button1" content={modal.button1} />
-      <Input name="button2" content={modal.button2} />
+      <Input type="text" name="title" />
+      <Input type="text" name="content1" />
+      <Input type="text" name="button1" />
+      <Input type="text" name="button2" />
 
       {modal.imageUrl && (
         <>

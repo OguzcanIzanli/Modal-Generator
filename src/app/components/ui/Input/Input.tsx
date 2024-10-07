@@ -4,11 +4,11 @@ import styles from "./Input.module.scss";
 
 interface InputProps {
   name: string;
-  content: string | null;
+  type: "text" | "number";
 }
 
-const Input: React.FC<InputProps> = ({ name, content }) => {
-  const { setModal } = useModal();
+const Input: React.FC<InputProps> = ({ name, type }) => {
+  const { modal, setModal } = useModal();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -17,11 +17,12 @@ const Input: React.FC<InputProps> = ({ name, content }) => {
 
   return (
     <div>
-      {(content || content === "") && (
+      {modal[name] !== undefined && (
         <input
-          type="text"
+          type={type}
           name={name}
-          value={content}
+          value={modal[name]}
+          placeholder={modal[name]}
           onChange={handleChange}
           className={styles.input}
         />

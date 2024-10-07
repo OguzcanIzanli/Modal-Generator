@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ModalDataType {
   id: number;
   title: string | null;
@@ -11,6 +12,9 @@ export interface ModalDataType {
   position: string;
   color: { background: string; text: string };
   device: string | null;
+  afterSeconds: number;
+  afterScroll: number;
+  [key: string]: any;
 }
 
 export const modalData: ModalDataType[] = [
@@ -32,6 +36,8 @@ export const modalData: ModalDataType[] = [
       text: "text-white",
     },
     device: "",
+    afterSeconds: 0,
+    afterScroll: 0,
   },
   {
     id: 2,
@@ -48,6 +54,8 @@ export const modalData: ModalDataType[] = [
       text: "text-white",
     },
     device: "",
+    afterSeconds: 0,
+    afterScroll: 0,
   },
   // {
   //   id: 3,

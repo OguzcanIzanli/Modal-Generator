@@ -1,5 +1,4 @@
 import React from "react";
-
 import Header from "./components/sections/Header";
 import ModalGenerator from "./components/sections/ModalGenerator";
 

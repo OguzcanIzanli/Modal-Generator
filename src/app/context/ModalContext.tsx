@@ -17,6 +17,8 @@ export const initialModalData = {
   position: "",
   color: { background: "", text: "" },
   device: null,
+  afterSeconds: 0,
+  afterScroll: 0,
 };
 
 interface ModalContextInterface {

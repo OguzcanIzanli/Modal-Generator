@@ -28,20 +28,20 @@ const VisitorDevice = () => {
 
       <div
         className={`${styles.deviceSelectionContainer} ${
-          toggle ? "h-[48px]" : "h-0"
+          toggle ? "h-[78px]" : "h-0"
         } `}
       >
-        <div className={styles.devices}>
+        <label className={styles.devices}>
           <DeviceCheckbox id="mobile" setDevice={setDevice} device={device} />
           <IconMobile className={styles.iconDevices} />
           Mobile
-        </div>
+        </label>
 
-        <div className={styles.devices}>
+        <label className={styles.devices}>
           <DeviceCheckbox id="desktop" setDevice={setDevice} device={device} />
           <IconDesktop className={styles.iconDevices} />
           Desktop
-        </div>
+        </label>
       </div>
     </>
   );

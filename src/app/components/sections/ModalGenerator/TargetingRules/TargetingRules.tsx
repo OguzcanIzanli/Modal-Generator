@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./TargetingRules.module.scss";
 import VisitorDevice from "./VisitorDevice";
+import AfterXSeconds from "./AfterXSeconds";
+import AfterScroll from "./AfterScroll";
 
 const TargetingRules = () => {
   return (
@@ -9,6 +11,8 @@ const TargetingRules = () => {
         <span>4</span>Targeting Rules
       </h3>
       <VisitorDevice />
+      <AfterXSeconds />
+      <AfterScroll />
     </div>
   );
 };

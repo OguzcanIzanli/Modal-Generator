@@ -7,10 +7,9 @@ export async function POST(request: Request) {
     const userConfig = await request.json();
     console.log("Received userConfig:", userConfig);
 
-    const embedCode =
-      `<script type="text/javascript" src="http://localhost:3000/dist/template${
-        userConfig.entry
-      }.js"></script>
+    const embedCode = `<script type="text/javascript" src="${
+      process.env.NEXT_PUBLIC_API_URL
+    }/dist/template${userConfig.entry}.js"></script>
     <script>
     window.MyModal.init({
       ${userConfig.title ? `title: "${userConfig.title}",` : ""}
@@ -23,8 +22,8 @@ export async function POST(request: Request) {
       sizes: "${userConfig.sizes}",
       position: "${userConfig.position}",
       color: { background: "${userConfig.color.background}", text: "${
-        userConfig.color.text
-      }" },
+      userConfig.color.text
+    }" },
       ${userConfig.device ? `device: "${userConfig.device}",` : ""}
       ${
         userConfig.afterSeconds
@@ -44,8 +43,8 @@ export async function POST(request: Request) {
       ${userConfig.webhookUrl ? `webhookUrl: "${userConfig.webhookUrl}",` : ""}
     });
     </script>`
-        .replace(/\s\s+/g, " ")
-        .trim();
+      .replace(/\s\s+/g, " ")
+      .trim();
 
     // DEVELOPMENT
     // Trigger webpack build

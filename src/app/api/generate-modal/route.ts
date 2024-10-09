@@ -35,11 +35,7 @@ export async function POST(request: Request) {
           ? `afterScroll: ${userConfig.afterScroll},`
           : `afterScroll: 0,`
       }
-      ${
-        userConfig.trafficSource
-          ? `trafficSource: "${userConfig.trafficSource}",`
-          : ""
-      }
+      ${`trafficSource: "${userConfig.trafficSource}",`}
       ${userConfig.webhookUrl ? `webhookUrl: "${userConfig.webhookUrl}",` : ""}
     });
     </script>`

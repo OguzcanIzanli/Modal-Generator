@@ -1,10 +1,14 @@
 import React, { useEffect, useState, useCallback } from "react";
+import Image from "next/image";
+import styles from "./Dropzone.module.scss";
 import { useDropzone, FileWithPath } from "react-dropzone";
 import { useModal } from "@/app/context/ModalContext";
-import IconImage from "../icons/IconImage";
-import IconUpload from "../icons/IconUpload";
-import styles from "./Dropzone.module.scss";
-import Image from "next/image";
+
+// Icon
+import IconImage from "@icons/IconImage";
+import IconUpload from "@icons/IconUpload";
+
+// Firebase
 import uploadImage from "../../../firebase/uploadImage";
 
 interface UploadedFile extends FileWithPath {
@@ -49,11 +53,11 @@ const Dropzone: React.FC<DropzoneProps> = ({ dropzone }) => {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    // accept: {
-    //   "image/jpeg": [".jpeg", ".jpg"],
-    //   "image/png": [".png"],
-    //   "image/gif": [".gif"],
-    // },
+    accept: {
+      "image/jpeg": [".jpeg", ".jpg"],
+      "image/png": [".png"],
+      "image/gif": [".gif"],
+    },
     maxSize: 2 * 1024 * 1024, // 2MB
   });
 

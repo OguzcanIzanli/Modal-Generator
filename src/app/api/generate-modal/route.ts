@@ -5,7 +5,7 @@ import path from "path";
 export async function POST(request: Request) {
   try {
     const userConfig = await request.json();
-    console.log("Received userConfig:", userConfig);
+    console.log("Received userConfig:", userConfig); // modal data from embed code generator
 
     const embedCode = `<script type="text/javascript" src="${
       process.env.NEXT_PUBLIC_API_URL

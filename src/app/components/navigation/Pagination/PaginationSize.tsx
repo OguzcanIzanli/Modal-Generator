@@ -1,35 +1,27 @@
 import React from "react";
 import styles from "./Pagination.module.scss";
 import { useModal } from "@/app/context/ModalContext";
-
-interface SizesType {
-  small: string;
-  medium: string;
-  large: string;
-}
+import { sizesData } from "@/app/data/templatePropertiesData";
 
 const PaginationSize = () => {
-  const sizes: SizesType = {
-    small: "w-[320px]",
-    medium: "w-[480px]",
-    large: "w-[640px]",
-  };
-
   const { setModal, modal } = useModal();
 
   return (
     <ul className={styles.paginationContainer}>
-      {Object.keys(sizes).map((item) => (
+      {Object.keys(sizesData).map((size) => (
         <li
-          key={item}
+          key={size}
           onClick={() =>
-            setModal({ ...modal, sizes: sizes[item as keyof SizesType] })
+            setModal({
+              ...modal,
+              sizes: sizesData[size],
+            })
           }
           className={`${styles.large} ${
-            modal.sizes === sizes[item as keyof SizesType] ? styles.active : ""
+            modal.sizes === sizesData[size] ? styles.active : ""
           }`}
         >
-          {item}
+          {size}
         </li>
       ))}
     </ul>

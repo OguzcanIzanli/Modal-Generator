@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Toggle from "@/app/components/ui/Toggle";
-import Input from "../../../../ui/Input";
-import styles from "./TrafficSource.module.scss";
 import { useModal } from "@/app/context/ModalContext";
+import styles from "./TrafficSource.module.scss";
+
+// Component
+import Input from "@ui/Input";
+import Toggle from "@ui/Toggle";
 
 const TrafficSource = () => {
   const [toggle, setToggle] = useState(false);

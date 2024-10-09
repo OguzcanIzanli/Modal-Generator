@@ -1,7 +1,7 @@
 import React from "react";
+import Image from "next/image";
 import styles from "./Footer.module.scss";
 import { FooterData } from "@/app/data/FAQFooterData";
-import Image from "next/image";
 
 const Footer = () => {
   return (

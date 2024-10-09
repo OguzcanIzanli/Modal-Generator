@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Toggle from "@/app/components/ui/Toggle";
-import Input from "../../../../ui/Input";
-import styles from "./AfterXSeconds.module.scss";
 import { useModal } from "@/app/context/ModalContext";
+import styles from "./AfterXSeconds.module.scss";
+
+// Component
+import Input from "@ui/Input";
+import Toggle from "@ui/Toggle";
 
 const AfterXSeconds = () => {
   const [toggle, setToggle] = useState(false);

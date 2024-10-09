@@ -11,6 +11,29 @@ interface FooterDataType {
   content: string;
 }
 
+export const FAQPopupPropertyData: FooterDataType[] = [
+  {
+    id: 1,
+    imgUrl: "/images/logos/pixel-perfect.png",
+    title: "Pixel Perfect",
+    content: "Helps you calculate your email marketing roi to measure success.",
+  },
+  {
+    id: 2,
+    imgUrl: "/images/logos/conversion.png",
+    title: "Conversion Ready",
+    content:
+      "Empowers your emails by generating afree code for a CTA in your subject line.",
+  },
+  {
+    id: 3,
+    imgUrl: "/images/logos/verified.png",
+    title: "Modern & Useful",
+    content:
+      "Enables you to estimate the total profit of your investment on a popup service.",
+  },
+];
+
 export const FAQData: FAQDataType[] = [
   {
     id: 1,

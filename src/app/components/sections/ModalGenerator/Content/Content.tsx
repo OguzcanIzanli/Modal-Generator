@@ -1,8 +1,10 @@
 import React from "react";
 import styles from "./Content.module.scss";
 import { useModal } from "@/app/context/ModalContext";
-import Dropzone from "@/app/components/ui/Dropzone";
-import Input from "@/app/components/ui/Input";
+
+// Component
+import Dropzone from "@ui/Dropzone";
+import Input from "@ui/Input";
 
 const Content = () => {
   const { modal } = useModal();

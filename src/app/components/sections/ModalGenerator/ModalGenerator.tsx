@@ -2,18 +2,20 @@
 
 import React from "react";
 import styles from "./ModalGenerator.module.scss";
+import { useModal } from "../../../context/ModalContext";
+
+// Component
 import ModalSelection from "./ModalSelection";
 import Appearance from "./Appearance";
 import SettingsAndCode from "./SettingsAndCode";
 import TemplateSelector from "./TemplateSelector";
 import Content from "./Content";
-import { useModal } from "../../../context/ModalContext";
 import TargetingRules from "./TargetingRules";
 
 const ModalGenerator = () => {
   const { modal } = useModal();
   return (
-    <div className={styles.modalGenerator}>
+    <div id="modalGenerator" className={styles.modalGenerator}>
       <div className={styles.generatorTitle}>
         <h2>Modal Card Generator</h2>
         <p className={styles.generatorTitleContent}>

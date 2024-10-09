@@ -10,11 +10,10 @@ const useTrafficSource = ({ domain }: UseTrafficSourceProps): boolean => {
   useEffect(() => {
     const referrer = document.referrer;
 
-    const isLocalOrModalGenerator =
-      process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator") ||
-      process.env.NEXT_PUBLIC_API_URL?.includes("localhost");
+    const isModalGeneratorWebsite =
+      process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
 
-    setDomainControl(isLocalOrModalGenerator || referrer.includes(domain));
+    setDomainControl(isModalGeneratorWebsite || referrer.includes(domain));
   }, [domain]);
 
   return domainControl;

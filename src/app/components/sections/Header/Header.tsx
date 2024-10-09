@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./Header.module.scss";
+
+// Component
 import Navbar from "../../navigation/Navbar";
 import Hero from "../Hero";
 

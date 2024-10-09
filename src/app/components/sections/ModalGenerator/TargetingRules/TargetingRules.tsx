@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./TargetingRules.module.scss";
+
+// Component
 import VisitorDevice from "./VisitorDevice";
 import AfterXSeconds from "./AfterXSeconds";
 import AfterScroll from "./AfterScroll";

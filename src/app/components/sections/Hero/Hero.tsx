@@ -1,8 +1,12 @@
 import React from "react";
 import styles from "./Hero.module.scss";
-import Button from "../../ui/Button";
-import IconCheck from "../../ui/icons/IconCheck";
+
+// Component
 import ExampleModal from "../../modal/ExampleModal";
+
+// Icon
+import Button from "@ui/Button";
+import IconCheck from "@ui/icons/IconCheck";
 
 const Hero = () => {
   return (

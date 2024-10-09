@@ -19,6 +19,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
+      "@icons/*": ["./src/app/components/ui/icons/*"],
+      "@ui/*": ["./src/app/components/ui/*"],
       "@base/*": ["./src/app/styles/base/*"],
       "@abstracts/*": ["./src/app/styles/abstracts/*"]
     }

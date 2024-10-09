@@ -2,9 +2,15 @@
 
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
-import IconClose from "../../ui/icons/IconClose";
-import { ModalDataType } from "@/app/data/modalData";
 import Image from "next/image";
+
+// Icon
+import IconClose from "@icons/IconClose";
+
+// Type
+import { ModalDataType } from "@/app/data/modalData";
+
+// Hook
 import useScrollModal from "../Hooks/useScrollModal";
 import useTrafficSource from "../Hooks/useTrafficSource";
 import { useWebhook } from "../Hooks/useWebhook";
@@ -14,7 +20,7 @@ interface TemplateProps {
 }
 
 const Template1: React.FC<TemplateProps> = ({ modalData }) => {
-  const isLocalOrModalGenerator =
+  const isModalGeneratorWebsite =
     process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
 
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -29,7 +35,7 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
     domain: modalData.trafficSource,
   });
 
-  // Webhook
+  // Webhook - VARIABLE
   const webhookData = {
     userClick: "",
   };
@@ -38,8 +44,8 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     const { id } = e.currentTarget;
-    if (!isLocalOrModalGenerator) {
-      webhookData.userClick = id;
+    if (!isModalGeneratorWebsite) {
+      webhookData.userClick = id; // VARIABLE
       const webhookUrl = modalData.webhookUrl;
       sendWebhookData(webhookData, webhookUrl);
       setIsModalOpen(false);
@@ -50,7 +56,7 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalTriggered && isTrafficSource && isModalOpen && (
         <div
-          className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white p-10 aspect-[1/1] ${
+          className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white p-10 ${
             modalData.sizes
           } ${modalData.id ? "sticky top-10 left-1/2" : ""}`}
         >
@@ -96,7 +102,7 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
                 <button
                   id={modalData.button1}
                   onClick={handleClick}
-                  className="w-1/2 py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-300"
+                  className="w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-300"
                 >
                   {modalData.button1}
                 </button>
@@ -108,7 +114,7 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={handleClick}
-                  className={`w-1/2 py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${modalData.color.background} ${modalData.color.text}`}
+                  className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${modalData.color.background} ${modalData.color.text}`}
                 >
                   {modalData.button2}
                 </a>
@@ -166,5 +172,4 @@ if (typeof window !== "undefined") {
       );
     },
   };
-  // console.log("MyModal initialized and added to window object.");
 }

@@ -1,7 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./Navbar.module.scss";
-import Button from "../../ui/Button";
+
+// Component
+import Button from "@ui/Button";
 
 const Navbar = () => {
   return (
@@ -30,7 +32,9 @@ const Navbar = () => {
         <button>
           <a href="#">Sign in</a>
         </button>
-        <Button size="medium">Try for free</Button>
+        <Button size="medium">
+          <a href="#modalGenerator">Try for free</a>
+        </Button>
       </div>
     </nav>
   );

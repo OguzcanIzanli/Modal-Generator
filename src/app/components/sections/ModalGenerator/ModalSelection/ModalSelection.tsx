@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react";
-import PaginationPage from "@/app/components/navigation/Pagination/PaginationPage";
+import React, { useState } from "react";
+import Image from "next/image";
 import styles from "./ModalSelection.module.scss";
 import { modalData } from "@/app/data/modalData";
-import Image from "next/image";
-import { useState } from "react";
 import { useModal } from "@/app/context/ModalContext";
+
+// Component
+import PaginationPage from "@/app/components/navigation/Pagination/PaginationPage";
 
 const ModalSelection = () => {
   const pageNumbers = [];

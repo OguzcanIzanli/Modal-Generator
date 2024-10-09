@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { useModal } from "@/app/context/ModalContext";
-import Button from "@/app/components/ui/Button";
 import styles from "./EmbedCodeGenerator.module.scss";
+import { useModal } from "@/app/context/ModalContext";
+
+// Component
+import Button from "@/app/components/ui/Button";
 
 const EmbedCodeGenerator = () => {
   const [embedCode, setEmbedCode] = useState("");

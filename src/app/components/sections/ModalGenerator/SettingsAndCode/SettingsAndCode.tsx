@@ -1,7 +1,11 @@
 import React from "react";
+
+// Icon
+import IconExclamation from "@icons/IconExclamation";
+
+// Component
 import EmbedCodeGenerator from "../EmbedCodeGenerator";
-import Input from "@/app/components/ui/Input";
-import IconExclamation from "@/app/components/ui/icons/IconExclamation";
+import Input from "@ui/Input";
 
 const SettingsAndCode = () => {
   return (

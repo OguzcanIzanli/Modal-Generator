@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Button.module.scss";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  size?: "small" | "medium" | "large";
+  size: "small" | "medium" | "large";
 }
 
 const Button: React.FC<ButtonProps> = ({

@@ -21,8 +21,7 @@ interface TemplateProps {
 
 const Template1: React.FC<TemplateProps> = ({ modalData }) => {
   const isModalGeneratorWebsite =
-    process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator") ||
-    process.env.NEXT_PUBLIC_API_URL?.includes("localhost");
+    process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
 
   const [isModalOpen, setIsModalOpen] = useState(true);
 

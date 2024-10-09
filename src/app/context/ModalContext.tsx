@@ -10,9 +10,11 @@ export const initialModalData = {
   logoUrl: "",
   imageUrl: "",
   content1: "",
+  content2: "",
   input1: "",
   button1: "",
   button2: "",
+  button2Link: "",
   sizes: "",
   position: "",
   color: { background: "", text: "" },
@@ -44,7 +46,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
     modal,
     setModal,
   };
-  console.log(modal.webhookUrl);
+
   return (
     <ModalContext.Provider value={values}>{children}</ModalContext.Provider>
   );

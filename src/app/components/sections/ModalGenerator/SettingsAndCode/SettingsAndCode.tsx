@@ -1,5 +1,5 @@
 import React from "react";
-import EmbedCodeGenerator from "./EmbedCodeGenerator";
+import EmbedCodeGenerator from "../EmbedCodeGenerator";
 import Input from "@/app/components/ui/Input";
 import IconExclamation from "@/app/components/ui/icons/IconExclamation";
 

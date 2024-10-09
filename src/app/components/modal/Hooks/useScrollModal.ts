@@ -34,6 +34,10 @@ const useScrollModal = ({ percentage }: UseScrollModalProps): boolean => {
     };
   }, [isTriggered, percentage]);
 
+  if (!percentage) {
+    return true;
+  }
+
   return isTriggered;
 };
 

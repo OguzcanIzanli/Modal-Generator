@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useModal } from "@/app/context/ModalContext";
 import Button from "@/app/components/ui/Button";
-import styles from "./SettingsAndCode.module.scss";
+import styles from "./EmbedCodeGenerator.module.scss";
 
 const EmbedCodeGenerator = () => {
   const [embedCode, setEmbedCode] = useState("");
@@ -20,9 +20,11 @@ const EmbedCodeGenerator = () => {
         logoUrl: modal.logoUrl,
         imageUrl: modal.imageUrl,
         content1: modal.content1,
+        content2: modal.content2,
         input1: modal.input1,
         button1: modal.button1,
         button2: modal.button2,
+        button2Link: modal.button2Link,
         sizes: modal.sizes,
         position: modal.position,
         color: {

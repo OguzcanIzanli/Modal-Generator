@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import styles from "./FAQ.module.scss";
 import Image from "next/image";
-import { FAQData } from "@/app/data/FAQData";
+import { FAQData } from "@/app/data/FAQFooterData";
 import IconPlusCircle from "../../ui/icons/IconPlusCircle";
 import IconMinusCircle from "../../ui/icons/IconMinusCircle";
 

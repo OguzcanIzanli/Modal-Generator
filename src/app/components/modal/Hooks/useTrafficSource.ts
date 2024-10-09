@@ -9,16 +9,12 @@ const useTrafficSource = ({ domain }: UseTrafficSourceProps): boolean => {
 
   useEffect(() => {
     const referrer = document.referrer;
-    if (
+
+    const isLocalOrModalGenerator =
       process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator") ||
-      process.env.NEXT_PUBLIC_API_URL?.includes("localhost")
-    ) {
-      setDomainControl(true);
-    } else if (!referrer.includes(domain)) {
-      setDomainControl(false);
-    } else {
-      setDomainControl(true);
-    }
+      process.env.NEXT_PUBLIC_API_URL?.includes("localhost");
+
+    setDomainControl(isLocalOrModalGenerator || referrer.includes(domain));
   }, [domain]);
 
   return domainControl;

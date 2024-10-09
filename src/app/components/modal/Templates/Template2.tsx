@@ -78,5 +78,5 @@ if (typeof window !== "undefined") {
       console.log("Template2 rendered.");
     },
   };
-  console.log("MyModal initialized and added to window object.");
+  // console.log("MyModal initialized and added to window object.");
 }

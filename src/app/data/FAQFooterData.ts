@@ -4,6 +4,13 @@ interface FAQDataType {
   content: string;
 }
 
+interface FooterDataType {
+  id: number;
+  imgUrl: string;
+  title: string;
+  content: string;
+}
+
 export const FAQData: FAQDataType[] = [
   {
     id: 1,
@@ -42,5 +49,32 @@ export const FAQData: FAQDataType[] = [
       "Can I cancel my essentials or premium plan subscription at my time?",
     content:
       "You can pay with a credit card or via net banking (if you’re in United States). We willrenew your subscription automatically at the end of every billing cycle. You can paywith a credit card or via net banking (if you’re in United States). We will renew your subscription automatically at the end of every billing cycle.",
+  },
+];
+
+export const FooterData: FooterDataType[] = [
+  {
+    id: 1,
+    imgUrl: "/images/logos/footer1.png",
+    title: "Targeting Options",
+    content: "Target +26 trigger to your visitors",
+  },
+  {
+    id: 2,
+    imgUrl: "/images/logos/footer2.png",
+    title: "No-Code",
+    content: "No code required while you’re creating a popup",
+  },
+  {
+    id: 3,
+    imgUrl: "/images/logos/footer3.png",
+    title: "Targeting Options",
+    content: "Integrated with your marketing and CRM platforms",
+  },
+  {
+    id: 4,
+    imgUrl: "/images/logos/footer4.png",
+    title: "Targeting Options",
+    content: "Don’t worry about speed and Amazon AWS resources",
   },
 ];

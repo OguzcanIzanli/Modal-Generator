@@ -13,7 +13,6 @@ module.exports = (env) => {
     output: {
       filename: `template${env.entry}.js`,
       path: path.resolve(__dirname, "public/dist"),
-      publicPath: "/dist/",
       umdNamedDefine: true,
       libraryTarget: "umd",
     },

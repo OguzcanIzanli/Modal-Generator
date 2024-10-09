@@ -15,11 +15,17 @@ const Content = () => {
 
       <h4>Edit your content</h4>
 
-      <Input type="text" name="title" placeholder="" />
-      <Input type="text" name="content1" placeholder="" />
-      <Input type="text" name="input1" placeholder="" />
-      <Input type="text" name="button1" placeholder="" />
-      <Input type="text" name="button2" placeholder="" />
+      <Input type="text" name="title" />
+      <Input type="text" name="content1" />
+      <Input type="text" name="content2" />
+      <Input type="text" name="input1" />
+      <Input type="text" name="button1" />
+      <Input type="text" name="button2" />
+      <Input
+        type="text"
+        name="button2Link"
+        placeholder={`Hyperlink for ${modal.button2} button`}
+      />
 
       {modal.imageUrl && (
         <>

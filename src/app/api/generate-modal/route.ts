@@ -16,9 +16,15 @@ export async function POST(request: Request) {
       ${userConfig.logoUrl ? `logoUrl: "${userConfig.logoUrl}",` : ""}
       ${userConfig.imageUrl ? `imageUrl: "${userConfig.imageUrl}",` : ""}
       ${userConfig.content1 ? `content1: "${userConfig.content1}",` : ""}
+      ${userConfig.content2 ? `content2: "${userConfig.content2}",` : ""}
       ${userConfig.input1 ? `input1: "${userConfig.input1}",` : ""}
       ${userConfig.button1 ? `button1: "${userConfig.button1}",` : ""}
       ${userConfig.button2 ? `button2: "${userConfig.button2}",` : ""}
+      ${
+        userConfig.button2Link
+          ? `button2Link: "${userConfig.button2Link}",`
+          : ""
+      }
       sizes: "${userConfig.sizes}",
       position: "${userConfig.position}",
       color: { background: "${userConfig.color.background}", text: "${
@@ -35,7 +41,11 @@ export async function POST(request: Request) {
           ? `afterScroll: ${userConfig.afterScroll},`
           : `afterScroll: 0,`
       }
-      ${`trafficSource: "${userConfig.trafficSource}",`}
+      ${
+        userConfig.trafficSource
+          ? `trafficSource: "${userConfig.trafficSource}",`
+          : ""
+      }
       ${userConfig.webhookUrl ? `webhookUrl: "${userConfig.webhookUrl}",` : ""}
     });
     </script>`

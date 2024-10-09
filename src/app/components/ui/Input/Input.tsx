@@ -5,7 +5,7 @@ import styles from "./Input.module.scss";
 interface InputProps {
   name: string;
   type: "text" | "number";
-  placeholder: string;
+  placeholder?: string;
 }
 
 const Input: React.FC<InputProps> = ({ name, type, placeholder }) => {

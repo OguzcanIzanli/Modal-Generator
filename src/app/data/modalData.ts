@@ -5,9 +5,11 @@ export interface ModalDataType {
   logoUrl?: string;
   imageUrl?: string;
   content1: string;
+  content2?: string;
   input1?: string;
   button1: string;
   button2: string;
+  button2Link: string;
   sizes: string;
   position: string;
   color: { background: string; text: string };
@@ -26,9 +28,10 @@ export const modalData: ModalDataType[] = [
     logoUrl:
       "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2FSecure.png?alt=media&token=9b57cafe-8462-44a6-bee6-536899822a85",
     content1: "This code expires in 24 hours",
-    input1: "Code",
+    content2: "Code",
     button1: "Cancel",
     button2: "Continue",
+    button2Link: "",
     sizes: "w-[480px]",
     position: "bottom-5 right-5",
     color: {
@@ -49,6 +52,7 @@ export const modalData: ModalDataType[] = [
     content1: "We’ve gone native, try it!",
     button1: "Continue",
     button2: "Not now",
+    button2Link: "",
     sizes: "w-[480px]",
     position: "bottom-5 right-5",
     color: {

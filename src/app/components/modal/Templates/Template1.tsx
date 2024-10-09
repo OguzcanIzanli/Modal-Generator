@@ -80,7 +80,7 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalTriggered && isTrafficSource && isModalOpen && (
         <div
-          className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white p-10 transition-transform duration-1000 ease-out  ${
+          className={`flex rounded-xl text-black font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white p-10 transition-transform duration-1000 ease-out  ${
             modalData.sizes
           } ${modalData.id ? "sticky top-10 left-1/2" : ""} ${
             !isModalGeneratorWebsite && (slide ? "" : modalData.position.slide)

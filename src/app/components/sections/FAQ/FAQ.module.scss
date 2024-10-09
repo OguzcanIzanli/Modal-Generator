@@ -1,0 +1,102 @@
+@use "@base/colors" as *;
+@use "@abstracts/mixins" as *;
+
+.FAQContainer {
+  @include container;
+  margin-bottom: 90px;
+
+  h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+
+  .popupPropertiesContainer {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 90px;
+
+    .popupProperty {
+      border-radius: 12px;
+      height: 267px;
+      background-color: $base-color-5;
+      padding: 50px 70px;
+      flex: 1;
+      text-align: center;
+
+      .image {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      h3 {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .FAQBox {
+    padding: 30px;
+    position: relative;
+    transition: 0.6s;
+    overflow: hidden;
+    height: 85px;
+    cursor: pointer;
+    border-top: 2px solid $base-color-6;
+
+    h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 25px;
+      color: $base-color-4;
+      transition: 0.6s;
+    }
+
+    p {
+      font-size: 16px;
+      opacity: 0;
+      transition: 0.6s;
+    }
+
+    .iconPlus,
+    .iconMinus {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      font-size: 24px;
+    }
+
+    .iconPlus {
+      color: $base-color-4;
+    }
+
+    .iconMinus {
+      color: $base-color-2;
+    }
+  }
+
+  .FAQBox:last-child {
+    border-bottom: 2px solid $base-color-6;
+  }
+
+  .open {
+    height: 170px;
+    background-color: $base-color-5;
+
+    h3 {
+      color: black;
+    }
+
+    p {
+      opacity: 1;
+    }
+  }
+}

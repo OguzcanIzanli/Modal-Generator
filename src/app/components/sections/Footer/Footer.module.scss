@@ -1,0 +1,14 @@
+@use "@base/colors" as *;
+@use "@abstracts/mixins" as *;
+
+.footerContainer {
+  @include container;
+  margin-bottom: 90px;
+
+  h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+}

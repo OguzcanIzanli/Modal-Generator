@@ -3,6 +3,7 @@ import styles from "./TargetingRules.module.scss";
 import VisitorDevice from "./VisitorDevice";
 import AfterXSeconds from "./AfterXSeconds";
 import AfterScroll from "./AfterScroll";
+import TrafficSource from "./TrafficSource";
 
 const TargetingRules = () => {
   return (
@@ -13,6 +14,7 @@ const TargetingRules = () => {
       <VisitorDevice />
       <AfterXSeconds />
       <AfterScroll />
+      <TrafficSource />
     </div>
   );
 };

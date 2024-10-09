@@ -1,19 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ModalDataType {
-  id: number;
-  title: string | null;
+  id: number | null;
+  title: string;
   logoUrl?: string;
   imageUrl?: string;
-  content1: string | null;
-  inputs?: { placeholder: string };
+  content1: string;
+  input1?: string;
   button1: string;
   button2: string;
   sizes: string;
   position: string;
   color: { background: string; text: string };
-  device: string | null;
-  afterSeconds: number;
-  afterScroll: number;
+  device: string;
+  afterSeconds: string;
+  afterScroll: string;
+  trafficSource: string;
+  webhookUrl: string;
   [key: string]: any;
 }
 
@@ -24,20 +26,20 @@ export const modalData: ModalDataType[] = [
     logoUrl:
       "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2FSecure.png?alt=media&token=9b57cafe-8462-44a6-bee6-536899822a85",
     content1: "This code expires in 24 hours",
-    inputs: {
-      placeholder: "Code",
-    },
+    input1: "Code",
     button1: "Cancel",
     button2: "Continue",
     sizes: "w-[480px]",
-    position: "",
+    position: "bottom-5 right-5",
     color: {
       background: "bg-violet-600 border-2 border-violet-600",
       text: "text-white",
     },
     device: "",
-    afterSeconds: 0,
-    afterScroll: 0,
+    afterSeconds: "",
+    afterScroll: "",
+    trafficSource: "",
+    webhookUrl: "",
   },
   {
     id: 2,
@@ -48,14 +50,16 @@ export const modalData: ModalDataType[] = [
     button1: "Continue",
     button2: "Not now",
     sizes: "w-[480px]",
-    position: "",
+    position: "bottom-5 right-5",
     color: {
       background: "bg-violet-600 border-2 border-violet-600",
       text: "text-white",
     },
     device: "",
-    afterSeconds: 0,
-    afterScroll: 0,
+    afterSeconds: "",
+    afterScroll: "",
+    trafficSource: "",
+    webhookUrl: "",
   },
   // {
   //   id: 3,

@@ -5,31 +5,36 @@ interface UseScrollModalProps {
 }
 
 const useScrollModal = ({ percentage }: UseScrollModalProps): boolean => {
-  const [isTriggered, setIsTriggered] = useState(false); // Modalı tetikleyecek durumu oluştur
+  const [isTriggered, setIsTriggered] = useState(false);
+
+  const calculateScrollPosition = (): number => {
+    const scrollPosition = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    return (scrollPosition * 100) / (documentHeight - windowHeight);
+  };
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const scrollPositionPercentage =
-        (scrollPosition * 100) / (documentHeight - windowHeight);
+    const initialScrollPosition = calculateScrollPosition();
+    if (initialScrollPosition >= percentage && !isTriggered) {
+      setIsTriggered(true);
+    }
 
+    const handleScroll = () => {
+      const scrollPositionPercentage = calculateScrollPosition();
       if (scrollPositionPercentage >= percentage && !isTriggered) {
-        setIsTriggered(true); // Modal tetikleme durumunu güncelle
-        console.log("Sınır aşıldı");
+        setIsTriggered(true);
       }
     };
 
     window.addEventListener("scroll", handleScroll);
 
-    // Bileşen kaldırıldığında dinleyiciyi kaldır
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [percentage, isTriggered]); // Dependency array'e percentage ve isTriggered ekle
+  }, [isTriggered, percentage]);
 
-  return isTriggered; // Hook, tetikleme durumunu döndürüyor
+  return isTriggered;
 };
 
 export default useScrollModal;

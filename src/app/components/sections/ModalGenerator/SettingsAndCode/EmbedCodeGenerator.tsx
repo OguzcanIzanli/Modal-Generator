@@ -20,7 +20,7 @@ const EmbedCodeGenerator = () => {
         logoUrl: modal.logoUrl,
         imageUrl: modal.imageUrl,
         content1: modal.content1,
-        inputs: { placeholder: modal.inputs?.placeholder },
+        input1: modal.input1,
         button1: modal.button1,
         button2: modal.button2,
         sizes: modal.sizes,
@@ -32,8 +32,8 @@ const EmbedCodeGenerator = () => {
         device: modal.device,
         afterSeconds: modal.afterSeconds,
         afterScroll: modal.afterScroll,
-        webhookUrl:
-          "https://hook.eu2.make.com/owgs6fu2vf8fr4m2m4zfe6grgmvt6me7",
+        trafficSource: modal.trafficSource,
+        webhookUrl: modal.webhookUrl,
       };
 
       const response = await fetch(

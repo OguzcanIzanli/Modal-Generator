@@ -5,20 +5,22 @@ import { createContext, useContext, ReactNode, useState } from "react";
 import { ModalDataType } from "../data/modalData";
 
 export const initialModalData = {
-  id: NaN,
-  title: null,
+  id: null,
+  title: "",
   logoUrl: "",
   imageUrl: "",
-  content1: null,
-  inputs: { placeholder: "" },
+  content1: "",
+  input1: "",
   button1: "",
   button2: "",
   sizes: "",
   position: "",
   color: { background: "", text: "" },
-  device: null,
-  afterSeconds: 0,
-  afterScroll: 0,
+  device: "",
+  afterSeconds: "",
+  afterScroll: "",
+  trafficSource: "",
+  webhookUrl: "",
 };
 
 interface ModalContextInterface {
@@ -42,7 +44,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
     modal,
     setModal,
   };
-
+  console.log(modal.webhookUrl);
   return (
     <ModalContext.Provider value={values}>{children}</ModalContext.Provider>
   );

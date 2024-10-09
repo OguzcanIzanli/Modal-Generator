@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:css": "npx tailwindcss -o ./public/dist/tailwind.css --watch"
   },
   "dependencies": {
     "autoprefixer": "^10.4.20",

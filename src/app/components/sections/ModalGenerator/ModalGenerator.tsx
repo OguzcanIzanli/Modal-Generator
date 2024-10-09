@@ -18,8 +18,8 @@ const ModalGenerator = () => {
         <h2>Modal Card Generator</h2>
         <p className={styles.generatorTitleContent}>
           Measure your return on email marketing efforts easier and faster by
-          using thebest online tools. Popupsmart is ready to help you build an
-          efficient email list!
+          using the best online tools. Modal generator is ready to help you
+          build an efficient email list!
         </p>
       </div>
       <ModalSelection />

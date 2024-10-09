@@ -5,9 +5,10 @@ import styles from "./Input.module.scss";
 interface InputProps {
   name: string;
   type: "text" | "number";
+  placeholder: string;
 }
 
-const Input: React.FC<InputProps> = ({ name, type }) => {
+const Input: React.FC<InputProps> = ({ name, type, placeholder }) => {
   const { modal, setModal } = useModal();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +23,7 @@ const Input: React.FC<InputProps> = ({ name, type }) => {
           type={type}
           name={name}
           value={modal[name]}
-          placeholder={modal[name]}
+          placeholder={placeholder}
           onChange={handleChange}
           className={styles.input}
         />

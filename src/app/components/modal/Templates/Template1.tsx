@@ -4,9 +4,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import IconClose from "../../ui/icons/IconClose";
 import { ModalDataType } from "@/app/data/modalData";
-import "tailwindcss/tailwind.css";
 import Image from "next/image";
 import useScrollModal from "../Hooks/useScrollModal";
+import useTrafficSource from "../Hooks/useTrafficSource";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -14,12 +14,16 @@ interface TemplateProps {
 
 const Template1: React.FC<TemplateProps> = ({ modalData }) => {
   const isModalTriggered = useScrollModal({
-    percentage: modalData.afterScroll,
+    percentage: modalData.afterScroll ? Number(modalData.afterScroll) : 0,
+  });
+
+  const isTrafficSource = useTrafficSource({
+    domain: modalData.trafficSource,
   });
 
   return (
     <>
-      {isModalTriggered && (
+      {isModalTriggered && isTrafficSource && (
         <div
           className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white p-10 aspect-[1/1] ${
             modalData.sizes
@@ -40,33 +44,45 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
           </div>
 
           {/* Title  */}
-          <div className="text-3xl font-bold text-center mb-[6%] w-full break-words text-wrap">
-            {modalData.title}
-          </div>
+          {modalData.title && (
+            <div className="text-3xl font-bold text-center mb-[6%] w-full break-words text-wrap">
+              {modalData.title}
+            </div>
+          )}
 
           {/* Content  */}
-          <div className="text-xl text-center mb-[6%] w-full break-words text-wrap">
-            {modalData.content1}
-          </div>
+          {modalData.content1 && (
+            <div className="text-xl text-center mb-[6%] w-full break-words text-wrap">
+              {modalData.content1}
+            </div>
+          )}
 
           {/* Input  */}
-          <input
-            type="text"
-            className="py-3 px-4 text-base w-full rounded-xl mb-[6%] border-2 border-gray-300"
-            placeholder={modalData.inputs?.placeholder}
-          />
+          {modalData.input1 && (
+            <input
+              type="text"
+              className="py-3 px-4 text-base w-full rounded-xl mb-[6%] border-2 border-gray-300 text-left"
+              placeholder={modalData.input1}
+            />
+          )}
 
           {/* Button */}
-          <div className="flex w-full gap-4 text-base justify-between break-words text-wrap">
-            <button className="w-1/2 py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-300">
-              {modalData.button1}
-            </button>
-            <button
-              className={`w-1/2 py-3 rounded-xl hover:scale-105 active:scale-95 transition ${modalData.color.background} ${modalData.color.text}`}
-            >
-              {modalData.button2}
-            </button>
-          </div>
+          {(modalData.button1 || modalData.button2) && (
+            <div className="flex w-full gap-4 text-base justify-between break-words text-wrap">
+              {modalData.button1 && (
+                <button className="w-1/2 py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-300">
+                  {modalData.button1}
+                </button>
+              )}
+              {modalData.button2 && (
+                <button
+                  className={`w-1/2 py-3 rounded-xl hover:scale-105 active:scale-95 transition ${modalData.color.background} ${modalData.color.text}`}
+                >
+                  {modalData.button2}
+                </button>
+              )}
+            </div>
+          )}
 
           {/* Close Button  */}
           <button className="absolute text-3xl top-6 right-6 border-2 text-gray-400 border-gray-400 rounded-full hover:scale-105 active:scale-95">
@@ -83,38 +99,38 @@ export default Template1;
 if (typeof window !== "undefined") {
   window.MyModal = {
     init: (modalData: ModalDataType) => {
-      console.log("Initializing modal...");
+      setTimeout(
+        () => {
+          console.log("Initializing modal...");
+          const container = document.createElement("div"); // Create a container div that will hold the modal
+          const shadow = container.attachShadow({ mode: "open" }); // Attach a shadow DOM to the container for style isolation
 
-      setTimeout(() => {
-        // const container = document.createElement("div");
-        // document.body.appendChild(container);
-        // container.className = `fixed ${modalData.position} ${modalData.device}`;
-        // console.log("Container created and appended.");
+          // Create a link element to load the external Tailwind CSS file
+          const linkElem = document.createElement("link");
+          linkElem.setAttribute("rel", "stylesheet"); // Set the relation to 'stylesheet'
+          linkElem.setAttribute(
+            "href",
+            `${process.env.NEXT_PUBLIC_API_URL}/dist/tailwind.css`
+          ); // Set the href to point to the Tailwind CSS file
 
-        // const root = ReactDOM.createRoot(container);
-        // console.log("ReactDOM root created.");
+          shadow.appendChild(linkElem); // Append the link element to the shadow DOM to load the styles
 
-        // root.render(<Template1 modalData={modalData} />);
-        // console.log("Template1 rendered.");
-        const container = document.createElement("div");
-        const shadow = container.attachShadow({ mode: "open" });
-        document.body.appendChild(container);
+          // Once the CSS file is fully loaded, proceed with rendering the modal
+          linkElem.onload = () => {
+            const modal = document.createElement("div"); // Create the modal element
 
-        // Tailwind CSS dosyasını shadow DOM içine ekleyin
-        const styleElement = document.createElement("style");
-        styleElement.textContent = `
-  @import url("https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css");
-`;
-        shadow.appendChild(styleElement);
+            modal.className = `fixed ${modalData.position} ${modalData.device}`; // Add fixed positioning and other necessary classes from modalData
+            shadow.appendChild(modal); // Append the modal element to the shadow DOM
 
-        // Shadow DOM içine modalı render edin
-        const modal = document.createElement("div");
-        modal.className = `fixed ${modalData.position} ${modalData.device}`;
-        shadow.appendChild(modal);
-
-        const root = ReactDOM.createRoot(modal);
-        root.render(<Template1 modalData={modalData} />);
-      }, modalData.afterSeconds * 1000);
+            // Render the React component (Template1) inside the shadow DOM
+            const root = ReactDOM.createRoot(modal);
+            root.render(<Template1 modalData={modalData} />);
+            console.log("Template rendered");
+          };
+          document.body.appendChild(container); // Append the container (with shadow DOM) to the body of the document
+        },
+        modalData.afterSeconds ? Number(modalData.afterSeconds) * 1000 : 0
+      );
     },
   };
   console.log("MyModal initialized and added to window object.");

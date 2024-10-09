@@ -11,7 +11,7 @@ const AfterScroll = () => {
 
   useEffect(() => {
     if (!toggle) {
-      setModal((prev) => ({ ...prev, afterScroll: 0 }));
+      setModal((prev) => ({ ...prev, afterScroll: "" }));
     }
   }, [setModal, toggle]);
 
@@ -23,7 +23,7 @@ const AfterScroll = () => {
           toggle ? "h-[52px] p-[2px]" : "h-0 px-[2px] py-0"
         }`}
       >
-        <Input type="number" name="afterScroll" />
+        <Input type="number" name="afterScroll" placeholder="Percent(%)" />
       </div>
     </>
   );

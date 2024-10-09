@@ -11,7 +11,7 @@ export interface ModalDataType {
   button2: string;
   button2Link: string;
   sizes: string;
-  position: string;
+  position: { position: string; slide: string };
   color: { background: string; text: string };
   device: string;
   afterSeconds: string;
@@ -33,7 +33,7 @@ export const modalData: ModalDataType[] = [
     button2: "Continue",
     button2Link: "",
     sizes: "w-[480px]",
-    position: "bottom-5 right-5",
+    position: { position: "right-5 bottom-5", slide: "translate-x-[120%]" },
     color: {
       background: "bg-violet-600 border-2 border-violet-600",
       text: "text-white",
@@ -54,7 +54,7 @@ export const modalData: ModalDataType[] = [
     button2: "Not now",
     button2Link: "",
     sizes: "w-[480px]",
-    position: "bottom-5 right-5",
+    position: { position: "bottom-5 right-5", slide: "-translate-x-full" },
     color: {
       background: "bg-violet-600 border-2 border-violet-600",
       text: "text-white",

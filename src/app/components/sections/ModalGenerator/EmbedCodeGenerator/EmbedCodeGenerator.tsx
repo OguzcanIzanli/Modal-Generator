@@ -28,7 +28,10 @@ const EmbedCodeGenerator = () => {
         button2: modal.button2,
         button2Link: modal.button2Link,
         sizes: modal.sizes,
-        position: modal.position,
+        position: {
+          position: modal.position.position,
+          slide: modal.position.slide,
+        },
         color: {
           background: modal.color.background,
           text: modal.color.text,

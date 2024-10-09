@@ -16,7 +16,7 @@ export const initialModalData = {
   button2: "",
   button2Link: "",
   sizes: "",
-  position: "",
+  position: { position: "", slide: "" },
   color: { background: "", text: "" },
   device: "",
   afterSeconds: "",

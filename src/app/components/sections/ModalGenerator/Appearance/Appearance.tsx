@@ -24,14 +24,16 @@ const Appearance = () => {
       <h4>Position</h4>
 
       <div className={styles.positionBoxesContainer}>
-        {positionData.map((position) => (
+        {positionData.map((data) => (
           <div
-            key={position}
-            className={`${modal.position === position ? styles.active : ""}`}
+            key={data.position}
+            className={`${
+              modal.position.position === data.position ? styles.active : ""
+            }`}
             onClick={() =>
               setModal({
                 ...modal,
-                position: position,
+                position: { position: data.position, slide: data.slide },
               })
             }
           ></div>

@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Image from "next/image";
 
 // Icon
-import IconClose from "@icons/IconClose";
+import IconClose from "../../ui/icons/IconClose";
 
 // Type
 import { ModalDataType } from "@/app/data/modalData";
@@ -21,7 +21,8 @@ interface TemplateProps {
 
 const Template1: React.FC<TemplateProps> = ({ modalData }) => {
   const isModalGeneratorWebsite =
-    process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
+    process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator") ||
+    process.env.NEXT_PUBLIC_API_URL?.includes("localhost");
 
   const [isModalOpen, setIsModalOpen] = useState(true);
 
@@ -34,6 +35,30 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
   const isTrafficSource = useTrafficSource({
     domain: modalData.trafficSource,
   });
+
+  // Slide Animation
+  const [slide, setSlide] = useState(false);
+
+  useEffect(() => {
+    if (
+      !isModalGeneratorWebsite &&
+      isModalTriggered &&
+      isTrafficSource &&
+      isModalOpen
+    ) {
+      const timer = setTimeout(() => {
+        setSlide(true);
+      }, Number(modalData.afterSeconds + 500));
+
+      return () => clearTimeout(timer);
+    }
+  }, [
+    isModalTriggered,
+    isTrafficSource,
+    isModalOpen,
+    isModalGeneratorWebsite,
+    modalData.afterSeconds,
+  ]);
 
   // Webhook - VARIABLE
   const webhookData = {
@@ -56,9 +81,11 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalTriggered && isTrafficSource && isModalOpen && (
         <div
-          className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white p-10 ${
+          className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white p-10 transition-transform duration-1000 ease-out  ${
             modalData.sizes
-          } ${modalData.id ? "sticky top-10 left-1/2" : ""}`}
+          } ${modalData.id ? "sticky top-10 left-1/2" : ""} ${
+            !isModalGeneratorWebsite && (slide ? "" : modalData.position.slide)
+          }`}
         >
           {/* Logo  */}
           <div
@@ -158,7 +185,7 @@ if (typeof window !== "undefined") {
           // Once the CSS file is fully loaded, proceed with rendering the modal
           linkElem.onload = () => {
             const modal = document.createElement("div"); // Create the modal element
-            modal.className = `fixed ${modalData.position} ${modalData.device}`; // Add fixed positioning and other necessary classes from modalData
+            modal.className = `fixed ${modalData.position.position} ${modalData.device}`; // Add fixed positioning and other necessary classes from modalData
             shadow.appendChild(modal); // Append the modal element to the shadow DOM
 
             // Render the React component (Template1) inside the shadow DOM

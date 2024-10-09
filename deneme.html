@@ -17,26 +17,25 @@
     ></script>
     <script>
       window.MyModal.init({
-        title: "Yasemin",
+        title: "Security Code",
         logoUrl:
           "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2FSecure.png?alt=media&token=9b57cafe-8462-44a6-bee6-536899822a85",
         content1: "This code expires in 24 hours",
         content2: "Code",
         button1: "Cancel",
         button2: "Continue",
-        button2Link: "https://www.google.com.tr",
-        sizes: "w-[320px]",
-        position: "bottom-5 left-5",
+        sizes: "w-[480px]",
+        position: {
+          position: "bottom-1/2 left-1/2 -translate-x-2/4 translate-y-2/4",
+          slide: "translate-y-[400%]",
+        },
         color: {
-          background: "bg-orange-600 border-2 border-orange-600",
+          background: "bg-violet-600 border-2 border-violet-600",
           text: "text-white",
         },
-        device: "hidden sm:flex",
-        afterSeconds: 5,
-        afterScroll: 50,
-        trafficSource: "sdf",
-        webhookUrl:
-          "https://hook.eu2.make.com/owgs6fu2vf8fr4m2m4zfe6grgmvt6me7",
+        afterSeconds: 0,
+        afterScroll: 0,
+        trafficSource: "",
       });
     </script>
   </body>

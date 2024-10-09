@@ -1,8 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface SizesDataType {
   small: string;
   medium: string;
   large: string;
   [key: string]: any;
+}
+
+export interface PositionDataType {
+  position: string;
+  slide: string;
 }
 
 export interface ColorDataType {
@@ -16,16 +22,28 @@ export const sizesData: SizesDataType = {
   large: "w-[640px]",
 };
 
-export const positionData: string[] = [
-  "top-5 left-5",
-  "top-5 left-1/2 -translate-x-2/4",
-  "top-5 right-5",
-  "left-5 bottom-1/2 translate-y-2/4",
-  "bottom-1/2 left-1/2 -translate-x-2/4 translate-y-2/4",
-  "right-5 bottom-1/2 translate-y-2/4",
-  "bottom-5 left-5",
-  "bottom-5 left-1/2 -translate-x-2/4",
-  "bottom-5 right-5",
+export const positionData: PositionDataType[] = [
+  { position: "top-5 left-5", slide: "-translate-x-[120%]" },
+  { position: "top-5 left-1/2 -translate-x-2/4", slide: "-translate-y-[120%]" },
+  { position: "top-5 right-5", slide: "translate-x-[120%]" },
+  {
+    position: "left-5 bottom-1/2 translate-y-2/4",
+    slide: "-translate-x-[120%]",
+  },
+  {
+    position: "bottom-1/2 left-1/2 -translate-x-2/4 translate-y-2/4",
+    slide: "translate-y-[400%]",
+  },
+  {
+    position: "right-5 bottom-1/2 translate-y-2/4",
+    slide: "translate-x-[120%]",
+  },
+  { position: "bottom-5 left-5", slide: "-translate-x-[120%]" },
+  {
+    position: "bottom-5 left-1/2 -translate-x-2/4",
+    slide: "translate-y-[120%]",
+  },
+  { position: "bottom-5 right-5", slide: "translate-x-[120%]" },
 ];
 
 export const colorData: ColorDataType[] = [

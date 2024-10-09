@@ -26,7 +26,9 @@ export async function POST(request: Request) {
           : ""
       }
       sizes: "${userConfig.sizes}",
-      position: "${userConfig.position}",
+        position: { position: "${userConfig.position.position}", slide: "${
+      userConfig.position.slide
+    }" },
       color: { background: "${userConfig.color.background}", text: "${
       userConfig.color.text
     }" },
@@ -41,11 +43,7 @@ export async function POST(request: Request) {
           ? `afterScroll: ${userConfig.afterScroll},`
           : `afterScroll: 0,`
       }
-      ${
-        userConfig.trafficSource
-          ? `trafficSource: "${userConfig.trafficSource}",`
-          : ""
-      }
+      trafficSource: "${userConfig.trafficSource}",
       ${userConfig.webhookUrl ? `webhookUrl: "${userConfig.webhookUrl}",` : ""}
     });
     </script>`

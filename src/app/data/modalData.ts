@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ModalDataType {
-  id: number | null;
+  id: string | number;
   title: string;
   logoUrl?: string;
   imageUrl?: string;

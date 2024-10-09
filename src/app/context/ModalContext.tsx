@@ -5,7 +5,7 @@ import { createContext, useContext, ReactNode, useState } from "react";
 import { ModalDataType } from "../data/modalData";
 
 export const initialModalData = {
-  id: null,
+  id: "",
   title: "",
   logoUrl: "",
   imageUrl: "",

@@ -43,7 +43,7 @@ const TemplateMap: { [key: number]: React.FC<TemplateProps> } = {
 
 const TemplateSelector = () => {
   const { modal } = useModal();
-  const SelectedTemplate = TemplateMap[modal.id];
+  const SelectedTemplate = TemplateMap[modal.id === "" ? 0 : Number(modal.id)];
 
   if (!SelectedTemplate) {
     return <div></div>;

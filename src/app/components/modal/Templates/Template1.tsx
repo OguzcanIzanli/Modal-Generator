@@ -178,7 +178,8 @@ if (typeof window !== "undefined") {
           // Create a link element to load the external Tailwind CSS file
           const linkElem = document.createElement("link");
           linkElem.rel = "stylesheet"; // Set the relation to 'stylesheet'
-          linkElem.href = `${process.env.NEXT_PUBLIC_API_URL}/dist/tailwind.css`; // Set the href to point to the Tailwind CSS file
+          linkElem.href =
+            "https://modal-generator.netlify.app//dist/tailwind.css"; // Set the href to point to the Tailwind CSS file
           shadow.appendChild(linkElem); // Append the link element to the shadow DOM to load the styles
 
           // Once the CSS file is fully loaded, proceed with rendering the modal

@@ -24,9 +24,11 @@ const EmbedCodeGenerator = () => {
         content1: modal.content1,
         content2: modal.content2,
         input1: modal.input1,
-        button1: modal.button1,
+        buttonAnchor: modal.buttonAnchor,
+        buttonAnchorLink: modal.buttonAnchorLink,
         button2: modal.button2,
-        button2Link: modal.button2Link,
+        // label1: modal.radio.label1,
+        // label1b: modal.radio.label1b,
         sizes: modal.sizes,
         position: {
           position: modal.position.position,
@@ -34,6 +36,7 @@ const EmbedCodeGenerator = () => {
         },
         color: {
           background: modal.color.background,
+          borderColor: modal.color.borderColor,
           text: modal.color.text,
         },
         device: modal.device,

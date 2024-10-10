@@ -30,7 +30,7 @@
 import React from "react";
 import { ModalDataType } from "@/app/data/modalData";
 import { useModal } from "../../../../context/ModalContext";
-import { Template1, Template2 } from "../../../modal/Templates";
+import { Template1, Template2, Template3 } from "../../../modal/Templates";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -39,6 +39,7 @@ interface TemplateProps {
 const TemplateMap: { [key: number]: React.FC<TemplateProps> } = {
   1: Template1,
   2: Template2,
+  3: Template3,
 };
 
 const TemplateSelector = () => {

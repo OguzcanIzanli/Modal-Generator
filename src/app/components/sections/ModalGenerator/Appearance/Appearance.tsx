@@ -54,6 +54,7 @@ const Appearance = () => {
                 ...modal,
                 color: {
                   background: color.background,
+                  borderColor: color.borderColor,
                   text: color.text,
                 },
               })

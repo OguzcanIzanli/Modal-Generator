@@ -13,6 +13,7 @@ export interface PositionDataType {
 
 export interface ColorDataType {
   background: string;
+  borderColor: string;
   text: string;
 }
 
@@ -47,16 +48,34 @@ export const positionData: PositionDataType[] = [
 ];
 
 export const colorData: ColorDataType[] = [
-  { background: "bg-black border-2 border-black", text: "text-white" },
   {
-    background: "bg-orange-600 border-2 border-orange-600",
+    background: "bg-black border-2",
+    borderColor: "border-black",
     text: "text-white",
   },
   {
-    background: "bg-violet-600 border-2 border-violet-600",
+    background: "bg-orange-600 border-2",
+    borderColor: "border-orange-600",
     text: "text-white",
   },
-  { background: "bg-gray-600 border-2 border-gray-600", text: "text-white" },
-  { background: "bg-gray-300 border-2 border-gray-300", text: "text-black" },
-  { background: "bg-white border-2 border-gray-300", text: "text-black" },
+  {
+    background: "bg-violet-600 border-2",
+    borderColor: "border-violet-600",
+    text: "text-white",
+  },
+  {
+    background: "bg-gray-600 border-2",
+    borderColor: "border-gray-600",
+    text: "text-white",
+  },
+  {
+    background: "bg-gray-300 border-2",
+    borderColor: "border-gray-300",
+    text: "text-black",
+  },
+  {
+    background: "bg-white border-2",
+    borderColor: "border-gray-300",
+    text: "text-black",
+  },
 ];

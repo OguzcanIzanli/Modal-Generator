@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
-import Image from "next/image";
 
 // Icon
 import IconClose from "../../ui/icons/IconClose";
@@ -14,16 +13,18 @@ import { ModalDataType } from "@/app/data/modalData";
 import useScrollModal from "../Hooks/useScrollModal";
 import useTrafficSource from "../Hooks/useTrafficSource";
 import { useWebhook } from "../Hooks/useWebhook";
+// import Radio from "../Components/Radio";
 
 interface TemplateProps {
   modalData: ModalDataType;
 }
 
-const Template2: React.FC<TemplateProps> = ({ modalData }) => {
+const Template3: React.FC<TemplateProps> = ({ modalData }) => {
   const isModalGeneratorWebsite =
     process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
 
   const [isModalOpen, setIsModalOpen] = useState(true);
+  const [value, setValue] = useState<string | null>(null);
 
   // Scroll
   const isModalTriggered = useScrollModal({
@@ -75,12 +76,12 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
       setIsModalOpen(false);
     }
   };
-
+  console.log(modalData);
   return (
     <>
       {isModalTriggered && isTrafficSource && isModalOpen && (
         <div
-          className={`flex rounded-xl text-black font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white transition-transform duration-1000 ease-out  ${
+          className={`flex rounded-xl text-black font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white p-10 transition-transform duration-1000 ease-out  ${
             modalData.sizes
           } ${
             modalData.id
@@ -90,15 +91,7 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
             !isModalGeneratorWebsite && (slide ? "" : modalData.position.slide)
           }`}
         >
-          {/* Image  */}
-          <Image
-            src={modalData.imageUrl ? modalData?.imageUrl : ""}
-            className="w-full h-1/2 rounded-t-xl mb-[6%]"
-            width={0}
-            height={0}
-            unoptimized
-            alt=""
-          />
+          <div className="text-xl mb-3">PLANS</div>
 
           {/* Title  */}
           {modalData.title && (
@@ -114,21 +107,62 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
             </div>
           )}
 
+          {/* Radio */}
+          <div className="flex flex-col">
+            <div className="flex gap-2 mb-6">
+              <input
+                type="radio"
+                id={modalData.label1}
+                value={modalData.label1}
+                onClick={(e) => setValue(e.currentTarget.value)}
+                className="relative appearance-none shrink-0 mt-1 w-5 h-5 border-2 border-gray-400 rounded-full cursor-pointer"
+              />
+              {value === modalData.label1 && (
+                <div
+                  className={`absolute mt-1 w-5 h-5 rounded-full border-[7px] ${modalData.color.borderColor}`}
+                />
+              )}
+              <label
+                className="flex flex-col cursor-pointer"
+                htmlFor={modalData.label1}
+              >
+                <span className="text-lg">{modalData.label1}</span>
+                <span className="text-sm text-gray-400">
+                  {modalData.label1b}
+                </span>
+              </label>
+            </div>
+          </div>
+          {/* <Radio modalData={modalData} /> */}
+
+          {/* <div className="flex gap-2 items-start">
+            <div className="grid place-items-center mt-1">
+              <input
+                type="radio"
+                id="radio"
+                className="col-start-1 row-start-1 appearance-none shrink-0 w-4 h-4 border-2 border-blue-500 rounded-full"
+              />
+              <div className="col-start-1 row-start-1 w-2 h-2 rounded-full bg-blue-500" />
+            </div>
+            <label htmlFor="radio" className="text-start">
+              This is the radio label
+            </label>
+            <div className="grid place-items-center mt-1">
+              <input
+                type="radio"
+                id="radio2"
+                className="col-start-1 row-start-1 appearance-none shrink-0 w-4 h-4 border-2 border-blue-500 rounded-full"
+              />
+              <div className="col-start-1 row-start-1 w-2 h-2 rounded-full bg-blue-500" />
+            </div>
+            <label htmlFor="radio2" className="text-start">
+              This is the radio label
+            </label>
+          </div> */}
+
           {/* Button */}
           {(modalData.buttonAnchor || modalData.button2) && (
-            <div className="flex flex-col w-full gap-4 text-base justify-between break-words text-wrap pb-10 px-10">
-              {modalData.buttonAnchor && (
-                <a
-                  href={modalData.buttonAnchorLink || "#"}
-                  id={modalData.buttonAnchor}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={handleClick}
-                  className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${modalData.color.background} ${modalData.color.borderColor} ${modalData.color.text}`}
-                >
-                  {modalData.buttonAnchor}
-                </a>
-              )}
+            <div className="flex w-full gap-4 text-base justify-between break-words text-wrap">
               {modalData.button2 && (
                 <button
                   id={modalData.button2}
@@ -137,6 +171,18 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
                 >
                   {modalData.button2}
                 </button>
+              )}
+              {modalData.buttonAnchor && (
+                <a
+                  href={modalData.buttonAnchorLink || "#"}
+                  id={modalData.buttonAnchor}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleClick}
+                  className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${modalData.color.background} ${modalData.color.text}`}
+                >
+                  {modalData.buttonAnchor}
+                </a>
               )}
             </div>
           )}
@@ -157,7 +203,7 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
   );
 };
 
-export default Template2;
+export default Template3;
 
 if (typeof window !== "undefined") {
   window.MyModal = {
@@ -181,9 +227,9 @@ if (typeof window !== "undefined") {
             modal.className = `fixed z-50 ${modalData.position.position} ${modalData.device}`; // Add fixed positioning and other necessary classes from modalData
             shadow.appendChild(modal); // Append the modal element to the shadow DOM
 
-            // Render the React component (Template2) inside the shadow DOM
+            // Render the React component (Template3) inside the shadow DOM
             const root = ReactDOM.createRoot(modal);
-            root.render(<Template2 modalData={modalData} />);
+            root.render(<Template3 modalData={modalData} />);
             console.log("Template rendered");
           };
           document.body.appendChild(container); // Append the container (with shadow DOM) to the body of the document

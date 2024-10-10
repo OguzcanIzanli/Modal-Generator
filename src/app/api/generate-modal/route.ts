@@ -18,20 +18,26 @@ export async function POST(request: Request) {
       ${userConfig.content1 ? `content1: "${userConfig.content1}",` : ""}
       ${userConfig.content2 ? `content2: "${userConfig.content2}",` : ""}
       ${userConfig.input1 ? `input1: "${userConfig.input1}",` : ""}
-      ${userConfig.button1 ? `button1: "${userConfig.button1}",` : ""}
-      ${userConfig.button2 ? `button2: "${userConfig.button2}",` : ""}
       ${
-        userConfig.button2Link
-          ? `button2Link: "${userConfig.button2Link}",`
+        userConfig.buttonAnchor
+          ? `buttonAnchor: "${userConfig.buttonAnchor}",`
           : ""
       }
+      ${
+        userConfig.buttonAnchorLink
+          ? `buttonAnchorLink: "${userConfig.buttonAnchorLink}",`
+          : ""
+      }
+      ${userConfig.button2 ? `button2: "${userConfig.button2}",` : ""}
+      ${userConfig.label1 ? `label1: "${userConfig.label1}",` : ""}
+      ${userConfig.label1b ? `label1b: "${userConfig.label1b}",` : ""}
       sizes: "${userConfig.sizes}",
         position: { position: "${userConfig.position.position}", slide: "${
       userConfig.position.slide
     }" },
-      color: { background: "${userConfig.color.background}", text: "${
-      userConfig.color.text
-    }" },
+      color: { background: "${userConfig.color.background}", borderColor: "${
+      userConfig.color.borderColor
+    }", text: "${userConfig.color.text}" },
       ${userConfig.device ? `device: "${userConfig.device}",` : ""}
       ${
         userConfig.afterSeconds

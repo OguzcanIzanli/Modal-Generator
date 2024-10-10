@@ -82,13 +82,17 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
         <div
           className={`flex rounded-xl text-black font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white p-10 transition-transform duration-1000 ease-out  ${
             modalData.sizes
-          } ${modalData.id ? "sticky top-10 left-1/2" : ""} ${
+          } ${
+            modalData.id
+              ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
+              : ""
+          } ${
             !isModalGeneratorWebsite && (slide ? "" : modalData.position.slide)
           }`}
         >
           {/* Logo  */}
           <div
-            className={`rounded-full flex items-center justify-center w-[25%] aspect-[1/1] mb-[8%] ${modalData.color.background}`}
+            className={`rounded-full flex items-center justify-center w-[25%] aspect-[1/1] mb-[8%] ${modalData.color.background} ${modalData.color.borderColor}`}
           >
             <Image
               src={modalData.logoUrl ? modalData?.logoUrl : ""}
@@ -122,27 +126,27 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
           )}
 
           {/* Button */}
-          {(modalData.button1 || modalData.button2) && (
+          {(modalData.buttonAnchor || modalData.button2) && (
             <div className="flex w-full gap-4 text-base justify-between break-words text-wrap">
-              {modalData.button1 && (
+              {modalData.button2 && (
                 <button
-                  id={modalData.button1}
+                  id={modalData.button2}
                   onClick={handleClick}
                   className="w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-300"
                 >
-                  {modalData.button1}
+                  {modalData.button2}
                 </button>
               )}
-              {modalData.button2 && (
+              {modalData.buttonAnchor && (
                 <a
-                  href={modalData.button2Link || "#"}
-                  id={modalData.button2}
+                  href={modalData.buttonAnchorLink || "#"}
+                  id={modalData.buttonAnchor}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={handleClick}
-                  className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${modalData.color.background} ${modalData.color.text}`}
+                  className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${modalData.color.background} ${modalData.color.borderColor} ${modalData.color.text}`}
                 >
-                  {modalData.button2}
+                  {modalData.buttonAnchor}
                 </a>
               )}
             </div>

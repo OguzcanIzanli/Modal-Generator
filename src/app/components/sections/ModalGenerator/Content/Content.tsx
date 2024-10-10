@@ -21,13 +21,15 @@ const Content = () => {
       <Input type="text" name="content1" />
       <Input type="text" name="content2" />
       <Input type="text" name="input1" />
-      <Input type="text" name="button1" />
-      <Input type="text" name="button2" />
+      <Input type="text" name="buttonAnchor" />
       <Input
         type="text"
-        name="button2Link"
-        placeholder={`Hyperlink for ${modal.button2} button`}
+        name="buttonAnchorLink"
+        placeholder={`Hyperlink for ${modal.buttonAnchor} button`}
       />
+      <Input type="text" name="button2" />
+      <Input type="text" name="label1" />
+      <Input type="text" name="label1b" />
 
       {modal.imageUrl && (
         <>

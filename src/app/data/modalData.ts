@@ -7,12 +7,14 @@ export interface ModalDataType {
   content1: string;
   content2?: string;
   input1?: string;
-  button1: string;
+  buttonAnchor: string;
+  buttonAnchorLink: string;
   button2: string;
-  button2Link: string;
+  label1?: string;
+  label1b?: string;
   sizes: string;
   position: { position: string; slide: string };
-  color: { background: string; text: string };
+  color: { background: string; borderColor: string; text: string };
   device: string;
   afterSeconds: string;
   afterScroll: string;
@@ -29,13 +31,14 @@ export const modalData: ModalDataType[] = [
       "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2FSecure.png?alt=media&token=9b57cafe-8462-44a6-bee6-536899822a85",
     content1: "This code expires in 24 hours",
     content2: "Code",
-    button1: "Cancel",
-    button2: "Continue",
-    button2Link: "",
+    buttonAnchor: "Continue",
+    buttonAnchorLink: "",
+    button2: "Cancel",
     sizes: "w-[480px]",
     position: { position: "right-5 bottom-5", slide: "translate-x-[120%]" },
     color: {
-      background: "bg-violet-600 border-2 border-violet-600",
+      background: "bg-violet-600 border-2",
+      borderColor: "border-violet-600",
       text: "text-white",
     },
     device: "",
@@ -50,13 +53,14 @@ export const modalData: ModalDataType[] = [
     imageUrl:
       "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal2.png?alt=media&token=16a564ba-c07d-4c04-93b5-93adda03c245",
     content1: "We’ve gone native, try it!",
-    button1: "Continue",
+    buttonAnchor: "Continue",
+    buttonAnchorLink: "",
     button2: "Not now",
-    button2Link: "",
     sizes: "w-[480px]",
-    position: { position: "bottom-5 right-5", slide: "-translate-x-full" },
+    position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },
     color: {
-      background: "bg-violet-600 border-2 border-violet-600",
+      background: "bg-violet-600 border-2",
+      borderColor: " border-violet-600",
       text: "text-white",
     },
     device: "",
@@ -65,35 +69,28 @@ export const modalData: ModalDataType[] = [
     trafficSource: "",
     webhookUrl: "",
   },
-  // {
-  //   id: 3,
-  //   container: "items-center flex-col py-10 px-16 w-[480px] bg-white",
-  //   logo: "rounded-full w-[90px] h-[90px] bg-violet-600 mb-7",
-  //   title: { content: "Security Code", style: "text-3xl font-bold mb-6" },
-  //   contents: {
-  //     content: "This code expires in 24 hours",
-  //     style: "text-xl mb-10",
-  //   },
-  //   inputs: {
-  //     placeholder: "Code",
-  //   },
-  //   buttons: {
-  //     button1: {
-  //       content: "Cancel",
-  //       style: "border-2 border-gray-300",
-  //     },
-  //     button2: {
-  //       content: "Continue",
-  //       style: "bg-violet-600 text-white",
-  //     },
-  //     style: "flex justify-between w-full gap-4 text-base",
-  //   },
-  //   sizes: {
-  //     small: "scale-75",
-  //     medium: "scale-100",
-  //     large: "scale-125",
-  //   },
-  // },
+  {
+    id: 3,
+    title: "Choose best for you",
+    content1: "Only pay for the capacity that you use.",
+    buttonAnchor: "Continue",
+    buttonAnchorLink: "",
+    button2: "Cancel",
+    label1: "Starter",
+    label1b: "1 free (then $15 per meember / month)",
+    sizes: "w-[480px]",
+    position: { position: "right-5 bottom-5", slide: "translate-x-[120%]" },
+    color: {
+      background: "bg-violet-600 border-2 ",
+      borderColor: "border-violet-600",
+      text: "text-white",
+    },
+    device: "",
+    afterSeconds: "",
+    afterScroll: "",
+    trafficSource: "",
+    webhookUrl: "",
+  },
   // { id: 4 },
   // { id: 5 },
   // { id: 6 },

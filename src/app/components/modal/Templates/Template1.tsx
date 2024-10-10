@@ -178,14 +178,14 @@ if (typeof window !== "undefined") {
           // Create a link element to load the external Tailwind CSS file
           const linkElem = document.createElement("link");
           linkElem.rel = "stylesheet"; // Set the relation to 'stylesheet'
-          linkElem.href =
-            "https://modal-generator.netlify.app//dist/tailwind.css"; // Set the href to point to the Tailwind CSS file
+          linkElem.href = "http://localhost:3000/dist/tailwind.css"; // Set the href to point to the Tailwind CSS file
+          // linkElem.href = "https://modal-generator.netlify.app/dist/tailwind.css";
           shadow.appendChild(linkElem); // Append the link element to the shadow DOM to load the styles
 
           // Once the CSS file is fully loaded, proceed with rendering the modal
           linkElem.onload = () => {
             const modal = document.createElement("div"); // Create the modal element
-            modal.className = `fixed ${modalData.position.position} ${modalData.device}`; // Add fixed positioning and other necessary classes from modalData
+            modal.className = `fixed z-50 ${modalData.position.position} ${modalData.device}`; // Add fixed positioning and other necessary classes from modalData
             shadow.appendChild(modal); // Append the modal element to the shadow DOM
 
             // Render the React component (Template1) inside the shadow DOM

@@ -120,37 +120,35 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
 
           {/* Input  */}
           {modalData.content2 && (
-            <div className="py-3 px-4 text-base w-full rounded-xl mb-[6%] border-2 border-gray-300 text-left">
+            <div className="py-3 px-4 text-base w-full rounded-xl mb-[6%] border-2 border-gray-400 text-left">
               {modalData.content2}
             </div>
           )}
 
           {/* Button */}
-          {(modalData.buttonAnchor || modalData.button2) && (
-            <div className="flex w-full gap-4 text-base justify-between break-words text-wrap">
-              {modalData.button2 && (
-                <button
-                  id={modalData.button2}
-                  onClick={handleClick}
-                  className="w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-300"
-                >
-                  {modalData.button2}
-                </button>
-              )}
-              {modalData.buttonAnchor && (
-                <a
-                  href={modalData.buttonAnchorLink || "#"}
-                  id={modalData.buttonAnchor}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={handleClick}
-                  className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${modalData.color.background} ${modalData.color.borderColor} ${modalData.color.text}`}
-                >
-                  {modalData.buttonAnchor}
-                </a>
-              )}
-            </div>
-          )}
+          <div className="flex w-full gap-4 text-base justify-between break-words text-wrap">
+            {modalData.button2 && (
+              <button
+                id={modalData.button2}
+                onClick={handleClick}
+                className="w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-400"
+              >
+                {modalData.button2}
+              </button>
+            )}
+            {modalData.buttonAnchor && (
+              <a
+                href={modalData.buttonAnchorLink || "#"}
+                id={modalData.buttonAnchor}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleClick}
+                className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${modalData.color.background} ${modalData.color.borderColor} ${modalData.color.text}`}
+              >
+                {modalData.buttonAnchor}
+              </a>
+            )}
+          </div>
 
           {/* Close Button  */}
           <button
@@ -182,8 +180,9 @@ if (typeof window !== "undefined") {
           // Create a link element to load the external Tailwind CSS file
           const linkElem = document.createElement("link");
           linkElem.rel = "stylesheet"; // Set the relation to 'stylesheet'
-          linkElem.href = "http://localhost:3000/dist/tailwind.css"; // Set the href to point to the Tailwind CSS file
-          // linkElem.href = "https://modal-generator.netlify.app/dist/tailwind.css";
+          // linkElem.href = "http://localhost:3000/dist/tailwind.css"; // Set the href to point to the Tailwind CSS file
+          linkElem.href =
+            "https://modal-generator.netlify.app/dist/tailwind.css";
           shadow.appendChild(linkElem); // Append the link element to the shadow DOM to load the styles
 
           // Once the CSS file is fully loaded, proceed with rendering the modal

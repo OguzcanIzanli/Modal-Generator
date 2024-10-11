@@ -70,12 +70,12 @@ export const colorData: ColorDataType[] = [
   },
   {
     background: "bg-gray-300 border-2",
-    borderColor: "border-gray-300",
+    borderColor: "border-gray-400",
     text: "text-black",
   },
   {
     background: "bg-white border-2",
-    borderColor: "border-gray-300",
+    borderColor: "border-gray-400",
     text: "text-black",
   },
 ];

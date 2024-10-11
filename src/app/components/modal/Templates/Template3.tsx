@@ -63,6 +63,7 @@ const Template3: React.FC<TemplateProps> = ({ modalData }) => {
   // Webhook - VARIABLE
   const webhookData = {
     userClick: "",
+    radioSelection: "",
   };
 
   const { sendWebhookData } = useWebhook();
@@ -71,12 +72,13 @@ const Template3: React.FC<TemplateProps> = ({ modalData }) => {
     const { id } = e.currentTarget;
     if (!isModalGeneratorWebsite) {
       webhookData.userClick = id; // VARIABLE
+      webhookData.radioSelection = value ? value : "Not selected.";
       const webhookUrl = modalData.webhookUrl;
       sendWebhookData(webhookData, webhookUrl);
       setIsModalOpen(false);
     }
   };
-  console.log(modalData);
+
   return (
     <>
       {isModalTriggered && isTrafficSource && isModalOpen && (
@@ -132,60 +134,78 @@ const Template3: React.FC<TemplateProps> = ({ modalData }) => {
                 </span>
               </label>
             </div>
+            <div className="flex gap-2 mb-6">
+              <input
+                type="radio"
+                id={modalData.label2}
+                value={modalData.label2}
+                onClick={(e) => setValue(e.currentTarget.value)}
+                className="relative appearance-none shrink-0 mt-1 w-5 h-5 border-2 border-gray-400 rounded-full cursor-pointer"
+              />
+              {value === modalData.label2 && (
+                <div
+                  className={`absolute mt-1 w-5 h-5 rounded-full border-[7px] ${modalData.color.borderColor}`}
+                />
+              )}
+              <label
+                className="flex flex-col cursor-pointer"
+                htmlFor={modalData.label2}
+              >
+                <span className="text-lg">{modalData.label2}</span>
+                <span className="text-sm text-gray-400">
+                  {modalData.label2b}
+                </span>
+              </label>
+            </div>
+            <div className="flex gap-2 mb-6">
+              <input
+                type="radio"
+                id={modalData.label3}
+                value={modalData.label3}
+                onClick={(e) => setValue(e.currentTarget.value)}
+                className="relative appearance-none shrink-0 mt-1 w-5 h-5 border-2 border-gray-400 rounded-full cursor-pointer"
+              />
+              {value === modalData.label3 && (
+                <div
+                  className={`absolute mt-1 w-5 h-5 rounded-full border-[7px] ${modalData.color.borderColor}`}
+                />
+              )}
+              <label
+                className="flex flex-col cursor-pointer"
+                htmlFor={modalData.label3}
+              >
+                <span className="text-lg">{modalData.label3}</span>
+                <span className="text-sm text-gray-400">
+                  {modalData.label3b}
+                </span>
+              </label>
+            </div>
           </div>
-          {/* <Radio modalData={modalData} /> */}
-
-          {/* <div className="flex gap-2 items-start">
-            <div className="grid place-items-center mt-1">
-              <input
-                type="radio"
-                id="radio"
-                className="col-start-1 row-start-1 appearance-none shrink-0 w-4 h-4 border-2 border-blue-500 rounded-full"
-              />
-              <div className="col-start-1 row-start-1 w-2 h-2 rounded-full bg-blue-500" />
-            </div>
-            <label htmlFor="radio" className="text-start">
-              This is the radio label
-            </label>
-            <div className="grid place-items-center mt-1">
-              <input
-                type="radio"
-                id="radio2"
-                className="col-start-1 row-start-1 appearance-none shrink-0 w-4 h-4 border-2 border-blue-500 rounded-full"
-              />
-              <div className="col-start-1 row-start-1 w-2 h-2 rounded-full bg-blue-500" />
-            </div>
-            <label htmlFor="radio2" className="text-start">
-              This is the radio label
-            </label>
-          </div> */}
 
           {/* Button */}
-          {(modalData.buttonAnchor || modalData.button2) && (
-            <div className="flex w-full gap-4 text-base justify-between break-words text-wrap">
-              {modalData.button2 && (
-                <button
-                  id={modalData.button2}
-                  onClick={handleClick}
-                  className="w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-300"
-                >
-                  {modalData.button2}
-                </button>
-              )}
-              {modalData.buttonAnchor && (
-                <a
-                  href={modalData.buttonAnchorLink || "#"}
-                  id={modalData.buttonAnchor}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={handleClick}
-                  className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${modalData.color.background} ${modalData.color.text}`}
-                >
-                  {modalData.buttonAnchor}
-                </a>
-              )}
-            </div>
-          )}
+          <div className="flex w-full gap-4 text-base justify-between break-words text-wrap">
+            {modalData.button2 && (
+              <button
+                id={modalData.button2}
+                onClick={handleClick}
+                className="w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-400"
+              >
+                {modalData.button2}
+              </button>
+            )}
+            {modalData.buttonAnchor && (
+              <a
+                href={modalData.buttonAnchorLink || "#"}
+                id={modalData.buttonAnchor}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleClick}
+                className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${modalData.color.background} ${modalData.color.borderColor} ${modalData.color.text}`}
+              >
+                {modalData.buttonAnchor}
+              </a>
+            )}
+          </div>
 
           {/* Close Button  */}
           <button
@@ -217,8 +237,9 @@ if (typeof window !== "undefined") {
           // Create a link element to load the external Tailwind CSS file
           const linkElem = document.createElement("link");
           linkElem.rel = "stylesheet"; // Set the relation to 'stylesheet'
-          linkElem.href = "http://localhost:3000/dist/tailwind.css"; // Set the href to point to the Tailwind CSS file
-          // linkElem.href = "https://modal-generator.netlify.app/dist/tailwind.css";
+          // linkElem.href = "http://localhost:3000/dist/tailwind.css"; // Set the href to point to the Tailwind CSS file
+          linkElem.href =
+            "https://modal-generator.netlify.app/dist/tailwind.css";
           shadow.appendChild(linkElem); // Append the link element to the shadow DOM to load the styles
 
           // Once the CSS file is fully loaded, proceed with rendering the modal

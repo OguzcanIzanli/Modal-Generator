@@ -19,7 +19,7 @@ interface TemplateProps {
   modalData: ModalDataType;
 }
 
-const Template2: React.FC<TemplateProps> = ({ modalData }) => {
+const Template4: React.FC<TemplateProps> = ({ modalData }) => {
   const isModalGeneratorWebsite =
     process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
 
@@ -80,7 +80,7 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalTriggered && isTrafficSource && isModalOpen && (
         <div
-          className={`flex rounded-xl text-black font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white transition-transform duration-1000 ease-out  ${
+          className={`flex rounded-xl text-black font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white p-10 transition-transform duration-1000 ease-out  ${
             modalData.sizes
           } ${
             modalData.id
@@ -90,32 +90,43 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
             !isModalGeneratorWebsite && (slide ? "" : modalData.position.slide)
           }`}
         >
-          {/* Image  */}
-          <Image
-            src={modalData.imageUrl ? modalData?.imageUrl : ""}
-            className="w-full h-1/2 rounded-t-xl mb-[6%]"
-            width={0}
-            height={0}
-            unoptimized
-            alt=""
-          />
+          {/* Logo  */}
+          <div
+            className={`rounded-full flex items-center justify-center w-[25%] aspect-[1/1] mb-[8%] ${modalData.color.background} ${modalData.color.borderColor}`}
+          >
+            <Image
+              src={modalData.logoUrl ? modalData?.logoUrl : ""}
+              className="w-2/3"
+              width={0}
+              height={0}
+              unoptimized
+              alt=""
+            />
+          </div>
 
           {/* Title  */}
           {modalData.title && (
-            <div className="text-3xl font-bold text-center mb-[6%] w-full break-words text-wrap px-10">
+            <div className="text-3xl font-bold text-center mb-[6%] w-full break-words text-wrap">
               {modalData.title}
             </div>
           )}
 
           {/* Content  */}
           {modalData.content1 && (
-            <div className="text-xl text-center mb-[6%] w-full break-words text-wrap px-10">
+            <div className="text-xl text-center mb-[6%] w-full break-words text-wrap">
               {modalData.content1}
             </div>
           )}
 
+          {/* Content 2  */}
+          {modalData.content2 && (
+            <div className="text-base w-[80%] text-center mb-[6%] break-words text-wrap text-gray-400">
+              {modalData.content2}
+            </div>
+          )}
+
           {/* Button */}
-          <div className="flex flex-col w-full gap-4 text-base justify-between break-words text-wrap pb-10 px-10">
+          <div className="flex flex-col w-full gap-4 text-base justify-between break-words text-wrap">
             {modalData.buttonAnchor && (
               <a
                 href={modalData.buttonAnchorLink || "#"}
@@ -132,7 +143,7 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
               <button
                 id={modalData.button2}
                 onClick={handleClick}
-                className="w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-400"
+                className="w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-300"
               >
                 {modalData.button2}
               </button>
@@ -155,7 +166,7 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
   );
 };
 
-export default Template2;
+export default Template4;
 
 if (typeof window !== "undefined") {
   window.MyModal = {
@@ -169,7 +180,7 @@ if (typeof window !== "undefined") {
           // Create a link element to load the external Tailwind CSS file
           const linkElem = document.createElement("link");
           linkElem.rel = "stylesheet"; // Set the relation to 'stylesheet'
-          // linkElem.href = "http://localhost:3000/dist/tailwind.css"; // Set the href to point to the Tailwind CSS file
+          //   linkElem.href = "http://localhost:3000/dist/tailwind.css"; // Set the href to point to the Tailwind CSS file
           linkElem.href =
             "https://modal-generator.netlify.app/dist/tailwind.css";
           shadow.appendChild(linkElem); // Append the link element to the shadow DOM to load the styles
@@ -180,9 +191,9 @@ if (typeof window !== "undefined") {
             modal.className = `fixed z-50 ${modalData.position.position} ${modalData.device}`; // Add fixed positioning and other necessary classes from modalData
             shadow.appendChild(modal); // Append the modal element to the shadow DOM
 
-            // Render the React component (Template2) inside the shadow DOM
+            // Render the React component (Template4) inside the shadow DOM
             const root = ReactDOM.createRoot(modal);
-            root.render(<Template2 modalData={modalData} />);
+            root.render(<Template4 modalData={modalData} />);
             console.log("Template rendered");
           };
           document.body.appendChild(container); // Append the container (with shadow DOM) to the body of the document

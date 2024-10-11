@@ -17,7 +17,6 @@ export async function POST(request: Request) {
       ${userConfig.imageUrl ? `imageUrl: "${userConfig.imageUrl}",` : ""}
       ${userConfig.content1 ? `content1: "${userConfig.content1}",` : ""}
       ${userConfig.content2 ? `content2: "${userConfig.content2}",` : ""}
-      ${userConfig.input1 ? `input1: "${userConfig.input1}",` : ""}
       ${
         userConfig.buttonAnchor
           ? `buttonAnchor: "${userConfig.buttonAnchor}",`
@@ -28,9 +27,26 @@ export async function POST(request: Request) {
           ? `buttonAnchorLink: "${userConfig.buttonAnchorLink}",`
           : ""
       }
+           ${
+             userConfig.buttonAnchor2
+               ? `buttonAnchor2: "${userConfig.buttonAnchor2}",`
+               : ""
+           }
+      ${
+        userConfig.buttonAnchorLink2
+          ? `buttonAnchorLink2: "${userConfig.buttonAnchorLink2}",`
+          : ""
+      }
       ${userConfig.button2 ? `button2: "${userConfig.button2}",` : ""}
+      ${userConfig.input1 ? `input1: "${userConfig.input1}",` : ""}
+      ${userConfig.input2 ? `input2: "${userConfig.input2}",` : ""}
+      ${userConfig.checkbox1 ? `checkbox1: "${userConfig.checkbox1}",` : ""}
       ${userConfig.label1 ? `label1: "${userConfig.label1}",` : ""}
       ${userConfig.label1b ? `label1b: "${userConfig.label1b}",` : ""}
+      ${userConfig.label2 ? `label2: "${userConfig.label2}",` : ""}
+      ${userConfig.label2b ? `label2b: "${userConfig.label2b}",` : ""}
+      ${userConfig.label3 ? `label3: "${userConfig.label3}",` : ""}
+      ${userConfig.label3b ? `label3b: "${userConfig.label3b}",` : ""}
       sizes: "${userConfig.sizes}",
         position: { position: "${userConfig.position.position}", slide: "${
       userConfig.position.slide

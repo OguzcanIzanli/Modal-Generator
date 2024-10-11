@@ -10,6 +10,8 @@ export interface ModalDataType {
   buttonAnchorLink: string;
   buttonAnchor2?: string;
   buttonAnchorLink2?: string;
+  buttonAnchor3?: string;
+  buttonAnchorLink3?: string;
   button2?: string;
   input1?: string;
   input2?: string;
@@ -235,7 +237,33 @@ export const modalData: ModalDataType[] = [
     trafficSource: "",
     webhookUrl: "",
   },
-  // { id: 10 },
+  {
+    id: 10,
+    title: "Sign up",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal10.png?alt=media&token=7a7ee844-84c9-486e-bd82-b10cbcb5c0b9",
+    content1: "Join new adventure",
+    buttonAnchor: "Sign up",
+    buttonAnchorLink: "",
+    buttonAnchor2: "Forgot password",
+    buttonAnchorLink2: "",
+    buttonAnchor3: "Log In",
+    buttonAnchorLink3: "",
+    input1: "Enter Full name",
+    input2: "Enter your email",
+    sizes: "w-[480px]",
+    position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },
+    color: {
+      background: "bg-violet-600 border-2",
+      borderColor: "border-violet-600",
+      text: "text-white",
+    },
+    device: "",
+    afterSeconds: "",
+    afterScroll: "",
+    trafficSource: "",
+    webhookUrl: "",
+  },
   // { id: 11 },
   // { id: 12 },
   // { id: 13 },

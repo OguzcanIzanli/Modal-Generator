@@ -33,6 +33,12 @@ const Content = () => {
         name="buttonAnchorLink2"
         placeholder={`Hyperlink for ${modal.buttonAnchor2} button`}
       />
+      <Input type="text" name="buttonAnchor3" />
+      <Input
+        type="text"
+        name="buttonAnchorLink3"
+        placeholder={`Hyperlink for ${modal.buttonAnchor3} button`}
+      />
       <Input type="text" name="button2" />
       <Input type="text" name="input1" />
       <Input type="text" name="input2" />

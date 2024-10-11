@@ -27,6 +27,8 @@ const EmbedCodeGenerator = () => {
         buttonAnchorLink: modal.buttonAnchorLink,
         buttonAnchor2: modal.buttonAnchor2,
         buttonAnchorLink2: modal.buttonAnchorLink2,
+        buttonAnchor3: modal.buttonAnchor3,
+        buttonAnchorLink3: modal.buttonAnchorLink3,
         button2: modal.button2,
         input1: modal.input1,
         input2: modal.input2,

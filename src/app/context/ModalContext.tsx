@@ -15,6 +15,8 @@ export const initialModalData = {
   buttonAnchorLink: "",
   buttonAnchor2: "",
   buttonAnchorLink2: "",
+  buttonAnchor3: "",
+  buttonAnchorLink3: "",
   button2: "",
   input1: "",
   input2: "",

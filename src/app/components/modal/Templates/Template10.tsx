@@ -19,7 +19,7 @@ interface TemplateProps {
   modalData: ModalDataType;
 }
 
-const Template9: React.FC<TemplateProps> = ({ modalData }) => {
+const Template10: React.FC<TemplateProps> = ({ modalData }) => {
   const isModalGeneratorWebsite =
     process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
 
@@ -95,9 +95,7 @@ const Template9: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalTriggered && isTrafficSource && isModalOpen && (
         <div
-          className={`flex rounded-xl text-black font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white transition-transform duration-1000 ease-out  ${
-            modalData.sizes
-          } ${
+          className={`flex rounded-xl w-min text-black font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between bg-white transition-transform duration-1000 ease-out ${
             modalData.id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
@@ -105,82 +103,103 @@ const Template9: React.FC<TemplateProps> = ({ modalData }) => {
             !isModalGeneratorWebsite && (slide ? "" : modalData.position.slide)
           }`}
         >
-          {/* Image  */}
-          <Image
-            src={modalData.imageUrl ? modalData?.imageUrl : ""}
-            className="w-full h-1/2 rounded-t-xl mb-[6%]"
-            width={0}
-            height={0}
-            unoptimized
-            alt=""
-          />
+          <div className={`py-10 ${modalData.sizes}`}>
+            {/* Title  */}
+            {modalData.title && (
+              <div className="text-3xl font-bold text-left mb-[6%] w-full break-words text-wrap px-10">
+                {modalData.title}
+              </div>
+            )}
 
-          {/* Title  */}
-          {modalData.title && (
-            <div className="text-3xl font-bold text-center mb-[6%] w-full break-words text-wrap px-10">
-              {modalData.title}
+            {/* Content  */}
+            {modalData.content1 && (
+              <div className="text-xl text-left mb-[6%] w-full break-words text-wrap px-10">
+                {modalData.content1}
+              </div>
+            )}
+
+            {/* Input  */}
+            <div className="px-10 w-full">
+              {modalData.input1 && (
+                <input
+                  type="text"
+                  value={value.name}
+                  name="name"
+                  onChange={handleInputChange}
+                  placeholder={modalData.input1}
+                  className="py-3 px-4 text-base w-full rounded-xl mb-[6%] border-2 border-gray-400 text-left"
+                />
+              )}
+              {modalData.input2 && (
+                <input
+                  type="email"
+                  value={value.email}
+                  name="email"
+                  onChange={handleInputChange}
+                  placeholder={modalData.input2}
+                  className="py-3 px-4 text-base w-full rounded-xl mb-[6%] border-2 border-gray-400 text-left"
+                />
+              )}
             </div>
-          )}
 
-          {/* Content  */}
-          {modalData.content1 && (
-            <div className="text-xl text-center mb-[6%] w-full break-words text-wrap px-10">
-              {modalData.content1}
-            </div>
-          )}
-
-          {/* Input  */}
-          <div className="px-10 w-full">
-            {modalData.input1 && (
-              <input
-                type="text"
-                value={value.name}
-                name="name"
-                onChange={handleInputChange}
-                placeholder={modalData.input1}
-                className="py-3 px-4 text-base w-full rounded-xl mb-[6%] border-2 border-gray-400 text-left"
-              />
-            )}
-            {modalData.input2 && (
-              <input
-                type="email"
-                value={value.email}
-                name="email"
-                onChange={handleInputChange}
-                placeholder={modalData.input2}
-                className="py-3 px-4 text-base w-full rounded-xl mb-[6%] border-2 border-gray-400 text-left"
-              />
-            )}
-          </div>
-
-          {/* Button */}
-          <div className="flex flex-col w-full gap-4 text-base justify-between break-words text-wrap pb-10 px-10">
-            {modalData.buttonAnchor && (
-              <a
-                href={modalData.buttonAnchorLink || "#"}
-                id={modalData.buttonAnchor}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={handleClick}
-                className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${modalData.color.background} ${modalData.color.borderColor} ${modalData.color.text}`}
-              >
-                {modalData.buttonAnchor}
-              </a>
-            )}
-            {modalData.buttonAnchor2 && (
-              <div>
+            {/* Button */}
+            <div className="flex w-full gap-4 text-base justify-between break-words text-wrap px-10">
+              {modalData.buttonAnchor && (
                 <a
-                  href={modalData.buttonAnchorLink2 || "#"}
-                  id={modalData.buttonAnchor2}
+                  href={modalData.buttonAnchorLink || "#"}
+                  id={modalData.buttonAnchor}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={handleClick}
-                  className="text-black text-sm inline-block"
+                  className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${modalData.color.background} ${modalData.color.borderColor} ${modalData.color.text}`}
                 >
-                  {modalData.buttonAnchor2}
+                  {modalData.buttonAnchor}
                 </a>
-              </div>
-            )}
+              )}
+            </div>
+
+            <div className="flex w-full text-base justify-between break-words text-wrap pt-2 px-10">
+              {modalData.buttonAnchor2 && (
+                <div>
+                  <a
+                    href={modalData.buttonAnchorLink2 || "#"}
+                    id={modalData.buttonAnchor2}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleClick}
+                    className="text-black text-sm inline-block"
+                  >
+                    {modalData.buttonAnchor2}
+                  </a>
+                </div>
+              )}
+              {modalData.buttonAnchor3 && (
+                <div>
+                  <a
+                    href={modalData.buttonAnchorLink3 || "#"}
+                    id={modalData.buttonAnchor3}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleClick}
+                    className="text-black text-sm inline-block"
+                  >
+                    {modalData.buttonAnchor3}
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Image  */}
+          <div className={`${modalData.sizes}`}>
+            <Image
+              src={modalData.imageUrl ? modalData?.imageUrl : ""}
+              className="w-full rounded-r-xl"
+              width={0}
+              height={0}
+              unoptimized
+              alt=""
+            />
           </div>
 
           {/* Close Button  */}
@@ -199,7 +218,7 @@ const Template9: React.FC<TemplateProps> = ({ modalData }) => {
   );
 };
 
-export default Template9;
+export default Template10;
 
 if (typeof window !== "undefined") {
   window.MyModal = {
@@ -224,9 +243,9 @@ if (typeof window !== "undefined") {
             modal.className = `fixed z-50 ${modalData.position.position} ${modalData.device}`; // Add fixed positioning and other necessary classes from modalData
             shadow.appendChild(modal); // Append the modal element to the shadow DOM
 
-            // Render the React component (Template9) inside the shadow DOM
+            // Render the React component (Template10) inside the shadow DOM
             const root = ReactDOM.createRoot(modal);
-            root.render(<Template9 modalData={modalData} />);
+            root.render(<Template10 modalData={modalData} />);
             console.log("Template rendered");
           };
           document.body.appendChild(container); // Append the container (with shadow DOM) to the body of the document

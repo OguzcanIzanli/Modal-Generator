@@ -37,6 +37,16 @@ export async function POST(request: Request) {
           ? `buttonAnchorLink2: "${userConfig.buttonAnchorLink2}",`
           : ""
       }
+                 ${
+                   userConfig.buttonAnchor3
+                     ? `buttonAnchor3: "${userConfig.buttonAnchor3}",`
+                     : ""
+                 }
+      ${
+        userConfig.buttonAnchorLink3
+          ? `buttonAnchorLink3: "${userConfig.buttonAnchorLink3}",`
+          : ""
+      }
       ${userConfig.button2 ? `button2: "${userConfig.button2}",` : ""}
       ${userConfig.input1 ? `input1: "${userConfig.input1}",` : ""}
       ${userConfig.input2 ? `input2: "${userConfig.input2}",` : ""}

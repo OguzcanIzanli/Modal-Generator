@@ -33,8 +33,8 @@ export const useWebhook = () => {
       body: JSON.stringify(dataToSend),
     })
       .then((response) => response.text())
-      .then((data) => {
-        console.log("Webhook success:", data);
+      .then(() => {
+        // console.log("Webhook success:", data);
       })
       .catch((error) => {
         console.error("Error sending webhook:", error);

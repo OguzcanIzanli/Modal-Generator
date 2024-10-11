@@ -19,7 +19,7 @@ interface TemplateProps {
   modalData: ModalDataType;
 }
 
-const Template10: React.FC<TemplateProps> = ({ modalData }) => {
+const Template12: React.FC<TemplateProps> = ({ modalData }) => {
   const isModalGeneratorWebsite =
     process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
 
@@ -95,7 +95,7 @@ const Template10: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalTriggered && isTrafficSource && isModalOpen && (
         <div
-          className={`flex rounded-xl w-min text-black font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center bg-white transition-transform duration-1000 ease-out ${
+          className={`flex relative rounded-xl w-min text-black font-sans items-center transition-transform duration-1000 ease-out ${
             modalData.id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
@@ -103,7 +103,21 @@ const Template10: React.FC<TemplateProps> = ({ modalData }) => {
             !isModalGeneratorWebsite && (slide ? "" : modalData.position.slide)
           }`}
         >
-          <div className={`py-10 ${modalData.sizes}`}>
+          {/* Image  */}
+          <div className={`${modalData.sizes}`}>
+            <Image
+              src={modalData.imageUrl ? modalData?.imageUrl : ""}
+              className="w-full rounded-r-xl translate-x-[25%]"
+              width={0}
+              height={0}
+              unoptimized
+              alt=""
+            />
+          </div>
+
+          <div
+            className={`py-10 bg-white scale-75 -translate-x-[25%] rounded-xl aspect-square flex flex-col justify-between shadow-[0_0_12px_rgba(0,0,0,0.25)] z-10 ${modalData.sizes}`}
+          >
             {/* Title  */}
             {modalData.title && (
               <div className="text-3xl font-bold text-left mb-[6%] w-full break-words text-wrap px-10">
@@ -188,37 +202,25 @@ const Template10: React.FC<TemplateProps> = ({ modalData }) => {
                 </div>
               )}
             </div>
-          </div>
 
-          {/* Image  */}
-          <div className={`${modalData.sizes}`}>
-            <Image
-              src={modalData.imageUrl ? modalData?.imageUrl : ""}
-              className="w-full rounded-r-xl"
-              width={0}
-              height={0}
-              unoptimized
-              alt=""
-            />
+            {/* Close Button  */}
+            <button
+              id="Exit button"
+              onClick={(e) => {
+                handleClick(e);
+              }}
+              className="absolute text-3xl top-6 right-6 border-2 text-gray-400 border-gray-400 rounded-full hover:scale-105 active:scale-95"
+            >
+              <IconClose />
+            </button>
           </div>
-
-          {/* Close Button  */}
-          <button
-            id="Exit button"
-            onClick={(e) => {
-              handleClick(e);
-            }}
-            className="absolute text-3xl top-6 right-6 border-2 text-gray-400 border-gray-400 rounded-full hover:scale-105 active:scale-95"
-          >
-            <IconClose />
-          </button>
         </div>
       )}
     </>
   );
 };
 
-export default Template10;
+export default Template12;
 
 if (typeof window !== "undefined") {
   window.MyModal = {
@@ -242,9 +244,9 @@ if (typeof window !== "undefined") {
             modal.className = `fixed z-50 ${modalData.position.position} ${modalData.device}`; // Add fixed positioning and other necessary classes from modalData
             shadow.appendChild(modal); // Append the modal element to the shadow DOM
 
-            // Render the React component (Template10) inside the shadow DOM
+            // Render the React component (Template12) inside the shadow DOM
             const root = ReactDOM.createRoot(modal);
-            root.render(<Template10 modalData={modalData} />);
+            root.render(<Template12 modalData={modalData} />);
             console.log("Template rendered");
           };
           document.body.appendChild(container); // Append the container (with shadow DOM) to the body of the document

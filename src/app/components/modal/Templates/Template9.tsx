@@ -108,7 +108,7 @@ const Template9: React.FC<TemplateProps> = ({ modalData }) => {
           {/* Image  */}
           <Image
             src={modalData.imageUrl ? modalData?.imageUrl : ""}
-            className="w-full h-1/2 rounded-t-xl mb-[6%]"
+            className="w-full rounded-t-xl mb-[6%]"
             width={0}
             height={0}
             unoptimized
@@ -157,7 +157,7 @@ const Template9: React.FC<TemplateProps> = ({ modalData }) => {
           <div className="flex flex-col w-full gap-4 text-base justify-between break-words text-wrap pb-10 px-10">
             {modalData.buttonAnchor && (
               <a
-                href={modalData.buttonAnchorLink || "#"}
+                href={modalData.buttonAnchorLink}
                 id={modalData.buttonAnchor}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -170,7 +170,7 @@ const Template9: React.FC<TemplateProps> = ({ modalData }) => {
             {modalData.buttonAnchor2 && (
               <div>
                 <a
-                  href={modalData.buttonAnchorLink2 || "#"}
+                  href={modalData.buttonAnchorLink2}
                   id={modalData.buttonAnchor2}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -213,9 +213,8 @@ if (typeof window !== "undefined") {
           // Create a link element to load the external Tailwind CSS file
           const linkElem = document.createElement("link");
           linkElem.rel = "stylesheet"; // Set the relation to 'stylesheet'
-          //   linkElem.href = "http://localhost:3000/dist/tailwind.css"; // Set the href to point to the Tailwind CSS file
-          linkElem.href =
-            "https://modal-generator.netlify.app/dist/tailwind.css";
+          linkElem.href = "http://localhost:3000/dist/tailwind.css"; // Set the href to point to the Tailwind CSS file
+          // linkElem.href = "https://modal-generator.netlify.app/dist/tailwind.css";
           shadow.appendChild(linkElem); // Append the link element to the shadow DOM to load the styles
 
           // Once the CSS file is fully loaded, proceed with rendering the modal

@@ -8,6 +8,11 @@ import Template7 from "./Template7";
 import Template8 from "./Template8";
 import Template9 from "./Template9";
 import Template10 from "./Template10";
+import Template11 from "./Template11";
+import Template12 from "./Template12";
+import Template13 from "./Template13";
+import Template14 from "./Template14";
+import Template15 from "./Template15";
 
 export {
   Template1,
@@ -20,4 +25,9 @@ export {
   Template8,
   Template9,
   Template10,
+  Template11,
+  Template12,
+  Template13,
+  Template14,
+  Template15,
 };

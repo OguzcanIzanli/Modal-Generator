@@ -6,8 +6,8 @@ export interface ModalDataType {
   imageUrl?: string;
   content1: string;
   content2?: string;
-  buttonAnchor: string;
-  buttonAnchorLink: string;
+  buttonAnchor?: string;
+  buttonAnchorLink?: string;
   buttonAnchor2?: string;
   buttonAnchorLink2?: string;
   buttonAnchor3?: string;
@@ -264,11 +264,128 @@ export const modalData: ModalDataType[] = [
     trafficSource: "",
     webhookUrl: "",
   },
-  // { id: 11 },
-  // { id: 12 },
-  // { id: 13 },
-  // { id: 14 },
-  // { id: 15 },
+  {
+    id: 11,
+    title: "Check your email",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmailbox.png?alt=media&token=6a7c6cf8-d569-4e6a-ba0d-a505cd3808da",
+    content1:
+      "Once you deletet your account, you’ll lose all data associatted with it.",
+    buttonAnchor: "Sign up",
+    buttonAnchorLink: "",
+    buttonAnchor2: "Already have an account?",
+    buttonAnchorLink2: "",
+    input1: "Enter your email",
+    sizes: "w-[480px]",
+    position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },
+    color: {
+      background: "bg-violet-600 border-2",
+      borderColor: "border-violet-600",
+      text: "text-white",
+    },
+    device: "",
+    afterSeconds: "",
+    afterScroll: "",
+    trafficSource: "",
+    webhookUrl: "",
+  },
+  {
+    id: 12,
+    title: "Sign up",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal12.png?alt=media&token=e8af9335-53ea-4b69-8565-3c554124572b",
+    content1: "Join new adventure",
+    buttonAnchor: "Sign up",
+    buttonAnchorLink: "",
+    buttonAnchor2: "Forgot password",
+    buttonAnchorLink2: "",
+    buttonAnchor3: "Log In",
+    buttonAnchorLink3: "",
+    input1: "Enter Full name",
+    input2: "Enter your email",
+    sizes: "w-[480px]",
+    position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },
+    color: {
+      background: "bg-violet-600 border-2",
+      borderColor: "border-violet-600",
+      text: "text-white",
+    },
+    device: "",
+    afterSeconds: "",
+    afterScroll: "",
+    trafficSource: "",
+    webhookUrl: "",
+  },
+  {
+    id: 13,
+    title: "Welcome to talk",
+    logoUrl:
+      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fsmile.png?alt=media&token=ccac9450-a311-4ec7-a16e-78fdef9e9a20",
+    content1:
+      "Send friends photos, videos, locations, songs, voice messages, and more.",
+    buttonAnchor: "Let’s get started",
+    buttonAnchorLink: "",
+    sizes: "w-[480px]",
+    position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },
+    color: {
+      background: "bg-violet-600 border-2",
+      borderColor: "border-violet-600",
+      text: "text-white",
+    },
+    device: "",
+    afterSeconds: "",
+    afterScroll: "",
+    trafficSource: "",
+    webhookUrl: "",
+  },
+  {
+    id: 14,
+    title: "Jenny Yelriver",
+    logoUrl:
+      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fpp.png?alt=media&token=a9f98998-ef44-4cf1-9d04-ca5374523e18",
+    content1: "@jennyyelriver",
+    content2:
+      "Duis eget elit erat. Aliam euismod, mauris quis tristique feugiat, elit diam tincidunt erat, nec fringilla odio orci dapibu magna. Vestibulum ultrices sem nec ex efficitur aliquam.",
+    button2: "10 SEP 2021 - 16:33 PM",
+    sizes: "w-[480px]",
+    position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },
+    color: {
+      background: "bg-white border-2",
+      borderColor: "border-gray-400",
+      text: "text-black",
+    },
+    device: "",
+    afterSeconds: "",
+    afterScroll: "",
+    trafficSource: "",
+    webhookUrl: "",
+  },
+  {
+    id: 15,
+    title: "Let’s feedback",
+    logoUrl:
+      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fsad.png?alt=media&token=4e334908-1699-46ee-9037-9220b34a6c73",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fconfused.png?alt=media&token=481e2e62-58f5-48f4-aed6-9917edb4975b",
+    content1:
+      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fhappy.png?alt=media&token=8f11f8f7-6f91-4a3c-b844-e957527fcda8",
+    content2:
+      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fhappy-face.png?alt=media&token=1852b6a1-de1b-464d-b564-420023fe1e39",
+    button2:
+      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fhappy-face2.png?alt=media&token=435b6971-7c9d-4d17-a06a-d5555a30e2de",
+    sizes: "w-[480px]",
+    position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },
+    color: {
+      background: "bg-white border-2",
+      borderColor: "border-gray-400",
+      text: "text-black",
+    },
+    device: "",
+    afterSeconds: "",
+    afterScroll: "",
+    trafficSource: "",
+    webhookUrl: "",
+  },
   // { id: 16 },
   // { id: 17 },
   // { id: 18 },

@@ -68,6 +68,12 @@ export const colorData: ColorDataType[] = [
     textBg: "text-violet-600",
   },
   {
+    background: "bg-cyan-500",
+    borderColor: "border-2 border-cyan-500",
+    text: "text-white",
+    textBg: "text-cyan-500",
+  },
+  {
     background: "bg-gray-600",
     borderColor: "border-2 border-gray-600",
     text: "text-white",

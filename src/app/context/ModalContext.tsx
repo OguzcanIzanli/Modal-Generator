@@ -74,7 +74,6 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
     modal,
     setModal,
   };
-  console.log(modal.color);
 
   return (
     <ModalContext.Provider value={values}>{children}</ModalContext.Provider>

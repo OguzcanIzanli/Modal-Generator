@@ -92,9 +92,11 @@ const Template15: React.FC<TemplateProps> = ({ modalData }) => {
     if (!isModalGeneratorWebsite) {
       webhookData.userClick = id; // VARIABLE
 
-      const newTheme = theme === "dark" ? "light" : "dark";
-      setTheme(newTheme);
-      localStorage.setItem("theme", newTheme);
+      if (!id.includes("Keep")) {
+        const newTheme = theme === "dark" ? "light" : "dark";
+        setTheme(newTheme);
+        localStorage.setItem("theme", newTheme);
+      }
 
       sendWebhookData(webhookData, webhookUrl);
       setIsModalOpen(false);
@@ -133,13 +135,11 @@ const Template15: React.FC<TemplateProps> = ({ modalData }) => {
           </div>
 
           {/* Content  */}
-
           <div className="text-xl text-center w-full break-words text-wrap mt-[6%]">
             Just letting you know that we have {theme} mode.
           </div>
 
           {/* Button */}
-
           <div className="flex flex-col justify-between gap-4 w-full text-base break-words text-wrap mt-[6%]">
             <button
               id={`Turn on ${theme} mode`}
@@ -152,7 +152,7 @@ const Template15: React.FC<TemplateProps> = ({ modalData }) => {
             <button
               id={`Keep using ${theme} mode`}
               onClick={handleClick}
-              className="w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-400"
+              className="w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-400 cursor-pointer"
             >
               Keep using {theme === "dark" ? "light" : "dark"} mode
             </button>
@@ -164,7 +164,7 @@ const Template15: React.FC<TemplateProps> = ({ modalData }) => {
             onClick={(e) => {
               handleClick(e);
             }}
-            className="absolute text-3xl top-6 right-6 border-2 text-gray-400 border-gray-400 rounded-full hover:scale-105 active:scale-95"
+            className={`absolute text-3xl top-6 right-6 rounded-full hover:scale-125 active:scale-95 z-10 transition-transform duration-1000 ease-out text-black`}
           >
             <IconClose />
           </button>
@@ -188,8 +188,9 @@ if (typeof window !== "undefined") {
           // Create a link element to load the external Tailwind CSS file
           const linkElem = document.createElement("link");
           linkElem.rel = "stylesheet"; // Set the relation to 'stylesheet'
-          linkElem.href = "http://localhost:3000/dist/tailwind.css"; // Set the href to point to the Tailwind CSS file
-          // linkElem.href = "https://modal-generator.netlify.app/dist/tailwind.css";
+          // linkElem.href = "http://localhost:3000/dist/tailwind.css"; // Set the href to point to the Tailwind CSS file
+          linkElem.href =
+            "https://modal-generator.netlify.app/dist/tailwind.css";
           shadow.appendChild(linkElem); // Append the link element to the shadow DOM to load the styles
 
           // Once the CSS file is fully loaded, proceed with rendering the modal

@@ -47,6 +47,11 @@ import {
   Template14,
   Template15,
   Template16,
+  Template17,
+  Template18,
+  Template19,
+  Template20,
+  Template21,
 } from "../../../modal/Templates";
 
 interface TemplateProps {
@@ -60,7 +65,7 @@ const TemplateMap: { [key: number]: React.FC<TemplateProps> } = {
   4: Template4,
   5: Template4,
   6: Template1,
-  7: Template5,
+  7: Template21,
   8: Template6,
   9: Template2,
   10: Template7,
@@ -74,6 +79,12 @@ const TemplateMap: { [key: number]: React.FC<TemplateProps> } = {
   18: Template14,
   19: Template15,
   20: Template16,
+  21: Template17,
+  22: Template18,
+  23: Template19,
+  24: Template20,
+  25: Template8,
+  26: Template5,
 };
 
 const TemplateSelector = () => {

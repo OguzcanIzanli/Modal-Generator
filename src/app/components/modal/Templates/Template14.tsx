@@ -126,7 +126,7 @@ const Template14: React.FC<TemplateProps> = ({ modalData }) => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleClick}
-            className={`p-3 text-4xl rounded-full mt-[10%] hover:scale-105 active:scale-95 transition ${color.textBg} ${color.borderColor}`}
+            className={`p-3 text-4xl rounded-full mt-[10%] hover:scale-105 active:scale-95 transition cursor-pointer ${color.textBg} ${color.borderColor}`}
           >
             <IconArrowRight className={color.textBg} />
           </a>
@@ -137,7 +137,7 @@ const Template14: React.FC<TemplateProps> = ({ modalData }) => {
             onClick={(e) => {
               handleClick(e);
             }}
-            className="absolute text-3xl top-6 right-6 border-2 text-gray-400 border-gray-400 cursor-pointer rounded-full hover:scale-105 active:scale-95"
+            className={`absolute text-3xl top-6 right-6 rounded-full hover:scale-125 active:scale-95 z-10 transition-transform duration-1000 ease-out text-black`}
           >
             <IconClose />
           </button>
@@ -161,8 +161,9 @@ if (typeof window !== "undefined") {
           // Create a link element to load the external Tailwind CSS file
           const linkElem = document.createElement("link");
           linkElem.rel = "stylesheet"; // Set the relation to 'stylesheet'
-          linkElem.href = "http://localhost:3000/dist/tailwind.css"; // Set the href to point to the Tailwind CSS file
-          // linkElem.href = "https://modal-generator.netlify.app/dist/tailwind.css";
+          // linkElem.href = "http://localhost:3000/dist/tailwind.css"; // Set the href to point to the Tailwind CSS file
+          linkElem.href =
+            "https://modal-generator.netlify.app/dist/tailwind.css";
           shadow.appendChild(linkElem); // Append the link element to the shadow DOM to load the styles
 
           // Once the CSS file is fully loaded, proceed with rendering the modal

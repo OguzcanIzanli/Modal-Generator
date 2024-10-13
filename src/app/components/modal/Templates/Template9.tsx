@@ -26,6 +26,7 @@ const Template9: React.FC<TemplateProps> = ({ modalData }) => {
     imageUrl,
     content,
     button,
+    link,
     input,
     sizes,
     position,
@@ -172,9 +173,7 @@ const Template9: React.FC<TemplateProps> = ({ modalData }) => {
             </div>
 
             {/* Button */}
-            {(button?.buttonAnchor ||
-              button?.buttonAnchor2 ||
-              button?.buttonAnchor3) && (
+            {button?.buttonAnchor && (
               <div className="flex flex-col justify-between gap-4 w-full text-base break-words text-wrap mt-[6%]">
                 {button?.buttonAnchor && (
                   <a
@@ -183,38 +182,41 @@ const Template9: React.FC<TemplateProps> = ({ modalData }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={handleClick}
-                    className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${color.background} ${color.borderColor} ${color.text}`}
+                    className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center cursor-pointer ${color.background} ${color.borderColor} ${color.text}`}
                   >
                     {button.buttonAnchor}
                   </a>
                 )}
+              </div>
+            )}
 
-                <div className="flex justify-between">
-                  {button?.buttonAnchor2 && (
-                    <a
-                      href={button.buttonAnchorLink2}
-                      id={button.buttonAnchor2}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={handleClick}
-                      className="text-black text-sm inline-block"
-                    >
-                      {button.buttonAnchor2}
-                    </a>
-                  )}
-                  {button?.buttonAnchor3 && (
-                    <a
-                      href={button.buttonAnchorLink3}
-                      id={button.buttonAnchor3}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={handleClick}
-                      className="text-black text-sm inline-block"
-                    >
-                      {button.buttonAnchor3}
-                    </a>
-                  )}
-                </div>
+            {/* Link */}
+            {(link?.link1 || link?.link2) && (
+              <div className="flex justify-between gap-4 w-full text-base break-words text-wrap">
+                {link?.link1 && (
+                  <a
+                    href={link.linkURL1}
+                    id={link.link1}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleClick}
+                    className="text-black text-sm inline-block mt-[6%]"
+                  >
+                    {link.link1}
+                  </a>
+                )}
+                {link?.link2 && (
+                  <a
+                    href={link.linkURL2}
+                    id={link.link2}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleClick}
+                    className="text-black text-sm inline-block mt-[6%]"
+                  >
+                    {link.link2}
+                  </a>
+                )}
               </div>
             )}
 
@@ -224,7 +226,7 @@ const Template9: React.FC<TemplateProps> = ({ modalData }) => {
               onClick={(e) => {
                 handleClick(e);
               }}
-              className="absolute text-3xl top-6 right-6 border-2 text-gray-400 border-gray-400 rounded-full hover:scale-105 active:scale-95"
+              className={`absolute text-3xl top-6 right-6 rounded-full hover:scale-125 active:scale-95 z-10 transition-transform duration-1000 ease-out text-black`}
             >
               <IconClose />
             </button>
@@ -249,8 +251,9 @@ if (typeof window !== "undefined") {
           // Create a link element to load the external Tailwind CSS file
           const linkElem = document.createElement("link");
           linkElem.rel = "stylesheet"; // Set the relation to 'stylesheet'
-          linkElem.href = "http://localhost:3000/dist/tailwind.css"; // Set the href to point to the Tailwind CSS file
-          // linkElem.href = "https://modal-generator.netlify.app/dist/tailwind.css";
+          // linkElem.href = "http://localhost:3000/dist/tailwind.css"; // Set the href to point to the Tailwind CSS file
+          linkElem.href =
+            "https://modal-generator.netlify.app/dist/tailwind.css";
           shadow.appendChild(linkElem); // Append the link element to the shadow DOM to load the styles
 
           // Once the CSS file is fully loaded, proceed with rendering the modal

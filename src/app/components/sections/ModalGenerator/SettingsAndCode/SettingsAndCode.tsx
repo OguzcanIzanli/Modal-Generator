@@ -22,7 +22,9 @@ const SettingsAndCode = () => {
         </a>
       </p>
 
-      <Input type="text" name="webhookUrl" placeholder="Your Webhook URL" />
+      <div className="mb-4">
+        <Input type="text" name="webhookUrl" placeholder="Your Webhook URL" />
+      </div>
 
       <EmbedCodeGenerator />
       <div className="flex gap-1 mt-4">

@@ -20,19 +20,37 @@ interface TemplateProps {
 }
 
 const Template1: React.FC<TemplateProps> = ({ modalData }) => {
+  const {
+    id,
+    title,
+    logoUrl,
+    content,
+    feedback,
+    button,
+    input,
+    sizes,
+    position,
+    color,
+    afterSeconds,
+    afterScroll,
+    trafficSource,
+    webhookUrl,
+  } = modalData;
+
   const isModalGeneratorWebsite =
     process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
 
   const [isModalOpen, setIsModalOpen] = useState(true);
+  const [value, setValue] = useState<string>("");
 
   // Scroll
   const isModalTriggered = useScrollModal({
-    percentage: Number(modalData.afterScroll),
+    percentage: Number(afterScroll),
   });
 
   // Traffic source
   const isTrafficSource = useTrafficSource({
-    domain: modalData.trafficSource,
+    domain: trafficSource,
   });
 
   // Slide Animation
@@ -47,7 +65,7 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
     ) {
       const timer = setTimeout(() => {
         setSlide(true);
-      }, Number(modalData.afterSeconds + 500));
+      }, Number(afterSeconds + 500));
 
       return () => clearTimeout(timer);
     }
@@ -56,21 +74,29 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
     isTrafficSource,
     isModalOpen,
     isModalGeneratorWebsite,
-    modalData.afterSeconds,
+    afterSeconds,
   ]);
 
   // Webhook - VARIABLE
-  const webhookData = {
-    userClick: "",
-  };
+  interface WebhookData {
+    userClick?: string;
+    email?: string;
+  }
 
   const { sendWebhookData } = useWebhook();
+  const webhookData: WebhookData = {};
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     const { id } = e.currentTarget;
     if (!isModalGeneratorWebsite) {
-      webhookData.userClick = id; // VARIABLE
-      const webhookUrl = modalData.webhookUrl;
+      webhookData.userClick = id;
+
+      if (input) {
+        webhookData.email = value || "Not written.";
+      } else {
+        delete webhookData?.email;
+      }
+
       sendWebhookData(webhookData, webhookUrl);
       setIsModalOpen(false);
     }
@@ -80,72 +106,160 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalTriggered && isTrafficSource && isModalOpen && (
         <div
-          className={`flex rounded-xl text-black font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white p-10 transition-transform duration-1000 ease-out  ${
-            modalData.sizes
-          } ${
-            modalData.id
+          className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] p-10 bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
+            id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
-          } ${
-            !isModalGeneratorWebsite && (slide ? "" : modalData.position.slide)
-          }`}
+          } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
           {/* Logo  */}
-          <div
-            className={`rounded-full flex items-center justify-center w-[25%] aspect-[1/1] mb-[8%] ${modalData.color.background} ${modalData.color.borderColor}`}
-          >
-            <Image
-              src={modalData.logoUrl ? modalData?.logoUrl : ""}
-              className="w-2/3"
-              width={0}
-              height={0}
-              unoptimized
-              alt=""
-            />
-          </div>
-
-          {/* Title  */}
-          {modalData.title && (
-            <div className="text-3xl font-bold text-center mb-[6%] w-full break-words text-wrap">
-              {modalData.title}
+          {logoUrl && (
+            <div
+              className={`flex items-center justify-center rounded-full w-[25%] aspect-[1/1] ${color.background} ${color.borderColor}`}
+            >
+              <Image src={logoUrl} width={50} height={50} unoptimized alt="" />
             </div>
           )}
 
+          {/* Title  */}
+          {title && (
+            <div className="text-3xl font-bold text-center w-full break-words text-wrap mt-[8%]">
+              {title}
+            </div>
+          )}
+
+          {/* Feedback  */}
+          <div className="flex justify-between mt-[6%]">
+            {feedback?.feedbackURL1 && (
+              <button
+                className={`rounded-full flex items-center justify-center w-[12%] transition hover:scale-125 active:scale-110`}
+                onClick={handleClick}
+                id="Sad"
+              >
+                <Image
+                  src={feedback.feedbackURL1 ? feedback?.feedbackURL1 : ""}
+                  className="w-full"
+                  width={0}
+                  height={0}
+                  unoptimized
+                  alt=""
+                />
+              </button>
+            )}
+
+            {feedback?.feedbackURL2 && (
+              <button
+                className={`rounded-full flex items-center justify-center w-[12%] transition hover:scale-125 active:scale-110`}
+                onClick={handleClick}
+                id="Confused"
+              >
+                <Image
+                  src={feedback.feedbackURL2 ? feedback?.feedbackURL2 : ""}
+                  className="w-full"
+                  width={0}
+                  height={0}
+                  unoptimized
+                  alt=""
+                />
+              </button>
+            )}
+
+            {feedback?.feedbackURL3 && (
+              <button
+                className={`rounded-full flex items-center justify-center w-[12%] transition hover:scale-125 active:scale-110`}
+                onClick={handleClick}
+                id="Pleased"
+              >
+                <Image
+                  src={feedback.feedbackURL3 ? feedback?.feedbackURL3 : ""}
+                  className="w-full"
+                  width={0}
+                  height={0}
+                  unoptimized
+                  alt=""
+                />
+              </button>
+            )}
+
+            {feedback?.feedbackURL4 && (
+              <button
+                className={`rounded-full flex items-center justify-center w-[12%] transition hover:scale-125 active:scale-110`}
+                onClick={handleClick}
+                id="Happy"
+              >
+                <Image
+                  src={feedback.feedbackURL4 ? feedback?.feedbackURL4 : ""}
+                  className="w-full"
+                  width={0}
+                  height={0}
+                  unoptimized
+                  alt=""
+                />
+              </button>
+            )}
+
+            {feedback?.feedbackURL5 && (
+              <button
+                className={`rounded-full flex items-center justify-center w-[12%] transition hover:scale-125 active:scale-110`}
+                onClick={handleClick}
+                id="Very Happy"
+              >
+                <Image
+                  src={feedback.feedbackURL5 ? feedback?.feedbackURL5 : ""}
+                  className="w-full"
+                  width={0}
+                  height={0}
+                  unoptimized
+                  alt=""
+                />
+              </button>
+            )}
+          </div>
+
           {/* Content  */}
-          {modalData.content1 && (
-            <div className="text-xl text-center mb-[6%] w-full break-words text-wrap">
-              {modalData.content1}
+          {content?.content1 && (
+            <div className="text-xl text-center w-full break-words text-wrap mt-[6%]">
+              {content.content1}
+            </div>
+          )}
+          {content?.content2 && (
+            <div className="text-base text-left w-full rounded-xl py-3 px-4 mt-[6%] border-2 border-gray-400 break-words text-wrap">
+              {content.content2}
             </div>
           )}
 
           {/* Input  */}
-          {modalData.content2 && (
-            <div className="py-3 px-4 text-base w-full rounded-xl mb-[6%] border-2 border-gray-400 text-left">
-              {modalData.content2}
-            </div>
+          {input?.input1 && (
+            <input
+              type="email"
+              value={value}
+              onChange={(e) => setValue(e.currentTarget.value)}
+              placeholder={input.input1}
+              className="py-3 px-4 text-base w-full rounded-xl mt-[6%] border-2 border-gray-400 text-left"
+            />
           )}
 
           {/* Button */}
-          <div className="flex w-full gap-4 text-base justify-between break-words text-wrap">
-            {modalData.button2 && (
+          <div className="flex justify-between w-full text-base gap-4 break-words text-wrap">
+            {button?.button2 && (
               <button
-                id={modalData.button2}
+                id={button.button2}
                 onClick={handleClick}
-                className="w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-400"
+                className="w-full py-3 mt-[6%] rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-400"
               >
-                {modalData.button2}
+                {button.button2}
               </button>
             )}
-            {modalData.buttonAnchor && (
+            {button?.buttonAnchor && (
               <a
-                href={modalData.buttonAnchorLink}
-                id={modalData.buttonAnchor}
+                href={button.buttonAnchorLink}
+                id={button.buttonAnchor}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleClick}
-                className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${modalData.color.background} ${modalData.color.borderColor} ${modalData.color.text}`}
+                className={`w-full py-3 mt-[6%] rounded-xl hover:scale-105 active:scale-95 transition text-center cursor-pointer ${color.background} ${color.borderColor} ${color.text}`}
               >
-                {modalData.buttonAnchor}
+                {button.buttonAnchor}
               </a>
             )}
           </div>

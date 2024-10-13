@@ -15,6 +15,7 @@ export interface ColorDataType {
   background: string;
   borderColor: string;
   text: string;
+  textBg: string;
 }
 
 export const sizesData: SizesDataType = {
@@ -33,7 +34,7 @@ export const positionData: PositionDataType[] = [
   },
   {
     position: "bottom-1/2 left-1/2 -translate-x-2/4 translate-y-2/4",
-    slide: "translate-y-[400%]",
+    slide: "translate-y-[500%]",
   },
   {
     position: "right-5 bottom-1/2 translate-y-2/4",
@@ -49,33 +50,39 @@ export const positionData: PositionDataType[] = [
 
 export const colorData: ColorDataType[] = [
   {
-    background: "bg-black border-2",
-    borderColor: "border-black",
+    background: "bg-black",
+    borderColor: "border-2 border-black",
     text: "text-white",
+    textBg: "text-black",
   },
   {
-    background: "bg-orange-600 border-2",
-    borderColor: "border-orange-600",
+    background: "bg-orange-600",
+    borderColor: "border-2 border-orange-600",
     text: "text-white",
+    textBg: "text-orange-600",
   },
   {
-    background: "bg-violet-600 border-2",
-    borderColor: "border-violet-600",
+    background: "bg-violet-600",
+    borderColor: "border-2 border-violet-600",
     text: "text-white",
+    textBg: "text-violet-600",
   },
   {
-    background: "bg-gray-600 border-2",
-    borderColor: "border-gray-600",
+    background: "bg-gray-600",
+    borderColor: "border-2 border-gray-600",
     text: "text-white",
+    textBg: "text-gray-600",
   },
   {
-    background: "bg-gray-300 border-2",
-    borderColor: "border-gray-400",
+    background: "bg-gray-300",
+    borderColor: "border-2 border-gray-400",
     text: "text-black",
+    textBg: "text-black",
   },
   {
-    background: "bg-white border-2",
-    borderColor: "border-gray-400",
+    background: "bg-white",
+    borderColor: "border-2 border-gray-400",
     text: "text-black",
+    textBg: "text-black",
   },
 ];

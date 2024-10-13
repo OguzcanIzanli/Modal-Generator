@@ -20,19 +20,47 @@ interface TemplateProps {
 }
 
 const Template2: React.FC<TemplateProps> = ({ modalData }) => {
+  const {
+    id,
+    title,
+    imageUrl,
+    content,
+    button,
+    link,
+    input,
+    sizes,
+    position,
+    color,
+    afterSeconds,
+    afterScroll,
+    trafficSource,
+    webhookUrl,
+  } = modalData;
+
   const isModalGeneratorWebsite =
     process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
 
   const [isModalOpen, setIsModalOpen] = useState(true);
+  const [value, setValue] = useState<{ name: string; email: string }>({
+    name: "",
+    email: "",
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   // Scroll
   const isModalTriggered = useScrollModal({
-    percentage: Number(modalData.afterScroll),
+    percentage: Number(afterScroll),
   });
 
   // Traffic source
   const isTrafficSource = useTrafficSource({
-    domain: modalData.trafficSource,
+    domain: trafficSource,
   });
 
   // Slide Animation
@@ -47,7 +75,7 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
     ) {
       const timer = setTimeout(() => {
         setSlide(true);
-      }, Number(modalData.afterSeconds + 500));
+      }, Number(afterSeconds + 500));
 
       return () => clearTimeout(timer);
     }
@@ -56,21 +84,32 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
     isTrafficSource,
     isModalOpen,
     isModalGeneratorWebsite,
-    modalData.afterSeconds,
+    afterSeconds,
   ]);
 
   // Webhook - VARIABLE
-  const webhookData = {
-    userClick: "",
-  };
+  interface WebhookData {
+    userClick?: string;
+    email?: string;
+    name?: string;
+  }
 
   const { sendWebhookData } = useWebhook();
+  const webhookData: WebhookData = {};
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     const { id } = e.currentTarget;
     if (!isModalGeneratorWebsite) {
       webhookData.userClick = id; // VARIABLE
-      const webhookUrl = modalData.webhookUrl;
+
+      if (input) {
+        webhookData.email = value.email || "Not written.";
+        webhookData.name = value.name || "Not written.";
+      } else {
+        delete webhookData?.email;
+        delete webhookData?.name;
+      }
+
       sendWebhookData(webhookData, webhookUrl);
       setIsModalOpen(false);
     }
@@ -80,62 +119,106 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalTriggered && isTrafficSource && isModalOpen && (
         <div
-          className={`flex rounded-xl text-black font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white transition-transform duration-1000 ease-out  ${
-            modalData.sizes
-          } ${
-            modalData.id
+          className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
+            id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
-          } ${
-            !isModalGeneratorWebsite && (slide ? "" : modalData.position.slide)
-          }`}
+          } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
           {/* Image  */}
-          <Image
-            src={modalData.imageUrl ? modalData?.imageUrl : ""}
-            className="w-full rounded-t-xl mb-[6%]"
-            width={0}
-            height={0}
-            unoptimized
-            alt=""
-          />
-
-          {/* Title  */}
-          {modalData.title && (
-            <div className="text-3xl font-bold text-center mb-[6%] w-full break-words text-wrap px-10">
-              {modalData.title}
-            </div>
+          {imageUrl && (
+            <Image
+              src={imageUrl}
+              className="w-full rounded-t-xl"
+              width={0}
+              height={0}
+              unoptimized
+              alt=""
+            />
           )}
 
-          {/* Content  */}
-          {modalData.content1 && (
-            <div className="text-xl text-center mb-[6%] w-full break-words text-wrap px-10">
-              {modalData.content1}
-            </div>
-          )}
-
-          {/* Button */}
-          <div className="flex flex-col w-full gap-4 text-base justify-between break-words text-wrap pb-10 px-10">
-            {modalData.buttonAnchor && (
-              <a
-                href={modalData.buttonAnchorLink}
-                id={modalData.buttonAnchor}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={handleClick}
-                className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${modalData.color.background} ${modalData.color.borderColor} ${modalData.color.text}`}
-              >
-                {modalData.buttonAnchor}
-              </a>
+          <div className="w-full p-10">
+            {/* Title  */}
+            {title && (
+              <div className="text-3xl font-bold text-center w-full break-words text-wrap">
+                {title}
+              </div>
             )}
-            {modalData.button2 && (
-              <button
-                id={modalData.button2}
-                onClick={handleClick}
-                className="w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-400"
-              >
-                {modalData.button2}
-              </button>
+
+            {/* Content  */}
+            {content?.content1 && (
+              <div className="text-xl text-center w-full break-words text-wrap mt-[6%]">
+                {content.content1}
+              </div>
+            )}
+
+            {/* Input  */}
+            <div className="w-full">
+              {input?.input1 && (
+                <input
+                  type="text"
+                  value={value.name}
+                  name="name"
+                  onChange={handleInputChange}
+                  placeholder={input.input1}
+                  className="py-3 px-4 text-base w-full rounded-xl mt-[6%] border-2 border-gray-400 text-left"
+                />
+              )}
+              {input?.input2 && (
+                <input
+                  type="email"
+                  value={value.email}
+                  name="email"
+                  onChange={handleInputChange}
+                  placeholder={input.input2}
+                  className="py-3 px-4 text-base w-full rounded-xl mt-[6%] border-2 border-gray-400 text-left"
+                />
+              )}
+            </div>
+
+            {/* Button */}
+            {(button?.buttonAnchor || button?.button2) && (
+              <div className="flex flex-col justify-between gap-4 w-full text-base break-words text-wrap mt-[6%]">
+                {button?.buttonAnchor && (
+                  <a
+                    href={button.buttonAnchorLink}
+                    id={button.buttonAnchor}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleClick}
+                    className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${color.background} ${color.borderColor} ${color.text}`}
+                  >
+                    {button.buttonAnchor}
+                  </a>
+                )}
+                {button?.button2 && (
+                  <button
+                    id={button.button2}
+                    onClick={handleClick}
+                    className="w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-400"
+                  >
+                    {button.button2}
+                  </button>
+                )}
+              </div>
+            )}
+
+            {/* Link */}
+            {(link?.link1 || link?.link2) && (
+              <div className="flex flex-col justify-between gap-4 w-full text-base break-words text-wrap mt-[6%]">
+                {link?.link1 && (
+                  <a
+                    href={link.linkURL1}
+                    id={link.link1}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleClick}
+                    className="text-black text-sm inline-block"
+                  >
+                    {link.link1}
+                  </a>
+                )}
+              </div>
             )}
           </div>
 

@@ -3,7 +3,7 @@ const path = require("path");
 const webpack = require("webpack");
 
 module.exports = (env) => {
-  const entryFile = `./src/app/components/modal/Templates/Template${env.entry}.tsx`;
+  const entryFile = `./src/app/components/modal/Templates/${env.entry}.tsx`;
 
   return {
     target: "web",
@@ -11,7 +11,7 @@ module.exports = (env) => {
     entry: path.resolve(__dirname, entryFile),
     entry: entryFile,
     output: {
-      filename: `template${env.entry}.js`,
+      filename: `${env.entry}.js`,
       path: path.resolve(__dirname, "public/dist"),
       umdNamedDefine: true,
       libraryTarget: "umd",

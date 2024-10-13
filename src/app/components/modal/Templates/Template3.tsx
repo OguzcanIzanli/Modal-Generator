@@ -20,6 +20,21 @@ interface TemplateProps {
 }
 
 const Template3: React.FC<TemplateProps> = ({ modalData }) => {
+  const {
+    id,
+    title,
+    content,
+    button,
+    radio,
+    sizes,
+    position,
+    color,
+    afterSeconds,
+    afterScroll,
+    trafficSource,
+    webhookUrl,
+  } = modalData;
+
   const isModalGeneratorWebsite =
     process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
 
@@ -28,12 +43,12 @@ const Template3: React.FC<TemplateProps> = ({ modalData }) => {
 
   // Scroll
   const isModalTriggered = useScrollModal({
-    percentage: Number(modalData.afterScroll),
+    percentage: Number(afterScroll),
   });
 
   // Traffic source
   const isTrafficSource = useTrafficSource({
-    domain: modalData.trafficSource,
+    domain: trafficSource,
   });
 
   // Slide Animation
@@ -48,7 +63,7 @@ const Template3: React.FC<TemplateProps> = ({ modalData }) => {
     ) {
       const timer = setTimeout(() => {
         setSlide(true);
-      }, Number(modalData.afterSeconds + 500));
+      }, Number(afterSeconds + 500));
 
       return () => clearTimeout(timer);
     }
@@ -57,7 +72,7 @@ const Template3: React.FC<TemplateProps> = ({ modalData }) => {
     isTrafficSource,
     isModalOpen,
     isModalGeneratorWebsite,
-    modalData.afterSeconds,
+    afterSeconds,
   ]);
 
   // Webhook - VARIABLE
@@ -73,7 +88,6 @@ const Template3: React.FC<TemplateProps> = ({ modalData }) => {
     if (!isModalGeneratorWebsite) {
       webhookData.userClick = id; // VARIABLE
       webhookData.radioSelection = value ? value : "Not selected.";
-      const webhookUrl = modalData.webhookUrl;
       sendWebhookData(webhookData, webhookUrl);
       setIsModalOpen(false);
     }
@@ -83,126 +97,124 @@ const Template3: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalTriggered && isTrafficSource && isModalOpen && (
         <div
-          className={`flex rounded-xl text-black font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white p-10 transition-transform duration-1000 ease-out  ${
-            modalData.sizes
-          } ${
-            modalData.id
+          className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] p-10 bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
+            id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
-          } ${
-            !isModalGeneratorWebsite && (slide ? "" : modalData.position.slide)
-          }`}
+          } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
-          <div className="text-xl mb-3">PLANS</div>
+          <div className="text-xl">PLANS</div>
 
           {/* Title  */}
-          {modalData.title && (
-            <div className="text-3xl font-bold text-center mb-[6%] w-full break-words text-wrap">
-              {modalData.title}
+          {title && (
+            <div className="text-3xl font-bold text-center w-full break-words text-wrap mt-3">
+              {title}
             </div>
           )}
 
           {/* Content  */}
-          {modalData.content1 && (
-            <div className="text-xl text-center mb-[6%] w-full break-words text-wrap">
-              {modalData.content1}
+          {content?.content1 && (
+            <div className="text-xl text-center w-full break-words text-wrap mt-[6%]">
+              {content.content1}
             </div>
           )}
 
           {/* Radio */}
           <div className="flex flex-col">
-            <div className="flex gap-2 mb-6">
-              <input
-                type="radio"
-                id={modalData.label1}
-                value={modalData.label1}
-                onClick={(e) => setValue(e.currentTarget.value)}
-                className="relative appearance-none shrink-0 mt-1 w-5 h-5 border-2 border-gray-400 rounded-full cursor-pointer"
-              />
-              {value === modalData.label1 && (
-                <div
-                  className={`absolute mt-1 w-5 h-5 rounded-full border-[7px] ${modalData.color.borderColor}`}
+            {radio?.label1 && (
+              <div className="flex gap-2 mt-6">
+                <input
+                  type="radio"
+                  id={radio.label1}
+                  value={radio.label1}
+                  onClick={(e) => setValue(e.currentTarget.value)}
+                  className="relative appearance-none shrink-0 mt-1 w-5 h-5 border-2 border-gray-400 rounded-full cursor-pointer"
                 />
-              )}
-              <label
-                className="flex flex-col cursor-pointer"
-                htmlFor={modalData.label1}
-              >
-                <span className="text-lg">{modalData.label1}</span>
-                <span className="text-sm text-gray-400">
-                  {modalData.label1b}
-                </span>
-              </label>
-            </div>
-            <div className="flex gap-2 mb-6">
-              <input
-                type="radio"
-                id={modalData.label2}
-                value={modalData.label2}
-                onClick={(e) => setValue(e.currentTarget.value)}
-                className="relative appearance-none shrink-0 mt-1 w-5 h-5 border-2 border-gray-400 rounded-full cursor-pointer"
-              />
-              {value === modalData.label2 && (
-                <div
-                  className={`absolute mt-1 w-5 h-5 rounded-full border-[7px] ${modalData.color.borderColor}`}
+                {value === radio.label1 && (
+                  <div
+                    className={`absolute mt-1 w-5 h-5 rounded-full border-[7px] ${color.borderColor}`}
+                  />
+                )}
+                <label
+                  className="flex flex-col cursor-pointer"
+                  htmlFor={radio.label1}
+                >
+                  <span className="text-lg">{radio.label1}</span>
+                  <span className="text-sm text-gray-400">{radio.label1b}</span>
+                </label>
+              </div>
+            )}
+
+            {radio?.label2 && (
+              <div className="flex gap-2 mt-6">
+                <input
+                  type="radio"
+                  id={radio.label2}
+                  value={radio.label2}
+                  onClick={(e) => setValue(e.currentTarget.value)}
+                  className="relative appearance-none shrink-0 mt-1 w-5 h-5 border-2 border-gray-400 rounded-full cursor-pointer"
                 />
-              )}
-              <label
-                className="flex flex-col cursor-pointer"
-                htmlFor={modalData.label2}
-              >
-                <span className="text-lg">{modalData.label2}</span>
-                <span className="text-sm text-gray-400">
-                  {modalData.label2b}
-                </span>
-              </label>
-            </div>
-            <div className="flex gap-2 mb-6">
-              <input
-                type="radio"
-                id={modalData.label3}
-                value={modalData.label3}
-                onClick={(e) => setValue(e.currentTarget.value)}
-                className="relative appearance-none shrink-0 mt-1 w-5 h-5 border-2 border-gray-400 rounded-full cursor-pointer"
-              />
-              {value === modalData.label3 && (
-                <div
-                  className={`absolute mt-1 w-5 h-5 rounded-full border-[7px] ${modalData.color.borderColor}`}
+                {value === radio.label2 && (
+                  <div
+                    className={`absolute mt-1 w-5 h-5 rounded-full border-[7px] ${color.borderColor}`}
+                  />
+                )}
+                <label
+                  className="flex flex-col cursor-pointer"
+                  htmlFor={radio.label2}
+                >
+                  <span className="text-lg">{radio.label2}</span>
+                  <span className="text-sm text-gray-400">{radio.label2b}</span>
+                </label>
+              </div>
+            )}
+
+            {radio?.label3 && (
+              <div className="flex gap-2 mt-6">
+                <input
+                  type="radio"
+                  id={radio.label3}
+                  value={radio.label3}
+                  onClick={(e) => setValue(e.currentTarget.value)}
+                  className="relative appearance-none shrink-0 mt-1 w-5 h-5 border-2 border-gray-400 rounded-full cursor-pointer"
                 />
-              )}
-              <label
-                className="flex flex-col cursor-pointer"
-                htmlFor={modalData.label3}
-              >
-                <span className="text-lg">{modalData.label3}</span>
-                <span className="text-sm text-gray-400">
-                  {modalData.label3b}
-                </span>
-              </label>
-            </div>
+                {value === radio.label3 && (
+                  <div
+                    className={`absolute mt-1 w-5 h-5 rounded-full border-[7px] ${color.borderColor}`}
+                  />
+                )}
+                <label
+                  className="flex flex-col cursor-pointer"
+                  htmlFor={radio.label3}
+                >
+                  <span className="text-lg">{radio.label3}</span>
+                  <span className="text-sm text-gray-400">{radio.label3b}</span>
+                </label>
+              </div>
+            )}
           </div>
 
           {/* Button */}
-          <div className="flex w-full gap-4 text-base justify-between break-words text-wrap">
-            {modalData.button2 && (
+          <div className="flex justify-between w-full text-base gap-4 break-words text-wrap">
+            {button?.button2 && (
               <button
-                id={modalData.button2}
+                id={button.button2}
                 onClick={handleClick}
-                className="w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-400"
+                className="w-full py-3 mt-[6%] rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-400"
               >
-                {modalData.button2}
+                {button.button2}
               </button>
             )}
-            {modalData.buttonAnchor && (
+            {button?.buttonAnchor && (
               <a
-                href={modalData.buttonAnchorLink}
-                id={modalData.buttonAnchor}
+                href={button.buttonAnchorLink}
+                id={button.buttonAnchor}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleClick}
-                className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${modalData.color.background} ${modalData.color.borderColor} ${modalData.color.text}`}
+                className={`w-full py-3 mt-[6%] rounded-xl hover:scale-105 active:scale-95 transition text-center ${color.background} ${color.borderColor} ${color.text}`}
               >
-                {modalData.buttonAnchor}
+                {button.buttonAnchor}
               </a>
             )}
           </div>

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
+import Image from "next/image";
 
 // Icon
 import IconClose from "../../ui/icons/IconClose";
@@ -19,21 +20,36 @@ interface TemplateProps {
 }
 
 const Template8: React.FC<TemplateProps> = ({ modalData }) => {
+  const {
+    id,
+    title,
+    imageUrl,
+    content,
+    button,
+    input,
+    sizes,
+    position,
+    color,
+    afterSeconds,
+    afterScroll,
+    trafficSource,
+    webhookUrl,
+  } = modalData;
+
   const isModalGeneratorWebsite =
     process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
 
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [value, setValue] = useState<string>("");
-  const [checked, setChecked] = useState<boolean>(false);
 
   // Scroll
   const isModalTriggered = useScrollModal({
-    percentage: Number(modalData.afterScroll),
+    percentage: Number(afterScroll),
   });
 
   // Traffic source
   const isTrafficSource = useTrafficSource({
-    domain: modalData.trafficSource,
+    domain: trafficSource,
   });
 
   // Slide Animation
@@ -48,7 +64,7 @@ const Template8: React.FC<TemplateProps> = ({ modalData }) => {
     ) {
       const timer = setTimeout(() => {
         setSlide(true);
-      }, Number(modalData.afterSeconds + 500));
+      }, Number(afterSeconds + 500));
 
       return () => clearTimeout(timer);
     }
@@ -57,7 +73,7 @@ const Template8: React.FC<TemplateProps> = ({ modalData }) => {
     isTrafficSource,
     isModalOpen,
     isModalGeneratorWebsite,
-    modalData.afterSeconds,
+    afterSeconds,
   ]);
 
   // Webhook - VARIABLE
@@ -73,7 +89,6 @@ const Template8: React.FC<TemplateProps> = ({ modalData }) => {
     if (!isModalGeneratorWebsite) {
       webhookData.userClick = id; // VARIABLE
       webhookData.email = value ? value : "Not written.";
-      const webhookUrl = modalData.webhookUrl;
       sendWebhookData(webhookData, webhookUrl);
       setIsModalOpen(false);
     }
@@ -83,104 +98,79 @@ const Template8: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalTriggered && isTrafficSource && isModalOpen && (
         <div
-          className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col p-10 transition-transform duration-1000 ease-out ${
-            modalData.color.background
-          } ${modalData.color.text} ${modalData.sizes} ${
-            modalData.id
+          className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] p-10 bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
+            id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
-          } ${
-            !isModalGeneratorWebsite && (slide ? "" : modalData.position.slide)
-          }`}
+          } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
+          {/* Image  */}
+          {imageUrl && (
+            <Image
+              src={imageUrl}
+              className="w-1/2 rounded-t-xl"
+              width={0}
+              height={0}
+              unoptimized
+              alt=""
+            />
+          )}
+
           {/* Title  */}
-          {modalData.title && (
-            <div className="text-3xl font-bold text-center mb-[6%] w-full break-words text-wrap">
-              {modalData.title}
+          {title && (
+            <div className="text-3xl font-bold text-center w-full break-words text-wrap mt-[8%]">
+              {title}
             </div>
           )}
 
           {/* Content  */}
-          {modalData.content1 && (
-            <div className="text-xl text-center mb-[6%] w-full break-words text-wrap">
-              {modalData.content1}
+          {content?.content1 && (
+            <div className="text-xl text-center w-full break-words text-wrap mt-[6%]">
+              {content.content1}
             </div>
           )}
 
           {/* Input  */}
-          {modalData.input1 && (
+          {input?.input1 && (
             <input
-              type="email"
+              type="text"
               value={value}
+              name="name"
               onChange={(e) => setValue(e.currentTarget.value)}
-              placeholder={modalData.input1}
-              className={`py-3 px-4 text-base w-[280px] rounded-xl mb-[4%] text-left border-2 border-gray-400 ${modalData.color.background} ${modalData.color.text}`}
+              placeholder={input.input1}
+              className="py-3 px-4 text-base w-full rounded-xl mt-[6%] border-2 border-gray-400 text-left"
             />
           )}
 
-          {/* Checkbox */}
-          {modalData.checkbox1 && (
-            <div className="flex items-center mb-[4%] w-[280px]">
-              <label
-                className="flex items-center cursor-pointer relative"
-                htmlFor="checkbox1"
-              >
-                <input
-                  id="checkbox1"
-                  type="checkbox"
-                  checked={checked}
-                  onChange={() => setChecked(!checked)}
-                  className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded-full shadow border-gray-400 border-2"
-                />
-                <span
-                  className={`absolute opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${modalData.color.text}`}
+          {/* Button */}
+          {(button?.buttonAnchor || button?.buttonAnchor2) && (
+            <div className="flex flex-col justify-between gap-4 w-full text-base break-words text-wrap mt-[6%]">
+              {button?.buttonAnchor && (
+                <a
+                  href={button.buttonAnchorLink}
+                  id={button.buttonAnchor}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleClick}
+                  className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${color.background} ${color.borderColor} ${color.text}`}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-3.5 w-3.5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    stroke="currentColor"
-                    strokeWidth="1"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    ></path>
-                  </svg>
-                </span>
-              </label>
-              <label
-                className="cursor-pointer ml-2 text-sm"
-                htmlFor="checkbox1"
-              >
-                {modalData.checkbox1}
-              </label>
+                  {button.buttonAnchor}
+                </a>
+              )}
+              {button?.buttonAnchor2 && (
+                <a
+                  href={button.buttonAnchorLink}
+                  id={button.buttonAnchor}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleClick}
+                  className="text-black text-sm inline-block"
+                >
+                  {button.buttonAnchor2}
+                </a>
+              )}
             </div>
           )}
-
-          {/* Button */}
-          <div className="flex w-[280px] gap-4 text-base justify-end break-words text-wrap">
-            {modalData.buttonAnchor && (
-              <a
-                href={modalData.buttonAnchorLink}
-                id={modalData.buttonAnchor}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={handleClick}
-                className={`w-1/2 py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center bg-white text-black border-2 ${
-                  modalData.color.borderColor
-                } ${
-                  checked
-                    ? ""
-                    : "pointer-events-none cursor-default opacity-50 scale-90"
-                }`}
-              >
-                {modalData.buttonAnchor}
-              </a>
-            )}
-          </div>
 
           {/* Close Button  */}
           <button

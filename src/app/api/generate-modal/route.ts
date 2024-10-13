@@ -7,76 +7,179 @@ export async function POST(request: Request) {
     const userConfig = await request.json();
     console.log("Received userConfig:", userConfig); // modal data from embed code generator
 
+    const {
+      entry,
+      title,
+      logoUrl,
+      imageUrl,
+      content,
+      button,
+      link,
+      input,
+      radio,
+      feedback,
+      sizes,
+      color,
+      position,
+      device,
+      afterSeconds,
+      afterScroll,
+      trafficSource,
+      webhookUrl,
+    } = userConfig;
+
     const embedCode = `<script type="text/javascript" src="${
       process.env.NEXT_PUBLIC_API_URL
-    }/dist/template${userConfig.entry}.js"></script>
+    }/dist/${entry}.js"></script>
     <script>
     window.MyModal.init({
-      ${userConfig.title ? `title: "${userConfig.title}",` : ""}
-      ${userConfig.logoUrl ? `logoUrl: "${userConfig.logoUrl}",` : ""}
-      ${userConfig.imageUrl ? `imageUrl: "${userConfig.imageUrl}",` : ""}
-      ${userConfig.content1 ? `content1: "${userConfig.content1}",` : ""}
-      ${userConfig.content2 ? `content2: "${userConfig.content2}",` : ""}
+      ${title ? `title: "${title}",` : ""}
+      ${logoUrl ? `logoUrl: "${logoUrl}",` : ""}
+      ${imageUrl ? `imageUrl: "${imageUrl}",` : ""}
       ${
-        userConfig.buttonAnchor
-          ? `buttonAnchor: "${userConfig.buttonAnchor}",`
+        content.content1 || content.content2
+          ? `content: {${
+              content.content1 ? `content1: "${content.content1}"` : ""
+            } ${content.content2 ? `, content2: "${content.content2}"` : ""}},`
           : ""
       }
       ${
-        userConfig.buttonAnchorLink
-          ? `buttonAnchorLink: "${userConfig.buttonAnchorLink}",`
+        button.buttonAnchor ||
+        button.buttonAnchor2 ||
+        button.buttonAnchor3 ||
+        button.button2
+          ? `button: {
+        ${button.buttonAnchor ? `buttonAnchor: "${button.buttonAnchor}"` : ""}
+        ${
+          button.buttonAnchorLink
+            ? `, buttonAnchorLink: "${button.buttonAnchorLink}"`
+            : ""
+        }
+        ${
+          button.buttonAnchor2
+            ? `, buttonAnchor2: "${button.buttonAnchor2}"`
+            : ""
+        }
+        ${
+          button.buttonAnchorLink2
+            ? `, buttonAnchorLink2: "${button.buttonAnchorLink2}"`
+            : ""
+        }
+        ${
+          button.buttonAnchor3
+            ? `, buttonAnchor3: "${button.buttonAnchor3}"`
+            : ""
+        }
+        ${
+          button.buttonAnchorLink3
+            ? `, buttonAnchorLink3: "${button.buttonAnchorLink3}"`
+            : ""
+        } 
+        ${button.button2 ? `, button2: "${button.button2}"` : ""}},`
           : ""
       }
-           ${
-             userConfig.buttonAnchor2
-               ? `buttonAnchor2: "${userConfig.buttonAnchor2}",`
-               : ""
-           }
       ${
-        userConfig.buttonAnchorLink2
-          ? `buttonAnchorLink2: "${userConfig.buttonAnchorLink2}",`
+        link.link1 || link.link2
+          ? `link: {
+          ${link.link1 ? `link1: "${link.link1}"` : ""} 
+          ${link.linkURL1 ? `, link2: "${link.linkURL1}"` : ""}
+          ${link.link2 ? `link1: "${link.link2}"` : ""} 
+          ${link.linkURL2 ? `, link2: "${link.linkURL2}"` : ""}},`
           : ""
       }
-                 ${
-                   userConfig.buttonAnchor3
-                     ? `buttonAnchor3: "${userConfig.buttonAnchor3}",`
-                     : ""
-                 }
       ${
-        userConfig.buttonAnchorLink3
-          ? `buttonAnchorLink3: "${userConfig.buttonAnchorLink3}",`
+        input.input1 || input.input2
+          ? `input: {${input.input1 ? `input1: "${input.input1}"` : ""} ${
+              input.input2 ? `, input2: "${input.input2}"` : ""
+            }},`
           : ""
       }
-      ${userConfig.button2 ? `button2: "${userConfig.button2}",` : ""}
-      ${userConfig.input1 ? `input1: "${userConfig.input1}",` : ""}
-      ${userConfig.input2 ? `input2: "${userConfig.input2}",` : ""}
       ${userConfig.checkbox1 ? `checkbox1: "${userConfig.checkbox1}",` : ""}
-      ${userConfig.label1 ? `label1: "${userConfig.label1}",` : ""}
-      ${userConfig.label1b ? `label1b: "${userConfig.label1b}",` : ""}
-      ${userConfig.label2 ? `label2: "${userConfig.label2}",` : ""}
-      ${userConfig.label2b ? `label2b: "${userConfig.label2b}",` : ""}
-      ${userConfig.label3 ? `label3: "${userConfig.label3}",` : ""}
-      ${userConfig.label3b ? `label3b: "${userConfig.label3b}",` : ""}
-      sizes: "${userConfig.sizes}",
-        position: { position: "${userConfig.position.position}", slide: "${
-      userConfig.position.slide
+      ${
+        radio.label1 || radio.label2 || radio.label3
+          ? `radio: {
+        ${radio.label1 ? `label1: "${radio.label1}"` : ""}
+        ${radio.label1b ? `, label1b: "${radio.label1b}"` : ""}
+        ${radio.label2 ? `, label2: "${radio.label2}"` : ""}
+        ${radio.label2b ? `, label2b: "${radio.label2b}"` : ""}
+        ${radio.label3 ? `, label3: "${radio.label3}"` : ""}
+        ${radio.label3b ? `, label3b: "${radio.label3b}"` : ""}},`
+          : ""
+      }
+      ${
+        feedback.feedbackURL1 ||
+        feedback.feedbackURL2 ||
+        feedback.feedbackURL3 ||
+        feedback.feedbackURL4 ||
+        feedback.feedbackURL5
+          ? `feedback: {
+        ${
+          feedback.feedbackURL1
+            ? `feedbackURL1: "${feedback.feedbackURL1}"`
+            : ""
+        }
+        ${
+          feedback.feedbackURL1Label
+            ? `, feedbackURL1Label: "${feedback.feedbackURL1Label}"`
+            : ""
+        }
+        ${
+          feedback.feedbackURL2
+            ? `, feedbackURL2: "${feedback.feedbackURL2}"`
+            : ""
+        }
+        ${
+          feedback.feedbackURL2Label
+            ? `, feedbackURL2Label: "${feedback.feedbackURL2Label}"`
+            : ""
+        }
+        ${
+          feedback.feedbackURL3
+            ? `, feedbackURL3: "${feedback.feedbackURL3}"`
+            : ""
+        }
+        ${
+          feedback.feedbackURL3Label
+            ? `, feedbackURL3Label: "${feedback.feedbackURL3Label}"`
+            : ""
+        }
+         ${
+           feedback.feedbackURL4
+             ? `, feedbackURL4: "${feedback.feedbackURL4}"`
+             : ""
+         }
+        ${
+          feedback.feedbackURL4Label
+            ? `, feedbackURL4Label: "${feedback.feedbackURL4Label}"`
+            : ""
+        }
+        ${
+          feedback.feedbackURL5
+            ? `, feedbackURL5: "${feedback.feedbackURL5}"`
+            : ""
+        }
+        ${
+          feedback.feedbackURL5Label
+            ? `, feedbackURL5Label: "${feedback.feedbackURL5Label}"`
+            : ""
+        }
+        },`
+          : ""
+      }
+      sizes: "${sizes}",
+      position: { position: "${position.position}", slide: "${
+      position.slide
     }" },
-      color: { background: "${userConfig.color.background}", borderColor: "${
-      userConfig.color.borderColor
-    }", text: "${userConfig.color.text}" },
-      ${userConfig.device ? `device: "${userConfig.device}",` : ""}
-      ${
-        userConfig.afterSeconds
-          ? `afterSeconds: ${userConfig.afterSeconds},`
-          : `afterSeconds: 0,`
-      }
-      ${
-        userConfig.afterScroll
-          ? `afterScroll: ${userConfig.afterScroll},`
-          : `afterScroll: 0,`
-      }
-      trafficSource: "${userConfig.trafficSource}",
-      ${userConfig.webhookUrl ? `webhookUrl: "${userConfig.webhookUrl}",` : ""}
+      color: { background: "${color.background}", borderColor: "${
+      color.borderColor
+    }", text: "${color.text}", ${
+      color.textBg ? `textBg: "${color.textBg}",` : ""
+    } },
+      ${device ? `device: "${device}",` : ""}
+      ${afterSeconds ? `afterSeconds: ${afterSeconds},` : `afterSeconds: 0,`}
+      ${afterScroll ? `afterScroll: ${afterScroll},` : `afterScroll: 0,`}
+      trafficSource: "${trafficSource}",
+      ${webhookUrl ? `webhookUrl: "${webhookUrl}",` : ""}
     });
     </script>`
       .replace(/\s\s+/g, " ")

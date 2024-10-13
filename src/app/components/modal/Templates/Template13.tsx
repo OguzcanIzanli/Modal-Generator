@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
-import Image from "next/image";
 
 // Icon
 import IconClose from "../../ui/icons/IconClose";
@@ -14,12 +13,27 @@ import { ModalDataType } from "@/app/data/modalData";
 import useScrollModal from "../Hooks/useScrollModal";
 import useTrafficSource from "../Hooks/useTrafficSource";
 import { useWebhook } from "../Hooks/useWebhook";
+import IconBell from "../Icons/IconBell";
 
 interface TemplateProps {
   modalData: ModalDataType;
 }
 
 const Template13: React.FC<TemplateProps> = ({ modalData }) => {
+  const {
+    id,
+    title,
+    content,
+    button,
+    sizes,
+    position,
+    color,
+    afterSeconds,
+    afterScroll,
+    trafficSource,
+    webhookUrl,
+  } = modalData;
+
   const isModalGeneratorWebsite =
     process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
 
@@ -27,12 +41,12 @@ const Template13: React.FC<TemplateProps> = ({ modalData }) => {
 
   // Scroll
   const isModalTriggered = useScrollModal({
-    percentage: Number(modalData.afterScroll),
+    percentage: Number(afterScroll),
   });
 
   // Traffic source
   const isTrafficSource = useTrafficSource({
-    domain: modalData.trafficSource,
+    domain: trafficSource,
   });
 
   // Slide Animation
@@ -47,7 +61,7 @@ const Template13: React.FC<TemplateProps> = ({ modalData }) => {
     ) {
       const timer = setTimeout(() => {
         setSlide(true);
-      }, Number(modalData.afterSeconds + 500));
+      }, Number(afterSeconds + 500));
 
       return () => clearTimeout(timer);
     }
@@ -56,7 +70,7 @@ const Template13: React.FC<TemplateProps> = ({ modalData }) => {
     isTrafficSource,
     isModalOpen,
     isModalGeneratorWebsite,
-    modalData.afterSeconds,
+    afterSeconds,
   ]);
 
   // Webhook - VARIABLE
@@ -70,7 +84,6 @@ const Template13: React.FC<TemplateProps> = ({ modalData }) => {
     const { id } = e.currentTarget;
     if (!isModalGeneratorWebsite) {
       webhookData.userClick = id; // VARIABLE
-      const webhookUrl = modalData.webhookUrl;
       sendWebhookData(webhookData, webhookUrl);
       setIsModalOpen(false);
     }
@@ -80,73 +93,81 @@ const Template13: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalTriggered && isTrafficSource && isModalOpen && (
         <div
-          className={`rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] transition-transform duration-1000 ease-out ${
-            modalData.color.text
-          } ${modalData.sizes} ${
-            modalData.id
+          className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] p-10 bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
+            id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
-          } ${
-            !isModalGeneratorWebsite && (slide ? "" : modalData.position.slide)
-          }`}
+          } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
-          <div
-            className={`p-10 flex flex-col items-center rounded-t-xl border-none opacity-90 ${modalData.color.background}`}
-          >
-            <div
-              className={`rounded-full flex items-center justify-center w-[40%] aspect-[1/1] mb-[8%] ${modalData.color.background} ${modalData.color.borderColor}`}
-            >
-              <Image
-                src={modalData.logoUrl ? modalData?.logoUrl : ""}
-                className="w-full"
-                width={0}
-                height={0}
-                unoptimized
-                alt=""
-              />
-            </div>
-
-            {/* Title  */}
-            {modalData.title && (
-              <div className="text-3xl font-bold text-center mb-[6%] w-full break-words text-wrap">
-                {modalData.title}
-              </div>
-            )}
-
-            {/* Content  */}
-            {modalData.content1 && (
-              <div className="text-xl text-center mb-[6%] w-full break-words text-wrap">
-                {modalData.content1}
-              </div>
-            )}
-
-            {/* Close Button  */}
-            <button
-              id="Exit button"
-              onClick={(e) => {
-                handleClick(e);
-              }}
-              className="absolute text-3xl top-6 right-6 border-2 text-gray-400 border-gray-400 rounded-full hover:scale-105 active:scale-95"
-            >
-              <IconClose />
-            </button>
+          {/* Logo  */}
+          <div className="flex items-center justify-center w-[10%] aspect-[1/1]">
+            <IconBell className={`w-full h-full ${color.textBg}`} />
           </div>
+
+          {/* Title  */}
+          {title && (
+            <div className="text-3xl font-bold text-center w-full break-words text-wrap mt-[8%]">
+              {title}
+            </div>
+          )}
+
+          {/* Content  */}
+          {content?.content1 && (
+            <div className="text-xl text-center w-full break-words text-wrap mt-[6%]">
+              {content.content1}
+            </div>
+          )}
+          {content?.content2 && (
+            <div className="text-base text-left w-full rounded-xl py-3 px-4 mt-[6%] border-2 border-gray-400 break-words text-wrap">
+              {content.content2}
+            </div>
+          )}
 
           {/* Button */}
-          <div className="flex w-full gap-4 text-base justify-between break-words text-wrap">
-            {modalData.buttonAnchor && (
-              <a
-                href={modalData.buttonAnchorLink}
-                id={modalData.buttonAnchor}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={handleClick}
-                className={`w-full py-3 rounded-b-xl transition text-center border-none ${modalData.color.background} ${modalData.color.text}`}
-              >
-                {modalData.buttonAnchor}
-              </a>
-            )}
-          </div>
+          {(button?.buttonAnchor ||
+            button?.buttonAnchor2 ||
+            button?.buttonAnchor3) && (
+            <div className="flex flex-col justify-between gap-4 w-full text-base break-words text-wrap mt-[6%]">
+              {button?.buttonAnchor && (
+                <button
+                  id={button.buttonAnchor}
+                  onClick={handleClick}
+                  className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center text-black ${color.borderColor}`}
+                >
+                  {button.buttonAnchor}
+                </button>
+              )}
+              {button?.buttonAnchor2 && (
+                <button
+                  id={button.buttonAnchor2}
+                  onClick={handleClick}
+                  className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center text-black ${color.borderColor}`}
+                >
+                  {button.buttonAnchor2}
+                </button>
+              )}
+              {button?.buttonAnchor3 && (
+                <button
+                  id={button.buttonAnchor3}
+                  onClick={handleClick}
+                  className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center text-black`}
+                >
+                  {button.buttonAnchor3}
+                </button>
+              )}
+            </div>
+          )}
+
+          {/* Close Button  */}
+          <button
+            id="Exit button"
+            onClick={(e) => {
+              handleClick(e);
+            }}
+            className="absolute text-3xl top-6 right-6 border-2 text-gray-400 border-gray-400 rounded-full hover:scale-105 active:scale-95"
+          >
+            <IconClose />
+          </button>
         </div>
       )}
     </>

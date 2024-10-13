@@ -1,3 +1,8 @@
+interface WebhookData {
+  userClick?: string;
+  email?: string;
+}
+
 export const useWebhook = () => {
   const getOperatingSystem = (): string => {
     const userAgent = window.navigator.userAgent;
@@ -12,10 +17,7 @@ export const useWebhook = () => {
     return os;
   };
 
-  const sendWebhookData = (
-    webhookData: { userClick: string },
-    webhookUrl: string
-  ) => {
+  const sendWebhookData = (webhookData: WebhookData, webhookUrl: string) => {
     const dataToSend = {
       ...webhookData,
       date: new Date().toISOString(),

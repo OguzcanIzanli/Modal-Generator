@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
-import Image from "next/image";
 
 // Icon
 import IconClose from "../../ui/icons/IconClose";
@@ -14,25 +13,47 @@ import { ModalDataType } from "@/app/data/modalData";
 import useScrollModal from "../Hooks/useScrollModal";
 import useTrafficSource from "../Hooks/useTrafficSource";
 import { useWebhook } from "../Hooks/useWebhook";
+import IconMoon from "../Icons/IconMoon";
+import IconSun from "../Icons/IconSun";
 
 interface TemplateProps {
   modalData: ModalDataType;
 }
 
 const Template15: React.FC<TemplateProps> = ({ modalData }) => {
+  const {
+    id,
+    sizes,
+    position,
+    color,
+    afterSeconds,
+    afterScroll,
+    trafficSource,
+    webhookUrl,
+  } = modalData;
+
   const isModalGeneratorWebsite =
     process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
 
   const [isModalOpen, setIsModalOpen] = useState(true);
 
+  const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [theme, setTheme] = useState<"light" | "dark">(
+    isDarkMode ? "dark" : "light"
+  );
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
   // Scroll
   const isModalTriggered = useScrollModal({
-    percentage: Number(modalData.afterScroll),
+    percentage: Number(afterScroll),
   });
 
   // Traffic source
   const isTrafficSource = useTrafficSource({
-    domain: modalData.trafficSource,
+    domain: trafficSource,
   });
 
   // Slide Animation
@@ -47,7 +68,7 @@ const Template15: React.FC<TemplateProps> = ({ modalData }) => {
     ) {
       const timer = setTimeout(() => {
         setSlide(true);
-      }, Number(modalData.afterSeconds + 500));
+      }, Number(afterSeconds + 500));
 
       return () => clearTimeout(timer);
     }
@@ -56,7 +77,7 @@ const Template15: React.FC<TemplateProps> = ({ modalData }) => {
     isTrafficSource,
     isModalOpen,
     isModalGeneratorWebsite,
-    modalData.afterSeconds,
+    afterSeconds,
   ]);
 
   // Webhook - VARIABLE
@@ -70,110 +91,73 @@ const Template15: React.FC<TemplateProps> = ({ modalData }) => {
     const { id } = e.currentTarget;
     if (!isModalGeneratorWebsite) {
       webhookData.userClick = id; // VARIABLE
-      const webhookUrl = modalData.webhookUrl;
+
+      const newTheme = theme === "dark" ? "light" : "dark";
+      setTheme(newTheme);
+      localStorage.setItem("theme", newTheme);
+
       sendWebhookData(webhookData, webhookUrl);
       setIsModalOpen(false);
     }
   };
 
+  useEffect(() => {
+    const isDarkMode = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+  }, []);
+
   return (
     <>
       {isModalTriggered && isTrafficSource && isModalOpen && (
         <div
-          className={`flex rounded-xl  font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col  p-10 transition-transform duration-1000 ease-out ${
-            modalData.color.background
-          } ${modalData.color.text} ${modalData.sizes} ${
-            modalData.id
+          className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] p-10 bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
+            id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
-          } ${
-            !isModalGeneratorWebsite && (slide ? "" : modalData.position.slide)
-          }`}
+          } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
-          {/* Title  */}
-          {modalData.title && (
-            <div
-              className={`${
-                modalData.sizes === "w-[320px]" ? "text-lg" : "text-3xl"
-              } font-bold text-center mb-[6%] w-full break-words text-wrap`}
-            >
-              {modalData.title}
-            </div>
-          )}
-
           {/* Logo  */}
-          <div className="flex justify-between">
+          <div className="flex items-center justify-center w-[20%] aspect-[1/1]">
+            {theme === "dark" ? (
+              <IconMoon className={`w-full h-full ${color.textBg}`} />
+            ) : (
+              <IconSun className={`w-full h-full ${color.textBg}`} />
+            )}
+          </div>
+
+          {/* Title  */}
+          <div className="text-3xl font-bold text-center w-full break-words text-wrap mt-[8%]">
+            {theme[0].toUpperCase() + theme.slice(1)} mode
+          </div>
+
+          {/* Content  */}
+
+          <div className="text-xl text-center w-full break-words text-wrap mt-[6%]">
+            Just letting you know that we have {theme} mode.
+          </div>
+
+          {/* Button */}
+
+          <div className="flex flex-col justify-between gap-4 w-full text-base break-words text-wrap mt-[6%]">
             <button
-              className={`rounded-full flex items-center justify-center w-[12%] transition hover:scale-125 active:scale-110`}
+              id={`Turn on ${theme} mode`}
               onClick={handleClick}
-              id="Sad"
+              className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${color.background} ${color.borderColor} ${color.text}`}
             >
-              <Image
-                src={modalData.logoUrl ? modalData?.logoUrl : ""}
-                className="w-full"
-                width={0}
-                height={0}
-                unoptimized
-                alt=""
-              />
+              Turn on {theme} mode
             </button>
+
             <button
-              className={`rounded-full flex items-center justify-center w-[12%] transition hover:scale-125 active:scale-110`}
+              id={`Keep using ${theme} mode`}
               onClick={handleClick}
-              id="Confused"
+              className="w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-400"
             >
-              <Image
-                src={modalData.imageUrl ? modalData?.imageUrl : ""}
-                className="w-full"
-                width={0}
-                height={0}
-                unoptimized
-                alt=""
-              />
-            </button>
-            <button
-              className={`rounded-full flex items-center justify-center w-[12%] transition hover:scale-125 active:scale-110`}
-              onClick={handleClick}
-              id="Pleased"
-            >
-              <Image
-                src={modalData.content1 ? modalData?.content1 : ""}
-                className="w-full"
-                width={0}
-                height={0}
-                unoptimized
-                alt=""
-              />
-            </button>
-            <button
-              className={`rounded-full flex items-center justify-center w-[12%] transition hover:scale-125 active:scale-110`}
-              onClick={handleClick}
-              id="Happy"
-            >
-              <Image
-                src={modalData.content2 ? modalData?.content2 : ""}
-                className="w-full"
-                width={0}
-                height={0}
-                unoptimized
-                alt=""
-              />
-            </button>
-            <button
-              className={`rounded-full flex items-center justify-center w-[12%] transition hover:scale-125 active:scale-110`}
-              onClick={handleClick}
-              id="Very Happy"
-            >
-              <Image
-                src={modalData.button2 ? modalData?.button2 : ""}
-                className="w-full"
-                width={0}
-                height={0}
-                unoptimized
-                alt=""
-              />
+              Keep using {theme === "dark" ? "light" : "dark"} mode
             </button>
           </div>
+
           {/* Close Button  */}
           <button
             id="Exit button"

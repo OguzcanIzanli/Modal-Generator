@@ -20,6 +20,22 @@ interface TemplateProps {
 }
 
 const Template9: React.FC<TemplateProps> = ({ modalData }) => {
+  const {
+    id,
+    title,
+    imageUrl,
+    content,
+    button,
+    input,
+    sizes,
+    position,
+    color,
+    afterSeconds,
+    afterScroll,
+    trafficSource,
+    webhookUrl,
+  } = modalData;
+
   const isModalGeneratorWebsite =
     process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
 
@@ -38,12 +54,12 @@ const Template9: React.FC<TemplateProps> = ({ modalData }) => {
 
   // Scroll
   const isModalTriggered = useScrollModal({
-    percentage: Number(modalData.afterScroll),
+    percentage: Number(afterScroll),
   });
 
   // Traffic source
   const isTrafficSource = useTrafficSource({
-    domain: modalData.trafficSource,
+    domain: trafficSource,
   });
 
   // Slide Animation
@@ -58,7 +74,7 @@ const Template9: React.FC<TemplateProps> = ({ modalData }) => {
     ) {
       const timer = setTimeout(() => {
         setSlide(true);
-      }, Number(modalData.afterSeconds + 500));
+      }, Number(afterSeconds + 500));
 
       return () => clearTimeout(timer);
     }
@@ -67,7 +83,7 @@ const Template9: React.FC<TemplateProps> = ({ modalData }) => {
     isTrafficSource,
     isModalOpen,
     isModalGeneratorWebsite,
-    modalData.afterSeconds,
+    afterSeconds,
   ]);
 
   // Webhook - VARIABLE
@@ -85,7 +101,6 @@ const Template9: React.FC<TemplateProps> = ({ modalData }) => {
       webhookData.userClick = id; // VARIABLE
       webhookData.name = value.name ? value.name : "Not written.";
       webhookData.email = value.email ? value.email : "Not written.";
-      const webhookUrl = modalData.webhookUrl;
       sendWebhookData(webhookData, webhookUrl);
       setIsModalOpen(false);
     }
@@ -95,104 +110,125 @@ const Template9: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalTriggered && isTrafficSource && isModalOpen && (
         <div
-          className={`flex rounded-xl text-black font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white transition-transform duration-1000 ease-out  ${
-            modalData.sizes
-          } ${
-            modalData.id
+          className={`flex relative rounded-xl w-min text-black font-sans items-center transition-transform duration-1000 ease-out ${
+            id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
-          } ${
-            !isModalGeneratorWebsite && (slide ? "" : modalData.position.slide)
-          }`}
+          } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
           {/* Image  */}
-          <Image
-            src={modalData.imageUrl ? modalData?.imageUrl : ""}
-            className="w-full rounded-t-xl mb-[6%]"
-            width={0}
-            height={0}
-            unoptimized
-            alt=""
-          />
-
-          {/* Title  */}
-          {modalData.title && (
-            <div className="text-3xl font-bold text-center mb-[6%] w-full break-words text-wrap px-10">
-              {modalData.title}
+          {imageUrl && (
+            <div className={`${sizes}`}>
+              <Image
+                src={imageUrl}
+                className="w-full rounded-r-xl translate-x-[25%]"
+                width={0}
+                height={0}
+                unoptimized
+                alt=""
+              />
             </div>
           )}
 
-          {/* Content  */}
-          {modalData.content1 && (
-            <div className="text-xl text-center mb-[6%] w-full break-words text-wrap px-10">
-              {modalData.content1}
-            </div>
-          )}
-
-          {/* Input  */}
-          <div className="px-10 w-full">
-            {modalData.input1 && (
-              <input
-                type="text"
-                value={value.name}
-                name="name"
-                onChange={handleInputChange}
-                placeholder={modalData.input1}
-                className="py-3 px-4 text-base w-full rounded-xl mb-[6%] border-2 border-gray-400 text-left"
-              />
-            )}
-            {modalData.input2 && (
-              <input
-                type="email"
-                value={value.email}
-                name="email"
-                onChange={handleInputChange}
-                placeholder={modalData.input2}
-                className="py-3 px-4 text-base w-full rounded-xl mb-[6%] border-2 border-gray-400 text-left"
-              />
-            )}
-          </div>
-
-          {/* Button */}
-          <div className="flex flex-col w-full gap-4 text-base justify-between break-words text-wrap pb-10 px-10">
-            {modalData.buttonAnchor && (
-              <a
-                href={modalData.buttonAnchorLink}
-                id={modalData.buttonAnchor}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={handleClick}
-                className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${modalData.color.background} ${modalData.color.borderColor} ${modalData.color.text}`}
-              >
-                {modalData.buttonAnchor}
-              </a>
-            )}
-            {modalData.buttonAnchor2 && (
-              <div>
-                <a
-                  href={modalData.buttonAnchorLink2}
-                  id={modalData.buttonAnchor2}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={handleClick}
-                  className="text-black text-sm inline-block"
-                >
-                  {modalData.buttonAnchor2}
-                </a>
+          <div
+            className={`p-10 bg-white scale-75 -translate-x-[25%] rounded-xl aspect-square flex flex-col justify-between shadow-[0_0_12px_rgba(0,0,0,0.25)] z-10 ${modalData.sizes}`}
+          >
+            {/* Title  */}
+            {title && (
+              <div className="text-3xl font-bold text-left w-full break-words text-wrap">
+                {title}
               </div>
             )}
-          </div>
 
-          {/* Close Button  */}
-          <button
-            id="Exit button"
-            onClick={(e) => {
-              handleClick(e);
-            }}
-            className="absolute text-3xl top-6 right-6 border-2 text-gray-400 border-gray-400 rounded-full hover:scale-105 active:scale-95"
-          >
-            <IconClose />
-          </button>
+            {/* Content  */}
+            {content?.content1 && (
+              <div className="text-xl text-left w-full break-words text-wrap mt-[6%]">
+                {content.content1}
+              </div>
+            )}
+
+            {/* Input  */}
+            <div className="w-full">
+              {input?.input1 && (
+                <input
+                  type="text"
+                  value={value.name}
+                  name="name"
+                  onChange={handleInputChange}
+                  placeholder={input.input1}
+                  className="py-3 px-4 text-base w-full rounded-xl mt-[6%] border-2 border-gray-400 text-left"
+                />
+              )}
+              {input?.input2 && (
+                <input
+                  type="email"
+                  value={value.email}
+                  name="email"
+                  onChange={handleInputChange}
+                  placeholder={input.input2}
+                  className="py-3 px-4 text-base w-full rounded-xl mt-[6%] border-2 border-gray-400 text-left"
+                />
+              )}
+            </div>
+
+            {/* Button */}
+            {(button?.buttonAnchor ||
+              button?.buttonAnchor2 ||
+              button?.buttonAnchor3) && (
+              <div className="flex flex-col justify-between gap-4 w-full text-base break-words text-wrap mt-[6%]">
+                {button?.buttonAnchor && (
+                  <a
+                    href={button.buttonAnchorLink}
+                    id={button.buttonAnchor}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleClick}
+                    className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${color.background} ${color.borderColor} ${color.text}`}
+                  >
+                    {button.buttonAnchor}
+                  </a>
+                )}
+
+                <div className="flex justify-between">
+                  {button?.buttonAnchor2 && (
+                    <a
+                      href={button.buttonAnchorLink2}
+                      id={button.buttonAnchor2}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={handleClick}
+                      className="text-black text-sm inline-block"
+                    >
+                      {button.buttonAnchor2}
+                    </a>
+                  )}
+                  {button?.buttonAnchor3 && (
+                    <a
+                      href={button.buttonAnchorLink3}
+                      id={button.buttonAnchor3}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={handleClick}
+                      className="text-black text-sm inline-block"
+                    >
+                      {button.buttonAnchor3}
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Close Button  */}
+            <button
+              id="Exit button"
+              onClick={(e) => {
+                handleClick(e);
+              }}
+              className="absolute text-3xl top-6 right-6 border-2 text-gray-400 border-gray-400 rounded-full hover:scale-105 active:scale-95"
+            >
+              <IconClose />
+            </button>
+          </div>
         </div>
       )}
     </>

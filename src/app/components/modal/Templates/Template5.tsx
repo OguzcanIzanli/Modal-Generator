@@ -19,19 +19,32 @@ interface TemplateProps {
 }
 
 const Template5: React.FC<TemplateProps> = ({ modalData }) => {
+  const {
+    id,
+    title,
+    content,
+    button,
+    sizes,
+    position,
+    color,
+    afterSeconds,
+    afterScroll,
+    trafficSource,
+    webhookUrl,
+  } = modalData;
+
   const isModalGeneratorWebsite =
     process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
 
   const [isModalOpen, setIsModalOpen] = useState(true);
-
   // Scroll
   const isModalTriggered = useScrollModal({
-    percentage: Number(modalData.afterScroll),
+    percentage: Number(afterScroll),
   });
 
   // Traffic source
   const isTrafficSource = useTrafficSource({
-    domain: modalData.trafficSource,
+    domain: trafficSource,
   });
 
   // Slide Animation
@@ -46,7 +59,7 @@ const Template5: React.FC<TemplateProps> = ({ modalData }) => {
     ) {
       const timer = setTimeout(() => {
         setSlide(true);
-      }, Number(modalData.afterSeconds + 500));
+      }, Number(afterSeconds + 500));
 
       return () => clearTimeout(timer);
     }
@@ -55,7 +68,7 @@ const Template5: React.FC<TemplateProps> = ({ modalData }) => {
     isTrafficSource,
     isModalOpen,
     isModalGeneratorWebsite,
-    modalData.afterSeconds,
+    afterSeconds,
   ]);
 
   // Webhook - VARIABLE
@@ -69,7 +82,6 @@ const Template5: React.FC<TemplateProps> = ({ modalData }) => {
     const { id } = e.currentTarget;
     if (!isModalGeneratorWebsite) {
       webhookData.userClick = id; // VARIABLE
-      const webhookUrl = modalData.webhookUrl;
       sendWebhookData(webhookData, webhookUrl);
       setIsModalOpen(false);
     }
@@ -79,43 +91,55 @@ const Template5: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalTriggered && isTrafficSource && isModalOpen && (
         <div
-          className={`flex rounded-xl text-black font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-center justify-between flex-col bg-white p-10 transition-transform duration-1000 ease-out  ${
-            modalData.sizes
-          } ${
-            modalData.id
+          className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] p-10 transition-transform duration-1000 ease-out ${
+            color.background
+          } ${color.text} ${sizes} ${
+            id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
-          } ${
-            !isModalGeneratorWebsite && (slide ? "" : modalData.position.slide)
-          }`}
+          } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
           {/* Title  */}
-          {modalData.title && (
-            <div className="text-3xl font-bold text-center mb-[6%] w-full break-words text-wrap">
-              {modalData.title}
+          {title && (
+            <div className="text-3xl font-bold text-center w-full break-words text-wrap">
+              {title}
             </div>
           )}
 
           {/* Content  */}
-          {modalData.content1 && (
-            <div className="text-xl text-center mb-[6%] w-full break-words text-wrap">
-              {modalData.content1}
+          {content?.content1 && (
+            <div className="text-xl text-center w-full break-words text-wrap mt-[6%]">
+              {content.content1}
             </div>
           )}
 
           {/* Button */}
-          {modalData.buttonAnchor && (
-            <a
-              href={modalData.buttonAnchorLink}
-              id={modalData.buttonAnchor}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={handleClick}
-              className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${modalData.color.background} ${modalData.color.borderColor} ${modalData.color.text}`}
-            >
-              {modalData.buttonAnchor}
-            </a>
-          )}
+          <div className="flex justify-between w-full text-base gap-4 break-words text-wrap">
+            {button?.buttonAnchor && (
+              <a
+                href={button.buttonAnchorLink}
+                id={button.buttonAnchor}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleClick}
+                className={`w-full py-3 mt-[6%] rounded-xl hover:scale-105 active:scale-95 transition text-center border-2 border-gray-400}`}
+              >
+                {button.buttonAnchor}
+              </a>
+            )}
+            {button?.buttonAnchor2 && (
+              <a
+                href={button.buttonAnchorLink2}
+                id={button.buttonAnchor2}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleClick}
+                className={`w-full py-3 mt-[6%] rounded-xl hover:scale-105 active:scale-95 transition text-center bg-white text-black ${color.borderColor}`}
+              >
+                {button.buttonAnchor2}
+              </a>
+            )}
+          </div>
 
           {/* Close Button  */}
           <button

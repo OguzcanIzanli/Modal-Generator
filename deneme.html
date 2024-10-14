@@ -13,17 +13,21 @@
   <body>
     <script
       type="text/javascript"
-      src="http://localhost:3000/dist/Template15.js"
+      src="https://modal-generator.netlify.app/dist/Template2.js"
     ></script>
     <script>
       window.MyModal.init({
+        title: "Install local now",
+        imageUrl:
+          "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal20.png-1728839222412?alt=media&token=96d30bd7-ee84-46e2-b088-5f1fe15281d8",
+        content: { content1: "We’ve gone native, try it!" },
+        button: { buttonAnchor: "Continue", button2: "Not now" },
         sizes: "w-[480px]",
         position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },
         color: {
           background: "bg-violet-600",
           borderColor: "border-2 border-violet-600",
           text: "text-white",
-          textBg: "text-violet-600",
         },
         afterSeconds: 0,
         afterScroll: 0,

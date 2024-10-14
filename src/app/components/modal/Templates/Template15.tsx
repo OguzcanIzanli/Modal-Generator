@@ -37,13 +37,14 @@ const Template15: React.FC<TemplateProps> = ({ modalData }) => {
 
   const [isModalOpen, setIsModalOpen] = useState(true);
 
-  const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [theme, setTheme] = useState<"light" | "dark">(
-    isDarkMode ? "dark" : "light"
+    localStorage.getItem("theme") as "light" | "dark"
   );
+  const [recomTheme, setRecomTheme] = useState<string>("light");
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
+    setRecomTheme(theme === "dark" ? "light" : "dark");
   }, [theme]);
 
   // Scroll
@@ -92,23 +93,19 @@ const Template15: React.FC<TemplateProps> = ({ modalData }) => {
     if (!isModalGeneratorWebsite) {
       webhookData.userClick = id; // VARIABLE
 
-      if (!id.includes("Keep")) {
+      if (!id.includes("Keep") && !id.includes("Exit")) {
         const newTheme = theme === "dark" ? "light" : "dark";
         setTheme(newTheme);
         localStorage.setItem("theme", newTheme);
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
       }
 
       sendWebhookData(webhookData, webhookUrl);
       setIsModalOpen(false);
     }
   };
-
-  useEffect(() => {
-    const isDarkMode = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-  }, []);
 
   return (
     <>
@@ -122,7 +119,7 @@ const Template15: React.FC<TemplateProps> = ({ modalData }) => {
         >
           {/* Logo  */}
           <div className="flex items-center justify-center w-[20%] aspect-[1/1]">
-            {theme === "dark" ? (
+            {recomTheme === "dark" ? (
               <IconMoon className={`w-full h-full ${color.textBg}`} />
             ) : (
               <IconSun className={`w-full h-full ${color.textBg}`} />
@@ -131,30 +128,30 @@ const Template15: React.FC<TemplateProps> = ({ modalData }) => {
 
           {/* Title  */}
           <div className="text-3xl font-bold text-center w-full break-words text-wrap mt-[8%]">
-            {theme[0].toUpperCase() + theme.slice(1)} mode
+            {recomTheme[0].toUpperCase() + recomTheme.slice(1)} mode
           </div>
 
           {/* Content  */}
           <div className="text-xl text-center w-full break-words text-wrap mt-[6%]">
-            Just letting you know that we have {theme} mode.
+            Just letting you know that we have {recomTheme} mode.
           </div>
 
           {/* Button */}
           <div className="flex flex-col justify-between gap-4 w-full text-base break-words text-wrap mt-[6%]">
             <button
-              id={`Turn on ${theme} mode`}
+              id={`Turn on ${recomTheme} mode`}
               onClick={handleClick}
               className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center ${color.background} ${color.borderColor} ${color.text}`}
             >
-              Turn on {theme} mode
+              Turn on {recomTheme} mode
             </button>
 
             <button
-              id={`Keep using ${theme} mode`}
+              id={`Keep using ${recomTheme} mode`}
               onClick={handleClick}
               className="w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-400 cursor-pointer"
             >
-              Keep using {theme === "dark" ? "light" : "dark"} mode
+              Keep using {recomTheme === "dark" ? "light" : "dark"} mode
             </button>
           </div>
 

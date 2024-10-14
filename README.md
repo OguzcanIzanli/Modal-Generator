@@ -15,7 +15,8 @@ Check out the live version of the site here: [Live Demo Link](https://modal-gene
 - **Next.js** – React-based framework for building user interfaces.
 - **TypeScript** – For type-safe development and scalable code.
 - **SASS** – CSS preprocessor for better styling management.
-- **Webpack** – To bundle and convert .tsx files into JavaScript.
+- **Tailwind CSS** – To style the modals with utility-first classes.
+- **Webpack** – To bundle and convert `.tsx` files into **JavaScript**.
 - **Firebase** – For handling image uploads and retrieving URLs.
 - **Webhook URL** – Integrate external services via webhooks to track interactions.
 
@@ -34,27 +35,27 @@ The Modal Generator allows users to select from a wide range of modal templates 
 - **Size:** Adjust modal dimensions.
 - **Color:** Change background, border and text colors.
 - **Position:** Define where the modal appears on the screen (e.g., top-left, center).
-- **Image:** If the selected modal includes images or logos, users can upload them. These images are automatically stored in Firebase, and their URLs are embedded directly into the code.
+- **Image:** If the selected modal includes **images** or **logos**, users can upload them. These images are automatically stored in **Firebase**, and their URLs are embedded directly into the code.
 
 3. **Add Content:**  
-   Users can modify or delete the content inside the modal. This includes titles, text, button, input, radio and any other visible elements.
+   Users can **modify** or **delete** the content inside the modal. This includes titles, text, button, input, radio and any other visible elements.
 
 4. **Configure Targeting Rules:**  
    In this section, users define when and where the modal should appear:
 
-- **Device Type:** Choose between mobile, desktop, or both.
+- **Device Type:** Choose between **mobile**, **desktop**, or both.
 - **After X Seconds:** Set the modal to trigger after a specific time delay.
 - **After % Scroll:** Trigger the modal when the user scrolls a certain percentage of the page.
 - **Traffic Source Domain:** Configure the modal to display only for visitors from specific domains.
 
-5. **Add Webhook URL:** In the final step, users can integrate a **webhook URL** (e.g., from Make.com) to track user interactions with the modal. This enables detailed analytics, such as:
+5. **Add Webhook URL:** In the final step, users can integrate a **webhook URL** from [make.com](https://www.make.com/en) to track user interactions with the modal. This enables detailed analytics, such as:
 
 - Button clicks.
 - Form input variables.
-- Device type, operating system, browser laguage and name, and date.
+- Device type, OS, browser laguage and name, and date.
 
 6. **Generate Embed Code:**  
-   Once the modal is configured, the user clicks the **"Get Embed Code"** button. The system generates a JavaScript embed code that the user can copy and paste just above the **body** tag on their website.
+   Once the modal is configured, the user clicks the **"Get Embed Code"** button. The system generates a JavaScript embed code that the user can copy and paste just above the `</body>` tag on their website.
 
 ## 📦 Example Embed Code
 

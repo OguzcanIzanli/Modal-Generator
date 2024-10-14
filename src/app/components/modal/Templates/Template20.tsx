@@ -96,6 +96,7 @@ const Template20: React.FC<TemplateProps> = ({ modalData }) => {
   const webhookData: WebhookData = {};
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
     const { id } = e.currentTarget;
     if (!isModalGeneratorWebsite) {
       webhookData.userClick = id;

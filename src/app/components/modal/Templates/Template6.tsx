@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 
 // Icon
@@ -10,9 +10,7 @@ import IconClose from "../../ui/icons/IconClose";
 import { ModalDataType } from "@/app/data/modalData";
 
 // Hook
-import useScrollModal from "../Hooks/useScrollModal";
-import useTrafficSource from "../Hooks/useTrafficSource";
-import { useWebhook } from "../Hooks/useWebhook";
+import { useModalHandler } from "../Hooks/useModalHandler";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -35,69 +33,25 @@ const Template6: React.FC<TemplateProps> = ({ modalData }) => {
     webhookUrl,
   } = modalData;
 
-  const isModalGeneratorWebsite =
-    process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
-
-  const [isModalOpen, setIsModalOpen] = useState(true);
-  const [value, setValue] = useState<string>("");
-  const [checked, setChecked] = useState<boolean>(false);
-
-  // Scroll
-  const isModalTriggered = useScrollModal({
-    percentage: Number(afterScroll),
-  });
-
-  // Traffic source
-  const isTrafficSource = useTrafficSource({
-    domain: trafficSource,
-  });
-
-  // Slide Animation
-  const [slide, setSlide] = useState(false);
-
-  useEffect(() => {
-    if (
-      !isModalGeneratorWebsite &&
-      isModalTriggered &&
-      isTrafficSource &&
-      isModalOpen
-    ) {
-      const timer = setTimeout(() => {
-        setSlide(true);
-      }, Number(afterSeconds + 500));
-
-      return () => clearTimeout(timer);
-    }
-  }, [
-    isModalTriggered,
-    isTrafficSource,
-    isModalOpen,
+  const {
+    isModalVisible,
+    slide,
+    value,
     isModalGeneratorWebsite,
-    afterSeconds,
-  ]);
-
-  // Webhook - VARIABLE
-  const webhookData = {
-    userClick: "",
-    email: "",
-  };
-
-  const { sendWebhookData } = useWebhook();
-
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    const { id } = e.currentTarget;
-    if (!isModalGeneratorWebsite) {
-      webhookData.userClick = id; // VARIABLE
-      webhookData.email = value ? value : "Not written.";
-      sendWebhookData(webhookData, webhookUrl);
-      setIsModalOpen(false);
-    }
-  };
-
+    checked,
+    setChecked,
+    handleClick,
+    handleInputChange,
+  } = useModalHandler({
+    afterScroll: Number(afterScroll),
+    trafficSource,
+    afterSeconds: Number(afterSeconds),
+    inputEmail: !!input?.input1,
+    webhookUrl,
+  });
   return (
     <>
-      {isModalTriggered && isTrafficSource && isModalOpen && (
+      {isModalVisible && (
         <div
           className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] p-10 transition-transform duration-1000 ease-out ${
             color.background
@@ -125,8 +79,8 @@ const Template6: React.FC<TemplateProps> = ({ modalData }) => {
           {input?.input1 && (
             <input
               type="email"
-              value={value}
-              onChange={(e) => setValue(e.currentTarget.value)}
+              value={value.email}
+              onChange={handleInputChange}
               placeholder={input.input1}
               className={`py-3 px-4 text-base w-[280px] rounded-xl mt-[6%] border-2 border-gray-400 text-left ${color.background}`}
             />

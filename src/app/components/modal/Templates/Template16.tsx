@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import Image from "next/image";
 
@@ -11,9 +11,7 @@ import IconClose from "../../ui/icons/IconClose";
 import { ModalDataType } from "@/app/data/modalData";
 
 // Hook
-import useScrollModal from "../Hooks/useScrollModal";
-import useTrafficSource from "../Hooks/useTrafficSource";
-import { useWebhook } from "../Hooks/useWebhook";
+import { useModalHandler } from "../Hooks/useModalHandler";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -37,88 +35,25 @@ const Template16: React.FC<TemplateProps> = ({ modalData }) => {
     webhookUrl,
   } = modalData;
 
-  const isModalGeneratorWebsite =
-    process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
-
-  const [isModalOpen, setIsModalOpen] = useState(true);
-  const [value, setValue] = useState<{ name: string; email: string }>({
-    name: "",
-    email: "",
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  // Scroll
-  const isModalTriggered = useScrollModal({
-    percentage: Number(afterScroll),
-  });
-
-  // Traffic source
-  const isTrafficSource = useTrafficSource({
-    domain: trafficSource,
-  });
-
-  // Slide Animation
-  const [slide, setSlide] = useState(false);
-
-  useEffect(() => {
-    if (
-      !isModalGeneratorWebsite &&
-      isModalTriggered &&
-      isTrafficSource &&
-      isModalOpen
-    ) {
-      const timer = setTimeout(() => {
-        setSlide(true);
-      }, Number(afterSeconds + 500));
-
-      return () => clearTimeout(timer);
-    }
-  }, [
-    isModalTriggered,
-    isTrafficSource,
-    isModalOpen,
+  const {
+    isModalVisible,
+    slide,
+    value,
     isModalGeneratorWebsite,
-    afterSeconds,
-  ]);
-
-  // Webhook - VARIABLE
-  interface WebhookData {
-    userClick?: string;
-    email?: string;
-    name?: string;
-  }
-
-  const { sendWebhookData } = useWebhook();
-  const webhookData: WebhookData = {};
-
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    const { id } = e.currentTarget;
-    if (!isModalGeneratorWebsite) {
-      webhookData.userClick = id; // VARIABLE
-
-      if (input) {
-        webhookData.email = value.email || "Not written.";
-        webhookData.name = value.name || "Not written.";
-      } else {
-        delete webhookData?.email;
-        delete webhookData?.name;
-      }
-
-      sendWebhookData(webhookData, webhookUrl);
-      setIsModalOpen(false);
-    }
-  };
+    handleInputChange,
+    handleClick,
+  } = useModalHandler({
+    afterScroll: Number(afterScroll),
+    trafficSource,
+    afterSeconds: Number(afterSeconds),
+    inputName: !!input?.input1,
+    inputEmail: !!input?.input2,
+    webhookUrl,
+  });
 
   return (
     <>
-      {isModalTriggered && isTrafficSource && isModalOpen && (
+      {isModalVisible && (
         <div
           className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
             id

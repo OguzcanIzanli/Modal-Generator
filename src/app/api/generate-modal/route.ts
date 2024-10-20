@@ -83,7 +83,7 @@ export async function POST(request: Request) {
           ? `link: {
           ${link.link1 ? `link1: "${link.link1}"` : ""} 
           ${link.linkURL1 ? `, link2: "${link.linkURL1}"` : ""}
-          ${link.link2 ? `link1: "${link.link2}"` : ""} 
+          ${link.link2 ? `, link1: "${link.link2}"` : ""} 
           ${link.linkURL2 ? `, link2: "${link.linkURL2}"` : ""}},`
           : ""
       }

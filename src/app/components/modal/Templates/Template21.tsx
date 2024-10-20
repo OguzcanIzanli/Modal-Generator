@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import Image from "next/image";
 
@@ -11,9 +11,7 @@ import IconClose from "../../ui/icons/IconClose";
 import { ModalDataType } from "@/app/data/modalData";
 
 // Hook
-import useScrollModal from "../Hooks/useScrollModal";
-import useTrafficSource from "../Hooks/useTrafficSource";
-import { useWebhook } from "../Hooks/useWebhook";
+import { useModalHandler } from "../Hooks/useModalHandler";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -37,76 +35,25 @@ const Template21: React.FC<TemplateProps> = ({ modalData }) => {
     webhookUrl,
   } = modalData;
 
-  const isModalGeneratorWebsite =
-    process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
-
-  const [isModalOpen, setIsModalOpen] = useState(true);
-  const [value, setValue] = useState<string>("");
-  const [selectedRadio, setSelectedRadio] = useState<string>("");
-
-  const handleRadioChange = (value: string) => {
-    setSelectedRadio(value);
-  };
-
-  // Scroll
-  const isModalTriggered = useScrollModal({
-    percentage: Number(afterScroll),
-  });
-
-  // Traffic source
-  const isTrafficSource = useTrafficSource({
-    domain: trafficSource,
-  });
-
-  // Slide Animation
-  const [slide, setSlide] = useState(false);
-
-  useEffect(() => {
-    if (
-      !isModalGeneratorWebsite &&
-      isModalTriggered &&
-      isTrafficSource &&
-      isModalOpen
-    ) {
-      const timer = setTimeout(() => {
-        setSlide(true);
-      }, Number(afterSeconds + 500));
-
-      return () => clearTimeout(timer);
-    }
-  }, [
-    isModalTriggered,
-    isTrafficSource,
-    isModalOpen,
+  const {
+    isModalVisible,
+    slide,
+    value,
     isModalGeneratorWebsite,
-    afterSeconds,
-  ]);
-
-  // Webhook - VARIABLE
-  interface WebhookData {
-    userClick?: string;
-    email?: string;
-    radioSelection?: string;
-  }
-
-  const { sendWebhookData } = useWebhook();
-  const webhookData: WebhookData = {};
-
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    const { id } = e.currentTarget;
-    if (!isModalGeneratorWebsite) {
-      webhookData.userClick = id;
-      webhookData.email = value || "Not written.";
-      webhookData.radioSelection = selectedRadio || "Not selected.";
-      sendWebhookData(webhookData, webhookUrl);
-      setIsModalOpen(false);
-    }
-  };
-
+    handleInputChange,
+    handleRadioClick,
+    handleClick,
+  } = useModalHandler({
+    afterScroll: Number(afterScroll),
+    trafficSource,
+    afterSeconds: Number(afterSeconds),
+    inputEmail: !!input?.input1,
+    radioSelection: !!radio,
+    webhookUrl,
+  });
   return (
     <>
-      {isModalTriggered && isTrafficSource && isModalOpen && (
+      {isModalVisible && (
         <div
           className={`flex relative flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] py-10 px-12 bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
             id
@@ -150,9 +97,10 @@ const Template21: React.FC<TemplateProps> = ({ modalData }) => {
           {/* Input  */}
           {input?.input1 && (
             <input
-              type="email"
-              value={value}
-              onChange={(e) => setValue(e.currentTarget.value)}
+              type="text"
+              value={value.email}
+              name="email"
+              onChange={handleInputChange}
               placeholder={input.input1}
               className="py-3 px-4 text-base w-full rounded-xl mt-[6%] border-2 border-gray-400 text-left z-10"
             />
@@ -166,10 +114,10 @@ const Template21: React.FC<TemplateProps> = ({ modalData }) => {
                   type="radio"
                   id={radio.label1}
                   value={radio.label1}
-                  onClick={() => handleRadioChange(radio.label1!)}
+                  onClick={handleRadioClick}
                   className="relative appearance-none shrink-0 mt-1 w-5 h-5 border-2 border-gray-400 rounded-full cursor-pointer"
                 />
-                {selectedRadio === radio.label1 && (
+                {value.radioSelection === radio.label1 && (
                   <div
                     className={`absolute mt-1 w-5 h-5 rounded-full border-[7px] ${color.borderColor}`}
                   />
@@ -191,10 +139,10 @@ const Template21: React.FC<TemplateProps> = ({ modalData }) => {
                   type="radio"
                   id={radio.label2}
                   value={radio.label2}
-                  onClick={() => handleRadioChange(radio.label2!)}
+                  onClick={handleRadioClick}
                   className="relative appearance-none shrink-0 mt-1 w-5 h-5 border-2 border-gray-400 rounded-full cursor-pointer"
                 />
-                {selectedRadio === radio.label2 && (
+                {value.radioSelection === radio.label2 && (
                   <div
                     className={`absolute mt-1 w-5 h-5 rounded-full border-[7px] ${color.borderColor}`}
                   />

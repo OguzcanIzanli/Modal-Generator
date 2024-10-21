@@ -2,16 +2,20 @@
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Image from "next/image";
-
-// Icon
-import IconClose from "../../ui/icons/IconClose";
 
 // Type
 import { ModalDataType } from "@/app/data/modalData";
 
 // Hook
 import { useModalHandler } from "../Hooks/useModalHandler";
+
+// Component
+import Content from "../Components/Content";
+import Link from "../Components/Link";
+import Title from "../Components/Title";
+import CloseButton from "../Components/CloseButton";
+import Input from "../Components/Input";
+import Button from "../Components/Button";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -20,8 +24,11 @@ interface TemplateProps {
 const Template19: React.FC<TemplateProps> = ({ modalData }) => {
   const {
     id,
-    logoUrl,
+    title,
     content,
+    button,
+    link,
+    input,
     sizes,
     position,
     color,
@@ -31,74 +38,60 @@ const Template19: React.FC<TemplateProps> = ({ modalData }) => {
     webhookUrl,
   } = modalData;
 
-  const { isModalVisible, slide, isModalGeneratorWebsite, handleClick } =
-    useModalHandler({
-      afterScroll: Number(afterScroll),
-      trafficSource,
-      afterSeconds: Number(afterSeconds),
-      webhookUrl,
-    });
+  const {
+    isModalVisible,
+    slide,
+    value,
+    isModalGeneratorWebsite,
+    handleInputChange,
+    handleClick,
+  } = useModalHandler({
+    afterScroll: Number(afterScroll),
+    trafficSource,
+    afterSeconds: Number(afterSeconds),
+    inputEmail: !!input?.email,
+    inputPhone: !!input?.phone,
+    webhookUrl,
+  });
 
   return (
     <>
       {isModalVisible && (
         <div
-          className={`flex items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out ${
-            sizes === "w-[320px]" ? "p-5" : "p-10"
-          } ${color.background} ${sizes} ${
+          className={`flex text-center flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out border-t-8 ${
+            color.borderColor
+          } ${sizes} ${sizes === "w-[320px]" ? "p-5 pt-10" : "p-10"} ${
             id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
           } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
-          {/* Logo  */}
-          {logoUrl && (
-            <div
-              className={`flex items-center justify-center rounded-full w-1/5 aspect-[1/1] mr-4 ${color.background} ${color.borderColor}`}
-            >
-              <Image
-                src={logoUrl}
-                width={0}
-                height={0}
-                unoptimized
-                alt=""
-                className="w-1/2"
-              />
-            </div>
-          )}
+          {/* Title  */}
+          <Title title={title} sizes={sizes} margin="mt-[8%]" />
 
           {/* Content  */}
-          <div className="flex flex-col justify-start w-full items-center">
-            {content?.content1 && (
-              <div
-                className={`font-bold w-full break-words text-wrap ${
-                  sizes === "w-[320px]" ? "text-sm" : "text-2xl"
-                }`}
-              >
-                {content.content1}
-              </div>
-            )}
-            {content?.content2 && (
-              <div
-                className={`w-full break-words text-wrap text-gray-400 ${
-                  sizes === "w-[320px]" ? "text-xs" : "text-xl"
-                }`}
-              >
-                {content.content2}
-              </div>
-            )}
-          </div>
+          <Content content={content} sizes={sizes} />
+
+          {/* Input  */}
+          <Input
+            input={input}
+            value={value}
+            handleInputChange={handleInputChange}
+          />
+
+          {/* Button */}
+          <Button
+            button={button}
+            handleClick={handleClick}
+            color={color}
+            sizes={sizes}
+          />
+
+          {/* Link */}
+          <Link handleClick={handleClick} link={link} />
 
           {/* Close Button  */}
-          <button
-            id="Exit button"
-            onClick={(e) => {
-              handleClick(e);
-            }}
-            className={`absolute text-3xl top-6 right-6 rounded-full hover:scale-125 active:scale-95 z-10 transition-transform duration-1000 ease-out text-black`}
-          >
-            <IconClose />
-          </button>
+          <CloseButton handleClick={handleClick} />
         </div>
       )}
     </>

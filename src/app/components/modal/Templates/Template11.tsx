@@ -4,14 +4,13 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import Image from "next/image";
 
-// Icon
-import IconClose from "../../ui/icons/IconClose";
-
 // Type
 import { ModalDataType } from "@/app/data/modalData";
 
 // Hook
 import { useModalHandler } from "../Hooks/useModalHandler";
+import Title from "../Components/Title";
+import CloseButton from "../Components/CloseButton";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -21,7 +20,7 @@ const Template11: React.FC<TemplateProps> = ({ modalData }) => {
   const {
     id,
     title,
-    logoUrl,
+    image,
     content,
     button,
     sizes,
@@ -45,20 +44,20 @@ const Template11: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalVisible && (
         <div
-          className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-start p-10 transition-transform duration-1000 ease-out ${
+          className={`flex rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] items-start transition-transform duration-1000 ease-out ${
             color.background
           } ${color.text}
-           ${sizes} ${
+           ${sizes} ${sizes === "w-[320px]" ? "p-5 pt-10" : "p-10"} ${
             id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
           } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
           {/* Logo  */}
-          {logoUrl && (
+          {image?.logoUrl && (
             <div className={`rounded-full w-1/5 mr-[6%]`}>
               <Image
-                src={logoUrl}
+                src={image.logoUrl}
                 className="w-full"
                 width={0}
                 height={0}
@@ -70,15 +69,7 @@ const Template11: React.FC<TemplateProps> = ({ modalData }) => {
 
           <div className="w-4/5">
             {/* Title  */}
-            {title && (
-              <div
-                className={`${
-                  sizes === "w-[320px]" ? "text-lg" : "text-2xl mb-[2%] mt-[2%]"
-                } font-bold w-full break-words text-wrap`}
-              >
-                {title}
-              </div>
-            )}
+            <Title title={title} sizes={sizes} />
 
             {/* Content  */}
             {content?.content1 && (
@@ -113,15 +104,7 @@ const Template11: React.FC<TemplateProps> = ({ modalData }) => {
           </div>
 
           {/* Close Button  */}
-          <button
-            id="Exit button"
-            onClick={(e) => {
-              handleClick(e);
-            }}
-            className={`absolute text-3xl top-6 right-6 rounded-full hover:scale-125 active:scale-95 z-10 transition-transform duration-1000 ease-out text-black`}
-          >
-            <IconClose />
-          </button>
+          <CloseButton handleClick={handleClick} />
         </div>
       )}
     </>

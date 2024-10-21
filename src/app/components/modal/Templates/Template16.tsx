@@ -4,14 +4,17 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import Image from "next/image";
 
-// Icon
-import IconClose from "../../ui/icons/IconClose";
-
 // Type
 import { ModalDataType } from "@/app/data/modalData";
 
 // Hook
 import { useModalHandler } from "../Hooks/useModalHandler";
+
+// Component
+import Title from "../Components/Title";
+import CloseButton from "../Components/CloseButton";
+import Button from "../Components/Button";
+import Input from "../Components/Input";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -21,8 +24,7 @@ const Template16: React.FC<TemplateProps> = ({ modalData }) => {
   const {
     id,
     title,
-    logoUrl,
-    imageUrl,
+    image,
     content,
     button,
     input,
@@ -46,8 +48,8 @@ const Template16: React.FC<TemplateProps> = ({ modalData }) => {
     afterScroll: Number(afterScroll),
     trafficSource,
     afterSeconds: Number(afterSeconds),
-    inputName: !!input?.input1,
-    inputEmail: !!input?.input2,
+    inputName: !!input?.name,
+    inputEmail: !!input?.email,
     webhookUrl,
   });
 
@@ -55,7 +57,7 @@ const Template16: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalVisible && (
         <div
-          className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
+          className={`flex text-center flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
             id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
@@ -64,7 +66,7 @@ const Template16: React.FC<TemplateProps> = ({ modalData }) => {
           {/* Image - Logo  */}
           <div className="relative">
             <Image
-              src={imageUrl ? imageUrl : ""}
+              src={image?.imageUrl ? image.imageUrl : ""}
               className="w-full rounded-t-xl"
               width={0}
               height={0}
@@ -75,7 +77,7 @@ const Template16: React.FC<TemplateProps> = ({ modalData }) => {
               className={`absolute rounded-full w-[25%] border-8 border-white -bottom-[22%] left-[50%] -translate-x-[50%]`}
             >
               <Image
-                src={logoUrl ? logoUrl : ""}
+                src={image?.logoUrl ? image.logoUrl : ""}
                 width={0}
                 height={0}
                 unoptimized
@@ -85,7 +87,11 @@ const Template16: React.FC<TemplateProps> = ({ modalData }) => {
             </div>
           </div>
 
-          <div className="w-full p-10">
+          <div
+            className={`w-full p-10 ${
+              sizes === "w-[320px]" ? "p-5 pt-10" : "p-10"
+            }`}
+          >
             {/* Content  */}
             {content?.content1 && (
               <div className="text-xl text-center font-bold w-full break-words text-wrap mt-[8%]">
@@ -99,79 +105,33 @@ const Template16: React.FC<TemplateProps> = ({ modalData }) => {
             )}
 
             {/* Title  */}
-            {title && (
-              <div className="text-3xl font-bold text-center w-full break-words text-wrap mt-[6%]">
-                {title}
-              </div>
-            )}
+            <Title title={title} sizes={sizes} margin="mt-[8%]" />
 
             {/* Content  */}
-            {button?.buttonAnchor && (
+            {content?.content3 && (
               <div className="text-base text-center w-full break-words text-wrap mt-[6%]">
-                {button.buttonAnchor}
+                {content.content3}
               </div>
             )}
 
             {/* Input  */}
-            <div className="w-full">
-              {input?.input1 && (
-                <input
-                  type="text"
-                  value={value.name}
-                  name="name"
-                  onChange={handleInputChange}
-                  placeholder={input.input1}
-                  className="py-3 px-4 text-base w-full rounded-xl mt-[6%] border-2 border-gray-400 text-left"
-                />
-              )}
-              {input?.input2 && (
-                <input
-                  type="email"
-                  value={value.email}
-                  name="email"
-                  onChange={handleInputChange}
-                  placeholder={input.input2}
-                  className="py-3 px-4 text-base w-full rounded-xl mt-[6%] border-2 border-gray-400 text-left"
-                />
-              )}
-            </div>
+            <Input
+              input={input}
+              value={value}
+              handleInputChange={handleInputChange}
+            />
 
             {/* Button */}
-            <div className="flex justify-between w-full text-base gap-4 break-words text-wrap">
-              {button?.button2 && (
-                <button
-                  id={button.button2}
-                  onClick={handleClick}
-                  className="w-full py-3 mt-[6%] rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-400"
-                >
-                  {button.button2}
-                </button>
-              )}
-              {button?.buttonAnchor2 && (
-                <a
-                  href={button.buttonAnchorLink2}
-                  id={button.buttonAnchor2}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={handleClick}
-                  className={`w-full py-3 mt-[6%] rounded-xl hover:scale-105 active:scale-95 transition text-center cursor-pointer ${color.background} ${color.borderColor} ${color.text}`}
-                >
-                  {button.buttonAnchor2}
-                </a>
-              )}
-            </div>
-          </div>
+            <Button
+              button={button}
+              handleClick={handleClick}
+              color={color}
+              sizes={sizes}
+            />
 
-          {/* Close Button  */}
-          <button
-            id="Exit button"
-            onClick={(e) => {
-              handleClick(e);
-            }}
-            className={`absolute text-3xl top-6 right-6 rounded-full hover:scale-125 active:scale-95 z-10 transition-transform duration-1000 ease-out text-black`}
-          >
-            <IconClose />
-          </button>
+            {/* Close Button  */}
+            <CloseButton handleClick={handleClick} />
+          </div>
         </div>
       )}
     </>

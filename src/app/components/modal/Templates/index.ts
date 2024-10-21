@@ -18,7 +18,6 @@ import Template17 from "./Template17";
 import Template18 from "./Template18";
 import Template19 from "./Template19";
 import Template20 from "./Template20";
-import Template21 from "./Template21";
 
 export {
   Template1,
@@ -41,5 +40,4 @@ export {
   Template18,
   Template19,
   Template20,
-  Template21,
 };

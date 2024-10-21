@@ -3,9 +3,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 
-// Icon
-import IconClose from "../../ui/icons/IconClose";
-
 // Type
 import { ModalDataType } from "@/app/data/modalData";
 
@@ -15,6 +12,9 @@ import useTrafficSource from "../Hooks/useTrafficSource";
 import { useWebhook } from "../Hooks/useWebhook";
 import IconMoon from "../Icons/IconMoon";
 import IconSun from "../Icons/IconSun";
+
+// Component
+import CloseButton from "../Components/CloseButton";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -112,7 +112,9 @@ const Template15: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalTriggered && isTrafficSource && isModalOpen && (
         <div
-          className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] p-10 bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
+          className={`flex text-center flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
+            sizes === "w-[320px]" ? "p-5 pt-10" : "p-10"
+          } ${
             id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
@@ -133,7 +135,7 @@ const Template15: React.FC<TemplateProps> = ({ modalData }) => {
           </div>
 
           {/* Content  */}
-          <div className="text-xl text-center w-full break-words text-wrap mt-[6%]">
+          <div className="text-xl w-full break-words text-wrap mt-[6%]">
             Just letting you know that we have {recomTheme} mode.
           </div>
 
@@ -157,15 +159,7 @@ const Template15: React.FC<TemplateProps> = ({ modalData }) => {
           </div>
 
           {/* Close Button  */}
-          <button
-            id="Exit button"
-            onClick={(e) => {
-              handleClick(e);
-            }}
-            className={`absolute text-3xl top-6 right-6 rounded-full hover:scale-125 active:scale-95 z-10 transition-transform duration-1000 ease-out text-black`}
-          >
-            <IconClose />
-          </button>
+          <CloseButton handleClick={handleClick} />
         </div>
       )}
     </>

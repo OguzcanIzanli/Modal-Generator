@@ -4,14 +4,17 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import Image from "next/image";
 
-// Icon
-import IconClose from "../../ui/icons/IconClose";
-
 // Type
 import { ModalDataType } from "@/app/data/modalData";
 
 // Hook
 import { useModalHandler } from "../Hooks/useModalHandler";
+
+// Component
+import Content from "../Components/Content";
+import Title from "../Components/Title";
+import CloseButton from "../Components/CloseButton";
+import Button from "../Components/Button";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -45,55 +48,29 @@ const Template5: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalVisible && (
         <div
-          className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] p-10 transition-transform duration-1000 ease-out ${
+          className={`flex text-center flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] transition-transform duration-1000 ease-out ${
             color.background
           } ${color.text} ${sizes} ${
+            sizes === "w-[320px]" ? "p-5 pt-10" : "p-10"
+          } ${
             id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
           } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
           {/* Title  */}
-          {title && (
-            <div className="text-3xl font-bold text-center w-full break-words text-wrap">
-              {title}
-            </div>
-          )}
+          <Title title={title} sizes={sizes} />
 
           {/* Content  */}
-          {content?.content1 && (
-            <div className="text-xl text-center w-full break-words text-wrap mt-[6%]">
-              {content.content1}
-            </div>
-          )}
+          <Content content={content} sizes={sizes} />
 
           {/* Button */}
-          <div className="flex justify-between w-full text-base gap-4 break-words text-wrap">
-            {button?.buttonAnchor && (
-              <a
-                href={button.buttonAnchorLink}
-                id={button.buttonAnchor}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={handleClick}
-                className={`w-full py-3 mt-[6%] rounded-xl hover:scale-105 active:scale-95 transition text-center border-2 border-gray-400 cursor-pointer`}
-              >
-                {button.buttonAnchor}
-              </a>
-            )}
-            {button?.buttonAnchor2 && (
-              <a
-                href={button.buttonAnchorLink2}
-                id={button.buttonAnchor2}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={handleClick}
-                className={`w-full py-3 mt-[6%] rounded-xl hover:scale-105 active:scale-95 transition text-center bg-white text-black cursor-pointer ${color.borderColor}`}
-              >
-                {button.buttonAnchor2}
-              </a>
-            )}
-          </div>
+          <Button
+            button={button}
+            handleClick={handleClick}
+            color={color}
+            sizes={sizes}
+          />
 
           {/* Feedback  */}
           <div className="flex justify-between">
@@ -184,15 +161,7 @@ const Template5: React.FC<TemplateProps> = ({ modalData }) => {
           </div>
 
           {/* Close Button  */}
-          <button
-            id="Exit button"
-            onClick={(e) => {
-              handleClick(e);
-            }}
-            className={`absolute text-3xl top-6 right-6 rounded-full hover:scale-125 active:scale-95 z-10 transition-transform duration-1000 ease-out ${color.text}`}
-          >
-            <IconClose />
-          </button>
+          <CloseButton handleClick={handleClick} color={color.text} />
         </div>
       )}
     </>

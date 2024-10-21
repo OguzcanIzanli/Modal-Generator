@@ -17,8 +17,7 @@ const EmbedCodeGenerator = () => {
     const {
       template,
       title,
-      logoUrl,
-      imageUrl,
+      image,
       content,
       button,
       link,
@@ -30,11 +29,11 @@ const EmbedCodeGenerator = () => {
       const modalConfig = {
         entry: template,
         title: title,
-        logoUrl: logoUrl,
-        imageUrl: imageUrl,
+        image: { logoUrl: image?.logoUrl, imageUrl: image?.imageUrl },
         content: {
           content1: content?.content1,
           content2: content?.content2,
+          content3: content?.content3,
         },
         button: {
           buttonAnchor: button?.buttonAnchor,
@@ -51,7 +50,7 @@ const EmbedCodeGenerator = () => {
           link2: link?.link2,
           linkURL2: link?.linkURL2,
         },
-        input: { input1: input?.input1, input2: input?.input2 },
+        input: { name: input?.name, email: input?.email, phone: input?.phone },
         checkbox1: modal.checkbox1,
         radio: {
           label1: radio?.label1,

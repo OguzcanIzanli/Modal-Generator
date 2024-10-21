@@ -2,16 +2,18 @@
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Image from "next/image";
-
-// Icon
-import IconClose from "../../ui/icons/IconClose";
 
 // Type
 import { ModalDataType } from "@/app/data/modalData";
 
 // Hook
 import { useModalHandler } from "../Hooks/useModalHandler";
+
+// Components
+import Title from "../Components/Title";
+import CloseButton from "../Components/CloseButton";
+import Button from "../Components/Button";
+import ImageLogo from "../Components/ImageLogo";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -21,7 +23,7 @@ const Template18: React.FC<TemplateProps> = ({ modalData }) => {
   const {
     id,
     title,
-    logoUrl,
+    image,
     content,
     button,
     sizes,
@@ -44,9 +46,9 @@ const Template18: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalVisible && (
         <div
-          className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] p-10 bg-white text-black transition-transform duration-1000 ease-out ${
+          className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out ${
             color.background
-          } ${sizes} ${
+          } ${sizes} ${sizes === "w-[320px]" ? "p-5 pt-10" : "p-10"} ${
             id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
@@ -54,17 +56,11 @@ const Template18: React.FC<TemplateProps> = ({ modalData }) => {
         >
           <div className="flex justify-start w-full items-center">
             {/* Logo  */}
-            {logoUrl && (
+            {image?.imageUrl && (
               <div
                 className={`flex items-center justify-center rounded-full w-[80px] aspect-[1/1] mr-2 ${color.background} ${color.borderColor}`}
               >
-                <Image
-                  src={logoUrl}
-                  width={20}
-                  height={20}
-                  unoptimized
-                  alt=""
-                />
+                <ImageLogo image={image} tailwindClass="w-2/3" />
               </div>
             )}
             {content?.content1 && (
@@ -77,11 +73,7 @@ const Template18: React.FC<TemplateProps> = ({ modalData }) => {
           </div>
 
           {/* Title  */}
-          {title && (
-            <div className="text-3xl font-bold text-left w-full break-words text-wrap mt-[8%]">
-              {title}
-            </div>
-          )}
+          <Title title={title} sizes={sizes} margin="mt-[8%]" />
 
           {/* Content  */}
           {content?.content2 && (
@@ -91,40 +83,16 @@ const Template18: React.FC<TemplateProps> = ({ modalData }) => {
           )}
 
           {/* Button */}
-          <div className="flex justify-between w-full text-base gap-4 break-words text-wrap">
-            {button?.buttonAnchor && (
-              <a
-                href={button.buttonAnchorLink}
-                id={button.buttonAnchor}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={handleClick}
-                className={`w-full py-3 mt-[6%] rounded-xl hover:scale-105 active:scale-95 transition text-center cursor-pointer ${color.background} ${color.borderColor} ${color.text}`}
-              >
-                {button.buttonAnchor}
-              </a>
-            )}
-            {button?.button2 && (
-              <button
-                id={button.button2}
-                onClick={handleClick}
-                className="w-full py-3 mt-[6%] rounded-xl hover:scale-105 active:scale-95 transition"
-              >
-                {button.button2}
-              </button>
-            )}
-          </div>
+          <Button
+            button={button}
+            handleClick={handleClick}
+            color={color}
+            sizes={sizes}
+            flexDirection="flex-row-reverse"
+          />
 
           {/* Close Button  */}
-          <button
-            id="Exit button"
-            onClick={(e) => {
-              handleClick(e);
-            }}
-            className={`absolute text-3xl top-6 right-6 rounded-full hover:scale-125 active:scale-95 z-10 transition-transform duration-1000 ease-out text-black`}
-          >
-            <IconClose />
-          </button>
+          <CloseButton handleClick={handleClick} />
         </div>
       )}
     </>

@@ -3,14 +3,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-// Icon
-import IconClose from "../../ui/icons/IconClose";
-
 // Type
 import { ModalDataType } from "@/app/data/modalData";
 
 // Hook
 import { useModalHandler } from "../Hooks/useModalHandler";
+
+// Component
+import Title from "../Components/Title";
+import CloseButton from "../Components/CloseButton";
+import Input from "../Components/Input";
+import Button from "../Components/Button";
+import ImageLogo from "../Components/ImageLogo";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -20,10 +24,11 @@ const Template20: React.FC<TemplateProps> = ({ modalData }) => {
   const {
     id,
     title,
+    image,
     content,
     button,
-    link,
     input,
+    radio,
     sizes,
     position,
     color,
@@ -39,120 +44,122 @@ const Template20: React.FC<TemplateProps> = ({ modalData }) => {
     value,
     isModalGeneratorWebsite,
     handleInputChange,
+    handleRadioClick,
     handleClick,
   } = useModalHandler({
     afterScroll: Number(afterScroll),
     trafficSource,
     afterSeconds: Number(afterSeconds),
-    inputEmail: !!input?.input1,
-    inputPhone: !!input?.input2,
+    inputEmail: !!input?.email,
+    radioSelection: !!radio,
     webhookUrl,
   });
-
   return (
     <>
       {isModalVisible && (
         <div
-          className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] p-10 bg-white text-black transition-transform duration-1000 ease-out border-t-8 ${
-            color.borderColor
-          } ${sizes} ${
+          className={`flex text-center relative flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
+            sizes === "w-[320px]" ? "py-5 px-6" : "py-10 px-12"
+          } ${
             id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
           } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
+          {/* Image  */}
+          <ImageLogo
+            image={image}
+            color={color}
+            tailwindClass="w-full h-full absolute top-0"
+          />
+
           {/* Title  */}
-          {title && (
-            <div className="text-3xl font-bold text-center w-full break-words text-wrap mt-[8%]">
-              {title}
-            </div>
-          )}
+          <Title title={title} sizes={sizes} margin="mt-[8%]" />
 
           {/* Content  */}
           {content?.content1 && (
-            <div className="text-xl text-center w-full break-words text-wrap mt-[6%]">
+            <div
+              className={`text-xl font-bold text-center w-full break-words text-wrap mt-[6%] rounded-full py-2 border-4 z-10 ${color.borderColor}`}
+            >
               {content.content1}
+            </div>
+          )}
+          {content?.content2 && (
+            <div className="text-xl text-center w-[80%] break-words text-wrap mt-[6%] z-10">
+              {content.content2}
             </div>
           )}
 
           {/* Input  */}
-          <div className="w-full">
-            {input?.input1 && (
-              <input
-                type="text"
-                value={value.email}
-                name="email"
-                onChange={handleInputChange}
-                placeholder={input.input1}
-                className="py-3 px-4 text-base w-full rounded-xl mt-[6%] border-2 border-gray-400 text-left"
-              />
+          <Input
+            input={input}
+            value={value}
+            handleInputChange={handleInputChange}
+          />
+
+          {/* Radio */}
+          <div className="flex gap-8 text-gray-400 z-10">
+            {radio?.label1 && (
+              <div className="flex gap-2 mt-6">
+                <input
+                  type="radio"
+                  id={radio.label1}
+                  value={radio.label1}
+                  onClick={handleRadioClick}
+                  className="relative appearance-none shrink-0 mt-1 w-5 h-5 border-2 border-gray-400 rounded-full cursor-pointer"
+                />
+                {value.radioSelection === radio.label1 && (
+                  <div
+                    className={`absolute mt-1 w-5 h-5 rounded-full border-[7px] ${color.borderColor}`}
+                  />
+                )}
+                <label
+                  className="flex flex-col cursor-pointer"
+                  htmlFor={radio.label1}
+                >
+                  <span className="text-lg break-words text-wrap">
+                    {radio.label1}
+                  </span>
+                </label>
+              </div>
             )}
-            {input?.input2 && (
-              <input
-                type="number"
-                value={value.phone ? value.phone : ""}
-                name="phone"
-                onChange={handleInputChange}
-                placeholder={input.input2}
-                className="py-3 px-4 text-base w-full rounded-xl mt-[6%] border-2 border-gray-400 text-left"
-              />
+
+            {radio?.label2 && (
+              <div className="flex gap-2 mt-6">
+                <input
+                  type="radio"
+                  id={radio.label2}
+                  value={radio.label2}
+                  onClick={handleRadioClick}
+                  className="relative appearance-none shrink-0 mt-1 w-5 h-5 border-2 border-gray-400 rounded-full cursor-pointer"
+                />
+                {value.radioSelection === radio.label2 && (
+                  <div
+                    className={`absolute mt-1 w-5 h-5 rounded-full border-[7px] ${color.borderColor}`}
+                  />
+                )}
+                <label
+                  className="flex flex-col cursor-pointer"
+                  htmlFor={radio.label2}
+                >
+                  <span className="text-lg break-words text-wrap">
+                    {radio.label2}
+                  </span>
+                </label>
+              </div>
             )}
           </div>
 
           {/* Button */}
-          {button?.buttonAnchor && (
-            <a
-              href={button.buttonAnchorLink}
-              id={button.buttonAnchor}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={handleClick}
-              className={`w-full py-3 mt-[6%] rounded-xl hover:scale-105 active:scale-95 transition text-center cursor-pointer ${color.background} ${color.borderColor} ${color.text}`}
-            >
-              {button.buttonAnchor}
-            </a>
-          )}
-
-          {/* Link */}
-          {(link?.link1 || link?.link2) && (
-            <div className="flex justify-between gap-4 w-full text-base break-words text-wrap">
-              {link?.link1 && (
-                <a
-                  href={link.linkURL1}
-                  id={link.link1}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={handleClick}
-                  className="text-black text-sm inline-block mt-[6%]"
-                >
-                  {link.link1}
-                </a>
-              )}
-              {link?.link2 && (
-                <a
-                  href={link.linkURL2}
-                  id={link.link2}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={handleClick}
-                  className="text-black text-sm inline-block mt-[6%]"
-                >
-                  {link.link2}
-                </a>
-              )}
-            </div>
-          )}
+          <Button
+            button={button}
+            handleClick={handleClick}
+            color={color}
+            sizes={sizes}
+          />
 
           {/* Close Button  */}
-          <button
-            id="Exit button"
-            onClick={(e) => {
-              handleClick(e);
-            }}
-            className={`absolute text-3xl top-6 right-6 rounded-full hover:scale-125 active:scale-95 z-10 transition-transform duration-1000 ease-out text-black`}
-          >
-            <IconClose />
-          </button>
+          <CloseButton handleClick={handleClick} />
         </div>
       )}
     </>

@@ -4,7 +4,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 // Icon
-import IconClose from "../../ui/icons/IconClose";
 import IconBell from "../Icons/IconBell";
 
 // Type
@@ -12,6 +11,11 @@ import { ModalDataType } from "@/app/data/modalData";
 
 // Hook
 import { useModalHandler } from "../Hooks/useModalHandler";
+
+// Component
+import Content from "../Components/Content";
+import Title from "../Components/Title";
+import CloseButton from "../Components/CloseButton";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -44,7 +48,9 @@ const Template13: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalVisible && (
         <div
-          className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] p-10 bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
+          className={`flex text-center flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
+            sizes === "w-[320px]" ? "p-5 pt-10" : "p-10"
+          } ${
             id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
@@ -56,23 +62,10 @@ const Template13: React.FC<TemplateProps> = ({ modalData }) => {
           </div>
 
           {/* Title  */}
-          {title && (
-            <div className="text-3xl font-bold text-center w-full break-words text-wrap mt-[8%]">
-              {title}
-            </div>
-          )}
+          <Title title={title} sizes={sizes} margin="mt-[8%]" />
 
           {/* Content  */}
-          {content?.content1 && (
-            <div className="text-xl text-center w-full break-words text-wrap mt-[6%]">
-              {content.content1}
-            </div>
-          )}
-          {content?.content2 && (
-            <div className="text-base text-left w-full rounded-xl py-3 px-4 mt-[6%] border-2 border-gray-400 break-words text-wrap">
-              {content.content2}
-            </div>
-          )}
+          <Content content={content} sizes={sizes} />
 
           {/* Button */}
           {(button?.buttonAnchor ||
@@ -110,15 +103,7 @@ const Template13: React.FC<TemplateProps> = ({ modalData }) => {
           )}
 
           {/* Close Button  */}
-          <button
-            id="Exit button"
-            onClick={(e) => {
-              handleClick(e);
-            }}
-            className={`absolute text-3xl top-6 right-6 rounded-full hover:scale-125 active:scale-95 z-10 transition-transform duration-1000 ease-out text-black`}
-          >
-            <IconClose />
-          </button>
+          <CloseButton handleClick={handleClick} />
         </div>
       )}
     </>

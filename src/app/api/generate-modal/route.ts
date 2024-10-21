@@ -10,8 +10,7 @@ export async function POST(request: Request) {
     const {
       entry,
       title,
-      logoUrl,
-      imageUrl,
+      image,
       content,
       button,
       link,
@@ -34,13 +33,20 @@ export async function POST(request: Request) {
     <script>
     window.MyModal.init({
       ${title ? `title: "${title}",` : ""}
-      ${logoUrl ? `logoUrl: "${logoUrl}",` : ""}
-      ${imageUrl ? `imageUrl: "${imageUrl}",` : ""}
+       ${
+         image.logoUrl || image.imageUrl
+           ? `image: {
+          ${image.logoUrl ? `logoUrl: "${image.logoUrl}"` : ""}
+          ${image.imageUrl ? `, imageUrl: "${image.imageUrl}"` : ""}
+          },`
+           : ""
+       }
       ${
         content.content1 || content.content2
-          ? `content: {${
-              content.content1 ? `content1: "${content.content1}"` : ""
-            } ${content.content2 ? `, content2: "${content.content2}"` : ""}},`
+          ? `content: {
+          ${content.content1 ? `content1: "${content.content1}"` : ""}
+          ${content.content2 ? `, content2: "${content.content2}"` : ""}
+          ${content.content3 ? `, content3: "${content.content3}"` : ""}},`
           : ""
       }
       ${
@@ -82,16 +88,18 @@ export async function POST(request: Request) {
         link.link1 || link.link2
           ? `link: {
           ${link.link1 ? `link1: "${link.link1}"` : ""} 
-          ${link.linkURL1 ? `, link2: "${link.linkURL1}"` : ""}
-          ${link.link2 ? `, link1: "${link.link2}"` : ""} 
-          ${link.linkURL2 ? `, link2: "${link.linkURL2}"` : ""}},`
+          ${link.linkURL1 ? `, linkURL1: "${link.linkURL1}"` : ""}
+          ${link.link2 ? `, link2: "${link.link2}"` : ""} 
+          ${link.linkURL2 ? `, linkURL2: "${link.linkURL2}"` : ""}},`
           : ""
       }
       ${
-        input.input1 || input.input2
-          ? `input: {${input.input1 ? `input1: "${input.input1}"` : ""} ${
-              input.input2 ? `, input2: "${input.input2}"` : ""
-            }},`
+        input.name || input.email || input.phone
+          ? `input: {
+          ${input.name ? `name: "${input.name}"` : ""}
+          ${input.email ? `, email: "${input.email}"` : ""}
+          ${input.phone ? `, phone: "${input.phone}"` : ""}
+          },`
           : ""
       }
       ${userConfig.checkbox1 ? `checkbox1: "${userConfig.checkbox1}",` : ""}

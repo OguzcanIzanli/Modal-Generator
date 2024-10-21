@@ -4,10 +4,9 @@ export interface ModalDataType {
   template: string;
   title?: string;
   // Logo - Image
-  logoUrl?: string;
-  imageUrl?: string;
+  image?: { logoUrl?: string; imageUrl?: string };
   // Content
-  content?: { content1?: string; content2?: string };
+  content?: { content1?: string; content2?: string; content3?: string };
   // Button
   button?: {
     buttonAnchor?: string;
@@ -28,7 +27,7 @@ export interface ModalDataType {
   // Checkbox
   checkbox1?: string;
   // Input
-  input?: { input1?: string; input2?: string };
+  input?: { name?: string; email?: string; phone?: string };
   // Radio
   radio?: {
     label1?: string;
@@ -80,8 +79,10 @@ export const modalData: ModalDataType[] = [
     id: 1,
     template: "Template1",
     title: "Security Code",
-    logoUrl:
-      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2FSecure.png?alt=media&token=9b57cafe-8462-44a6-bee6-536899822a85",
+    image: {
+      logoUrl:
+        "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2FSecure.png?alt=media&token=9b57cafe-8462-44a6-bee6-536899822a85",
+    },
     content: { content1: "This code expires in 24 hours", content2: "Code" },
     button: {
       buttonAnchor: "Continue",
@@ -105,8 +106,10 @@ export const modalData: ModalDataType[] = [
     id: 2,
     template: "Template2",
     title: "Install local now",
-    imageUrl:
-      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal2.png?alt=media&token=16a564ba-c07d-4c04-93b5-93adda03c245",
+    image: {
+      imageUrl:
+        "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal2.png?alt=media&token=16a564ba-c07d-4c04-93b5-93adda03c245",
+    },
     content: { content1: "We’ve gone native, try it!" },
     button: {
       buttonAnchor: "Continue",
@@ -161,11 +164,13 @@ export const modalData: ModalDataType[] = [
     id: 4,
     template: "Template4",
     title: "Delete your profile",
-    logoUrl:
-      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fdelete.png?alt=media&token=059d29f4-f8a0-48c6-ac3a-5d82673918cf",
+    image: {
+      logoUrl:
+        "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fdelete.png?alt=media&token=059d29f4-f8a0-48c6-ac3a-5d82673918cf",
+    },
     content: {
       content1: "Your profile will be automatically deleted after 1 month.",
-      content2: "You won’t be able to access to your profile after 30.08.2021.",
+      content3: "You won’t be able to access to your profile after 30.08.2021.",
     },
     button: {
       buttonAnchor: "Delete my profile",
@@ -187,7 +192,7 @@ export const modalData: ModalDataType[] = [
   },
   {
     id: 5,
-    template: "Template4",
+    template: "Template2",
     title: "The file is on it's way",
     content: {
       content1:
@@ -211,15 +216,17 @@ export const modalData: ModalDataType[] = [
     id: 6,
     template: "Template1",
     title: "Join our mail list",
-    logoUrl:
-      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fpercentage.png?alt=media&token=0fba65d3-8460-4abb-97e8-63d03962f265",
+    image: {
+      logoUrl:
+        "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fpercentage.png?alt=media&token=0fba65d3-8460-4abb-97e8-63d03962f265",
+    },
     content: { content1: "Save up to 30% of your next order" },
     button: {
       buttonAnchor: "Join now",
       buttonAnchorLink: "",
       button2: "Later",
     },
-    input: { input1: "Enter your email" },
+    input: { email: "Enter your email" },
     sizes: "w-[480px]",
     position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },
     color: {
@@ -235,10 +242,12 @@ export const modalData: ModalDataType[] = [
   },
   {
     id: 7,
-    template: "Template21",
+    template: "Template20",
     title: "Sign up for our newsletter",
-    imageUrl:
-      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal26bg.png?alt=media&token=67ecc25d-77be-465b-8c35-6e4afdf31b52",
+    image: {
+      imageUrl:
+        "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal26bg.png?alt=media&token=67ecc25d-77be-465b-8c35-6e4afdf31b52",
+    },
     content: {
       content1: "GET 30% OF DISCOUNT",
       content2: "Be the first to learn about new trends and offers.",
@@ -251,7 +260,7 @@ export const modalData: ModalDataType[] = [
       label1: "Women",
       label2: "Men",
     },
-    input: { input1: "Enter your email address" },
+    input: { email: "Enter your email address" },
     sizes: "w-[480px]",
     position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },
     color: {
@@ -271,7 +280,7 @@ export const modalData: ModalDataType[] = [
     title: "Subscribe to our newsletter",
     content: { content1: "Receive the flash news in your inbox." },
     button: { buttonAnchor: "Sign up now", buttonAnchorLink: "" },
-    input: { input1: "Enter your email" },
+    input: { email: "Enter your email" },
     checkbox1: "By subscribe this form I agree to Privacy Policy.",
     sizes: "w-[480px]",
     position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },
@@ -290,15 +299,17 @@ export const modalData: ModalDataType[] = [
     id: 9,
     template: "Template2",
     title: "Hello stranger",
-    imageUrl:
-      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal9.png?alt=media&token=8d4ee152-7ca7-4691-8c0a-2ab18f84f11a",
+    image: {
+      imageUrl:
+        "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal9.png?alt=media&token=8d4ee152-7ca7-4691-8c0a-2ab18f84f11a",
+    },
     content: { content1: "Sign up now and get 30% discount" },
     button: {
       buttonAnchor: "Sign up",
       buttonAnchorLink: "",
     },
     link: { link1: "Already have an account?", linkURL1: "" },
-    input: { input1: "Enter Full name", input2: "Enter your email" },
+    input: { name: "Enter Full name", email: "Enter your email" },
     sizes: "w-[480px]",
     position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },
     color: {
@@ -316,8 +327,10 @@ export const modalData: ModalDataType[] = [
     id: 10,
     template: "Template7",
     title: "Sign up",
-    imageUrl:
-      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal10.png?alt=media&token=7a7ee844-84c9-486e-bd82-b10cbcb5c0b9",
+    image: {
+      imageUrl:
+        "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal10.png?alt=media&token=7a7ee844-84c9-486e-bd82-b10cbcb5c0b9",
+    },
     content: { content1: "Join new adventure" },
     button: {
       buttonAnchor: "Sign up",
@@ -329,7 +342,7 @@ export const modalData: ModalDataType[] = [
       link2: "Log In",
       linkURL2: "",
     },
-    input: { input1: "Enter Full name", input2: "Enter your email" },
+    input: { name: "Enter Full name", email: "Enter your email" },
     sizes: "w-[480px]",
     position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },
     color: {
@@ -347,8 +360,10 @@ export const modalData: ModalDataType[] = [
     id: 11,
     template: "Template8",
     title: "Check your email",
-    imageUrl:
-      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmailbox.png?alt=media&token=6a7c6cf8-d569-4e6a-ba0d-a505cd3808da",
+    image: {
+      imageUrl:
+        "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmailbox.png?alt=media&token=6a7c6cf8-d569-4e6a-ba0d-a505cd3808da",
+    },
     content: {
       content1:
         "Once you deletet your account, you’ll lose all data associatted with it.",
@@ -358,7 +373,7 @@ export const modalData: ModalDataType[] = [
       buttonAnchorLink: "",
     },
     link: { link1: "Already have an account?", linkURL1: "" },
-    input: { input1: "Enter your email" },
+    input: { email: "Enter your email" },
     sizes: "w-[480px]",
     position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },
     color: {
@@ -376,8 +391,10 @@ export const modalData: ModalDataType[] = [
     id: 12,
     template: "Template9",
     title: "Sign up",
-    imageUrl:
-      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal12.png?alt=media&token=e8af9335-53ea-4b69-8565-3c554124572b",
+    image: {
+      imageUrl:
+        "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal12.png?alt=media&token=e8af9335-53ea-4b69-8565-3c554124572b",
+    },
     content: { content1: "Join new adventure" },
     button: {
       buttonAnchor: "Sign up",
@@ -389,7 +406,7 @@ export const modalData: ModalDataType[] = [
       link2: "Log In",
       linkURL2: "",
     },
-    input: { input1: "Enter Full name", input2: "Enter your email" },
+    input: { name: "Enter Full name", email: "Enter your email" },
     sizes: "w-[480px]",
     position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },
     color: {
@@ -407,8 +424,10 @@ export const modalData: ModalDataType[] = [
     id: 13,
     template: "Template10",
     title: "Welcome to talk",
-    logoUrl:
-      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fsmile.png?alt=media&token=ccac9450-a311-4ec7-a16e-78fdef9e9a20",
+    image: {
+      imageUrl:
+        "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fsmile.png?alt=media&token=ccac9450-a311-4ec7-a16e-78fdef9e9a20",
+    },
     content: {
       content1:
         "Send friends photos, videos, locations, songs, voice messages, and more.",
@@ -431,8 +450,10 @@ export const modalData: ModalDataType[] = [
     id: 14,
     template: "Template11",
     title: "Jenny Yelriver",
-    logoUrl:
-      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fpp.png?alt=media&token=a9f98998-ef44-4cf1-9d04-ca5374523e18",
+    image: {
+      logoUrl:
+        "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fpp.png?alt=media&token=a9f98998-ef44-4cf1-9d04-ca5374523e18",
+    },
     content: {
       content1: "@jennyyelriver",
       content2:
@@ -485,8 +506,10 @@ export const modalData: ModalDataType[] = [
     id: 16,
     template: "Template12",
     title: "Hey there🥳",
-    logoUrl:
-      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Funion.png?alt=media&token=9e810d12-a3e7-4914-b3c6-b4ac602822d3",
+    image: {
+      logoUrl:
+        "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Funion.png?alt=media&token=d0dde543-3ac2-4f34-83e7-b506d9e9e97a",
+    },
     content: {
       content1:
         "We’re launching our product and we would be happy to have you.",
@@ -573,19 +596,21 @@ export const modalData: ModalDataType[] = [
     id: 20,
     template: "Template16",
     title: "5 reasons to purchase desktop computers",
-    logoUrl:
-      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fpp.png?alt=media&token=a9f98998-ef44-4cf1-9d04-ca5374523e18",
-    imageUrl:
-      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal20.png?alt=media&token=b2ca7e5b-66a5-41b3-a8bf-296fe09f6f4e",
+    image: {
+      logoUrl:
+        "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fpp.png?alt=media&token=a9f98998-ef44-4cf1-9d04-ca5374523e18",
+      imageUrl:
+        "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal20.png?alt=media&token=b2ca7e5b-66a5-41b3-a8bf-296fe09f6f4e",
+    },
     content: {
       content1: "Jenny Yelriver",
       content2: "Creative Director",
+      content3:
+        "Our award winning templates are the most beautiful way to present your ideas online.",
     },
     button: {
-      buttonAnchor:
-        "Our award winning templates are the most beautiful way to present your ideas online.",
-      buttonAnchor2: "Read Article",
-      buttonAnchorLink2: "",
+      buttonAnchor: "Read Article",
+      buttonAnchorLink: "",
       button2: "Maybe Later",
     },
     sizes: "w-[480px]",
@@ -605,8 +630,10 @@ export const modalData: ModalDataType[] = [
     id: 21,
     template: "Template17",
     title: "Do you like our design?",
-    logoUrl:
-      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Funion.png?alt=media&token=9e810d12-a3e7-4914-b3c6-b4ac602822d3",
+    image: {
+      imageUrl:
+        "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Funion.png?alt=media&token=d0dde543-3ac2-4f34-83e7-b506d9e9e97a",
+    },
     content: { content1: "Help us to improve it." },
     feedback: {
       feedbackURL1:
@@ -642,8 +669,10 @@ export const modalData: ModalDataType[] = [
     id: 22,
     template: "Template18",
     title: "Learn, share and connect with our community.",
-    logoUrl:
-      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Funion.png?alt=media&token=9e810d12-a3e7-4914-b3c6-b4ac602822d3",
+    image: {
+      imageUrl:
+        "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Funion.png?alt=media&token=d0dde543-3ac2-4f34-83e7-b506d9e9e97a",
+    },
     content: {
       content1: "tailwind",
       content2:
@@ -670,33 +699,11 @@ export const modalData: ModalDataType[] = [
   {
     id: 23,
     template: "Template19",
-    logoUrl:
-      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Funion.png?alt=media&token=9e810d12-a3e7-4914-b3c6-b4ac602822d3",
-    content: {
-      content1: "Reach and grow your audience",
-      content2: "Build a better popup today.",
-    },
-    sizes: "w-[480px]",
-    position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },
-    color: {
-      background: "bg-violet-600",
-      borderColor: "border-2 border-violet-600",
-      text: "text-white",
-    },
-    device: "",
-    afterSeconds: "",
-    afterScroll: "",
-    trafficSource: "",
-    webhookUrl: "",
-  },
-  {
-    id: 24,
-    template: "Template20",
     title: "Get straight to growing your business well",
     content: {
       content1: "There’s good news for parents who have child born.",
     },
-    input: { input1: "Enter your email address", input2: "Enter your phone" },
+    input: { email: "Enter your email address", phone: "Enter your phone" },
     button: { buttonAnchor: "Sign up", buttonAnchorLink: "" },
     link: {
       link1: "I have an account",
@@ -719,11 +726,13 @@ export const modalData: ModalDataType[] = [
   },
 
   {
-    id: 25,
+    id: 24,
     template: "Template8",
     title: "Opps",
-    imageUrl:
-      "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fpage-not-found.png?alt=media&token=fc438e6b-3895-4dc8-8f6c-5cf4c11f5f74",
+    image: {
+      imageUrl:
+        "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fpage-not-found.png?alt=media&token=fc438e6b-3895-4dc8-8f6c-5cf4c11f5f74",
+    },
     content: {
       content1: "Page not found",
     },
@@ -745,15 +754,15 @@ export const modalData: ModalDataType[] = [
     webhookUrl: "",
   },
   {
-    id: 26,
+    id: 25,
     template: "Template5",
     title: "Hi, stranger",
     content: { content1: "This code expires in 24 hours" },
     button: {
       buttonAnchor: "Log In",
       buttonAnchorLink: "",
-      buttonAnchor2: "Sign up now",
-      buttonAnchorLink2: "",
+      buttonAnchor3: "Sign up now",
+      buttonAnchorLink3: "",
     },
     sizes: "w-[480px]",
     position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },

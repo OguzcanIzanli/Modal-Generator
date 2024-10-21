@@ -64,7 +64,7 @@ const Appearance = () => {
         ))}
       </div>
 
-      {modal.logoUrl && (
+      {modal.image?.logoUrl && (
         <>
           <h4>Upload Logo</h4> <Dropzone dropzone="logoUrl" />
         </>

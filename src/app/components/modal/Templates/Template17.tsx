@@ -4,14 +4,17 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import Image from "next/image";
 
-// Icon
-import IconClose from "../../ui/icons/IconClose";
-
 // Type
 import { ModalDataType } from "@/app/data/modalData";
 
 // Hook
 import { useModalHandler } from "../Hooks/useModalHandler";
+
+// Component
+import Content from "../Components/Content";
+import Title from "../Components/Title";
+import CloseButton from "../Components/CloseButton";
+import ImageLogo from "../Components/ImageLogo";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -21,7 +24,7 @@ const Template17: React.FC<TemplateProps> = ({ modalData }) => {
   const {
     id,
     title,
-    logoUrl,
+    image,
     content,
     feedback,
     sizes,
@@ -45,7 +48,7 @@ const Template17: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalVisible && (
         <div
-          className={`flex flex-col items-center justify-between rounded-xl font-sans relative shadow-[0_0_12px_rgba(0,0,0,0.25)] mt-20 bg-white text-black transition-transform duration-1000 ease-out ${
+          className={`flex text-center flex-col items-center justify-between rounded-xl font-sans relative shadow-[0_0_12px_rgba(0,0,0,0.25)] mt-20 bg-white text-black transition-transform duration-1000 ease-out ${
             color.text
           } ${sizes} ${
             id
@@ -53,33 +56,27 @@ const Template17: React.FC<TemplateProps> = ({ modalData }) => {
               : ""
           } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
-          {/* Logo  */}
-          {logoUrl && (
+          {/* Image */}
+          {image?.imageUrl && (
             <div
               className={`flex items-center w-[30%] aspect-square justify-center rounded-full absolute top-0 -translate-y-[50%] z-10 ${color.background} ${color.borderColor}`}
             >
-              <Image src={logoUrl} width={50} height={50} unoptimized alt="" />
+              <ImageLogo image={image} tailwindClass="w-2/3" />
             </div>
           )}
 
           <div className="absolute z-10 text-black top-10 w-full px-10">
             {/* Title  */}
-            {title && (
-              <div className="text-3xl font-bold text-center w-full break-words text-wrap mt-[16%]">
-                {title}
-              </div>
-            )}
+            <Title title={title} sizes={sizes} margin="mt-[16%]" />
 
             {/* Content  */}
-            {content?.content1 && (
-              <div className="text-xl text-center w-full break-words text-wrap mt-[9%]">
-                {content.content1}
-              </div>
-            )}
+            <Content content={content} sizes={sizes} />
           </div>
 
           <div
-            className={`flex flex-col items-center justify-between w-full font-sans relative rounded-t-xl px-10 py-14 opacity-20 ${color.background}`}
+            className={`flex flex-col items-center justify-between w-full font-sans relative rounded-t-xl py-14 opacity-20 ${
+              sizes === "w-[320px]" ? "px-5" : "px-10"
+            } ${color.background}`}
           >
             {/* Title  */}
             {title && <div className="mt-[16%] opacity-0">{title}</div>}
@@ -91,7 +88,11 @@ const Template17: React.FC<TemplateProps> = ({ modalData }) => {
           </div>
 
           {/* Feedback  */}
-          <div className={`flex w-full justify-between p-8 text-black `}>
+          <div
+            className={`flex w-full justify-between text-black ${
+              sizes === "w-[320px]" ? "p-4" : "p-8"
+            }`}
+          >
             {feedback?.feedbackURL1 && (
               <button
                 className={`rounded-full flex flex-col gap-2 items-center justify-center transition hover:scale-125 hover:font-bold active:scale-110`}
@@ -179,15 +180,7 @@ const Template17: React.FC<TemplateProps> = ({ modalData }) => {
           </div>
 
           {/* Close Button  */}
-          <button
-            id="Exit button"
-            onClick={(e) => {
-              handleClick(e);
-            }}
-            className={`absolute text-3xl top-6 right-6 rounded-full hover:scale-125 active:scale-95 z-10 transition-transform duration-1000 ease-out text-black`}
-          >
-            <IconClose />
-          </button>
+          <CloseButton handleClick={handleClick} />
         </div>
       )}
     </>

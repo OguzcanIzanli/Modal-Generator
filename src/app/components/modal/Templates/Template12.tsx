@@ -2,16 +2,19 @@
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Image from "next/image";
-
-// Icon
-import IconClose from "../../ui/icons/IconClose";
 
 // Type
 import { ModalDataType } from "@/app/data/modalData";
 
 // Hook
 import { useModalHandler } from "../Hooks/useModalHandler";
+
+// Component
+import Content from "../Components/Content";
+import Title from "../Components/Title";
+import CloseButton from "../Components/CloseButton";
+import Button from "../Components/Button";
+import ImageLogo from "../Components/ImageLogo";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -21,7 +24,7 @@ const Template12: React.FC<TemplateProps> = ({ modalData }) => {
   const {
     id,
     title,
-    logoUrl,
+    image,
     content,
     button,
     sizes,
@@ -45,63 +48,33 @@ const Template12: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalVisible && (
         <div
-          className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] p-10 bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
+          className={`flex text-center flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
+            sizes === "w-[320px]" ? "p-5 pt-10" : "p-10"
+          } ${
             id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
           } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
           {/* Logo  */}
-          {logoUrl && (
-            <div
-              className={`rounded-full flex items-center justify-center w-[35%] aspect-[1/1] ${color.background} ${color.borderColor}`}
-            >
-              <Image src={logoUrl} width={50} height={50} unoptimized alt="" />
-            </div>
-          )}
+          <ImageLogo image={image} color={color} />
 
           {/* Title  */}
-          {title && (
-            <div className="text-3xl font-bold text-center w-full break-words text-wrap mt-[8%]">
-              {title}
-            </div>
-          )}
+          <Title title={title} sizes={sizes} margin="mt-[8%]" />
 
           {/* Content  */}
-          {content?.content1 && (
-            <div className="text-xl text-center w-full break-words text-wrap mt-[6%]">
-              {content.content1}
-            </div>
-          )}
+          <Content content={content} sizes={sizes} />
 
           {/* Button */}
-          {(button?.buttonAnchor || button?.button2) && (
-            <div className="flex flex-col justify-between gap-4 w-full text-base break-words text-wrap mt-[6%]">
-              {button?.buttonAnchor && (
-                <a
-                  href={button.buttonAnchorLink}
-                  id={button.buttonAnchor}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={handleClick}
-                  className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center cursor-pointer ${color.background} ${color.borderColor} ${color.text}`}
-                >
-                  {button.buttonAnchor}
-                </a>
-              )}
-            </div>
-          )}
+          <Button
+            button={button}
+            handleClick={handleClick}
+            color={color}
+            sizes={sizes}
+          />
 
           {/* Close Button  */}
-          <button
-            id="Exit button"
-            onClick={(e) => {
-              handleClick(e);
-            }}
-            className={`absolute text-3xl top-6 right-6 rounded-full hover:scale-125 active:scale-95 z-10 transition-transform duration-1000 ease-out text-black`}
-          >
-            <IconClose />
-          </button>
+          <CloseButton handleClick={handleClick} />
         </div>
       )}
     </>

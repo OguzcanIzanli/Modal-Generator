@@ -3,14 +3,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-// Icon
-import IconClose from "../../ui/icons/IconClose";
-
 // Type
 import { ModalDataType } from "@/app/data/modalData";
 
 // Hook
 import { useModalHandler } from "../Hooks/useModalHandler";
+
+// Component
+import Content from "../Components/Content";
+import Title from "../Components/Title";
+import CloseButton from "../Components/CloseButton";
+import Input from "../Components/Input";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -46,14 +49,14 @@ const Template6: React.FC<TemplateProps> = ({ modalData }) => {
     afterScroll: Number(afterScroll),
     trafficSource,
     afterSeconds: Number(afterSeconds),
-    inputEmail: !!input?.input1,
+    inputEmail: !!input?.email,
     webhookUrl,
   });
   return (
     <>
       {isModalVisible && (
         <div
-          className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] p-10 transition-transform duration-1000 ease-out ${
+          className={`flex text-center flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] p-10 transition-transform duration-1000 ease-out ${
             color.background
           } ${color.text} ${sizes} ${
             id
@@ -62,29 +65,18 @@ const Template6: React.FC<TemplateProps> = ({ modalData }) => {
           } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
           {/* Title  */}
-          {title && (
-            <div className="text-3xl font-bold text-center w-full break-words text-wrap">
-              {title}
-            </div>
-          )}
+          <Title title={title} sizes={sizes} />
 
           {/* Content  */}
-          {content?.content1 && (
-            <div className="text-xl text-center w-full break-words text-wrap mt-[6%]">
-              {content.content1}
-            </div>
-          )}
+          <Content content={content} sizes={sizes} />
 
           {/* Input  */}
-          {input?.input1 && (
-            <input
-              type="email"
-              value={value.email}
-              onChange={handleInputChange}
-              placeholder={input.input1}
-              className={`py-3 px-4 text-base w-[280px] rounded-xl mt-[6%] border-2 border-gray-400 text-left ${color.background}`}
-            />
-          )}
+          <Input
+            input={input}
+            value={value}
+            handleInputChange={handleInputChange}
+            color={color}
+          />
 
           {/* Checkbox */}
           {checkbox1 && (
@@ -120,7 +112,7 @@ const Template6: React.FC<TemplateProps> = ({ modalData }) => {
                 </span>
               </label>
               <label
-                className="cursor-pointer ml-2 text-sm"
+                className="text-left cursor-pointer ml-2 text-sm"
                 htmlFor="checkbox1"
               >
                 {modalData.checkbox1}
@@ -151,15 +143,7 @@ const Template6: React.FC<TemplateProps> = ({ modalData }) => {
           )}
 
           {/* Close Button  */}
-          <button
-            id="Exit button"
-            onClick={(e) => {
-              handleClick(e);
-            }}
-            className={`absolute text-3xl top-6 right-6 rounded-full hover:scale-125 active:scale-95 z-10 transition-transform duration-1000 ease-out ${color.text}`}
-          >
-            <IconClose />
-          </button>
+          <CloseButton handleClick={handleClick} color={color.text} />
         </div>
       )}
     </>

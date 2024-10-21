@@ -8,9 +8,8 @@ export const initialModalData = {
   id: "",
   template: "",
   title: "",
-  logoUrl: "",
-  imageUrl: "",
-  content: { content1: "", content2: "" },
+  image: { logoUrl: "", imageUrl: "" },
+  content: { content1: "", content2: "", content3: "" },
   button: {
     buttonAnchor: "",
     buttonAnchorLink: "",
@@ -22,7 +21,7 @@ export const initialModalData = {
   },
   link: { link1: "", linkURL1: "", link2: "", linkURL2: "" },
   checkbox1: "",
-  input: { input1: "", input2: "" },
+  input: { name: "", email: "", phone: "" },
   radio: {
     label1: "",
     label1b: "",

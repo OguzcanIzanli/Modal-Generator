@@ -2,16 +2,21 @@
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Image from "next/image";
-
-// Icon
-import IconClose from "../../ui/icons/IconClose";
 
 // Type
 import { ModalDataType } from "@/app/data/modalData";
 
 // Hook
 import { useModalHandler } from "../Hooks/useModalHandler";
+
+// Component
+import Content from "../Components/Content";
+import Link from "../Components/Link";
+import Title from "../Components/Title";
+import CloseButton from "../Components/CloseButton";
+import Input from "../Components/Input";
+import Button from "../Components/Button";
+import ImageLogo from "../Components/ImageLogo";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -21,7 +26,7 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
   const {
     id,
     title,
-    imageUrl,
+    image,
     content,
     button,
     link,
@@ -46,8 +51,8 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
     afterScroll: Number(afterScroll),
     trafficSource,
     afterSeconds: Number(afterSeconds),
-    inputName: !!input?.input1,
-    inputEmail: !!input?.input2,
+    inputName: !!input?.name,
+    inputEmail: !!input?.email,
     webhookUrl,
   });
 
@@ -55,115 +60,44 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalVisible && (
         <div
-          className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
+          className={`flex text-center flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
             id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
           } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
           {/* Image  */}
-          {imageUrl && (
-            <Image
-              src={imageUrl}
-              className="w-full rounded-t-xl"
-              width={0}
-              height={0}
-              unoptimized
-              alt=""
-            />
-          )}
+          <ImageLogo image={image} tailwindClass="w-full" />
 
-          <div className="w-full p-10">
+          <div className={`w-full ${sizes === "w-[320px]" ? "p-5" : "p-10"}`}>
             {/* Title  */}
-            {title && (
-              <div className="text-3xl font-bold text-center w-full break-words text-wrap">
-                {title}
-              </div>
-            )}
+            <Title title={title} sizes={sizes} />
 
             {/* Content  */}
-            {content?.content1 && (
-              <div className="text-xl text-center w-full break-words text-wrap mt-[6%]">
-                {content.content1}
-              </div>
-            )}
+            <Content content={content} sizes={sizes} />
 
             {/* Input  */}
-            <div className="w-full">
-              {input?.input1 && (
-                <input
-                  type="text"
-                  value={value.name}
-                  name="name"
-                  onChange={handleInputChange}
-                  placeholder={input.input1}
-                  className="py-3 px-4 text-base w-full rounded-xl mt-[6%] border-2 border-gray-400 text-left"
-                />
-              )}
-              {input?.input2 && (
-                <input
-                  type="email"
-                  value={value.email}
-                  name="email"
-                  onChange={handleInputChange}
-                  placeholder={input.input2}
-                  className="py-3 px-4 text-base w-full rounded-xl mt-[6%] border-2 border-gray-400 text-left"
-                />
-              )}
-            </div>
+            <Input
+              input={input}
+              value={value}
+              handleInputChange={handleInputChange}
+            />
 
             {/* Button */}
-            {(button?.buttonAnchor || button?.button2) && (
-              <div className="flex flex-col justify-between gap-4 w-full text-base break-words text-wrap mt-[6%]">
-                {button?.buttonAnchor && (
-                  <a
-                    href={button.buttonAnchorLink}
-                    id={button.buttonAnchor}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={handleClick}
-                    className={`w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition text-center cursor-pointer ${color.background} ${color.borderColor} ${color.text}`}
-                  >
-                    {button.buttonAnchor}
-                  </a>
-                )}
-                {button?.button2 && (
-                  <button
-                    id={button.button2}
-                    onClick={handleClick}
-                    className="w-full py-3 rounded-xl hover:scale-105 active:scale-95 transition border-2 border-gray-400"
-                  >
-                    {button.button2}
-                  </button>
-                )}
-              </div>
-            )}
+            <Button
+              button={button}
+              handleClick={handleClick}
+              color={color}
+              sizes={sizes}
+              flexDirection="flex-col-reverse"
+            />
 
             {/* Link */}
-            {link?.link1 && (
-              <a
-                href={link.linkURL1}
-                id={link.link1}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={handleClick}
-                className="text-black text-sm inline-block mt-[6%]"
-              >
-                {link.link1}
-              </a>
-            )}
+            <Link handleClick={handleClick} link={link} />
           </div>
 
           {/* Close Button  */}
-          <button
-            id="Exit button"
-            onClick={(e) => {
-              handleClick(e);
-            }}
-            className={`absolute text-3xl top-6 right-6 rounded-full hover:scale-125 active:scale-95 z-10 transition-transform duration-1000 ease-out text-black`}
-          >
-            <IconClose />
-          </button>
+          <CloseButton handleClick={handleClick} />
         </div>
       )}
     </>

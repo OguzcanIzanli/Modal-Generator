@@ -135,7 +135,7 @@ const Content = () => {
         placeholder="5th feedback"
       />
 
-      {modal.imageUrl && (
+      {modal.image?.imageUrl && (
         <>
           <h4>Upload Image</h4> <Dropzone dropzone="imageUrl" />
         </>

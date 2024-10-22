@@ -35,7 +35,9 @@ const Template15: React.FC<TemplateProps> = ({ modalData }) => {
   const isModalGeneratorWebsite =
     process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
 
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(
+    localStorage.getItem("isOpen") ?? "true"
+  );
 
   const [theme, setTheme] = useState<"light" | "dark">(
     localStorage.getItem("theme") as "light" | "dark"
@@ -57,29 +59,21 @@ const Template15: React.FC<TemplateProps> = ({ modalData }) => {
     domain: trafficSource,
   });
 
+  const isModalVisible =
+    isModalTriggered && isTrafficSource && isModalOpen === "true";
+
   // Slide Animation
   const [slide, setSlide] = useState(false);
 
   useEffect(() => {
-    if (
-      !isModalGeneratorWebsite &&
-      isModalTriggered &&
-      isTrafficSource &&
-      isModalOpen
-    ) {
+    if (!isModalGeneratorWebsite && isModalVisible) {
       const timer = setTimeout(() => {
         setSlide(true);
       }, Number(afterSeconds + 500));
 
       return () => clearTimeout(timer);
     }
-  }, [
-    isModalTriggered,
-    isTrafficSource,
-    isModalOpen,
-    isModalGeneratorWebsite,
-    afterSeconds,
-  ]);
+  }, [isModalVisible, isModalGeneratorWebsite, afterSeconds]);
 
   // Webhook - VARIABLE
   const webhookData = {
@@ -103,14 +97,15 @@ const Template15: React.FC<TemplateProps> = ({ modalData }) => {
         }, 100);
       }
 
+      localStorage.setItem("isOpen", "false");
       sendWebhookData(webhookData, webhookUrl);
-      setIsModalOpen(false);
+      setIsModalOpen("false");
     }
   };
 
   return (
     <>
-      {isModalTriggered && isTrafficSource && isModalOpen && (
+      {isModalVisible && (
         <div
           className={`flex text-center flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
             sizes === "w-[320px]" ? "p-5 pt-10" : "p-10"

@@ -5,12 +5,14 @@
   height: auto;
   border-radius: 8px;
   margin-top: 30px;
+  overflow: hidden;
 
   pre {
     color: white;
     font-size: 12px;
-    white-space: pre-wrap;
     margin-bottom: 15px;
+    overflow-wrap: break-word;
+    text-wrap: wrap;
   }
 
   .copyEmbedCodeBtn {

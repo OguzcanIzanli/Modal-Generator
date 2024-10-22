@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import Image from "next/image";
 import styles from "./Dropzone.module.scss";
 import { useDropzone, FileWithPath } from "react-dropzone";
@@ -39,9 +39,9 @@ const Dropzone: React.FC<DropzoneProps> = ({ dropzone }) => {
         const downloadURL = await uploadImage(file);
 
         if (downloadURL) {
-          setModal((prevModal) => ({
-            ...prevModal,
-            [dropzone]: downloadURL,
+          setModal((prev) => ({
+            ...prev,
+            image: { ...prev.image, [dropzone]: downloadURL },
           }));
         }
 
@@ -60,23 +60,6 @@ const Dropzone: React.FC<DropzoneProps> = ({ dropzone }) => {
     },
     maxSize: 2 * 1024 * 1024, // 2MB
   });
-
-  useEffect(() => {
-    if (uploadedImg.length > 0) {
-      const latestFile = uploadedImg[0];
-
-      setModal((prevModal) => ({
-        ...prevModal,
-        [dropzone]: latestFile.preview,
-      }));
-    }
-
-    // Cleaning up generated URLs to prevent memory leaks
-    return () => {
-      uploadedImg.forEach((file) => URL.revokeObjectURL(file.preview));
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [uploadedImg, setModal]);
 
   return (
     <div {...getRootProps()} className={styles.uploadImgContainer}>

@@ -17,6 +17,8 @@ import CloseButton from "../Components/CloseButton";
 import Input from "../Components/Input";
 import Button from "../Components/Button";
 import ImageLogo from "../Components/ImageLogo";
+import Radio from "../Components/Radio";
+import Link from "../Components/Link";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -29,7 +31,9 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
     image,
     content,
     button,
+    link,
     input,
+    radio,
     sizes,
     position,
     color,
@@ -44,13 +48,17 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
     slide,
     value,
     isModalGeneratorWebsite,
+    handleRadioClick,
     handleInputChange,
     handleClick,
   } = useModalHandler({
     afterScroll: Number(afterScroll),
     trafficSource,
     afterSeconds: Number(afterSeconds),
+    inputName: !!input?.name,
     inputEmail: !!input?.email,
+    inputPhone: !!input?.phone,
+    radioSelection: !!radio,
     webhookUrl,
   });
 
@@ -66,20 +74,45 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
               : ""
           } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
-          {/* Logo  */}
-          <ImageLogo image={image} color={color} />
+          {radio && (
+            <div
+              className={`${
+                sizes === "w-[320px]"
+                  ? "text-base"
+                  : sizes === "w-[640px]"
+                  ? "text-2xl"
+                  : "text-xl"
+              }`}
+            >
+              PLANS
+            </div>
+          )}
+
+          {/* Logo - Image */}
+          <ImageLogo image={image} color={color} tailwindClass="w-1/2" />
 
           {/* Title  */}
-          <Title title={title} sizes={sizes} margin="mt-[8%]" />
+          <Title title={title} sizes={sizes} margin="mt-[6%]" />
 
           {/* Content  */}
           <Content content={content} sizes={sizes} />
+
+          {/* Radio */}
+          <Radio
+            radio={radio}
+            color={color}
+            handleRadioClick={handleRadioClick}
+            value={value}
+            sizes={sizes}
+            flexDirection="flex-col"
+          />
 
           {/* Input  */}
           <Input
             input={input}
             value={value}
             handleInputChange={handleInputChange}
+            sizes={sizes}
           />
 
           {/* Button */}
@@ -88,7 +121,11 @@ const Template1: React.FC<TemplateProps> = ({ modalData }) => {
             handleClick={handleClick}
             color={color}
             sizes={sizes}
+            flexDirection={`${modalData.id === 4 ? "flex-col-reverse" : ""} `}
           />
+
+          {/* Link */}
+          <Link handleClick={handleClick} link={link} sizes={sizes} />
 
           {/* Close Button  */}
           <CloseButton handleClick={handleClick} />

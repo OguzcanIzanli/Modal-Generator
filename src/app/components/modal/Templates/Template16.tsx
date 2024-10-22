@@ -119,6 +119,7 @@ const Template16: React.FC<TemplateProps> = ({ modalData }) => {
               input={input}
               value={value}
               handleInputChange={handleInputChange}
+              sizes={sizes}
             />
 
             {/* Button */}

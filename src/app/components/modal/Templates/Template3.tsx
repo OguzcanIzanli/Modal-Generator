@@ -10,10 +10,12 @@ import { ModalDataType } from "@/app/data/modalData";
 import { useModalHandler } from "../Hooks/useModalHandler";
 
 // Component
-import Content from "../Components/Content";
 import Title from "../Components/Title";
 import CloseButton from "../Components/CloseButton";
+import Input from "../Components/Input";
 import Button from "../Components/Button";
+import ImageLogo from "../Components/ImageLogo";
+import Radio from "../Components/Radio";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -23,8 +25,10 @@ const Template3: React.FC<TemplateProps> = ({ modalData }) => {
   const {
     id,
     title,
+    image,
     content,
     button,
+    input,
     radio,
     sizes,
     position,
@@ -40,110 +44,69 @@ const Template3: React.FC<TemplateProps> = ({ modalData }) => {
     slide,
     value,
     isModalGeneratorWebsite,
+    handleInputChange,
     handleRadioClick,
     handleClick,
   } = useModalHandler({
     afterScroll: Number(afterScroll),
     trafficSource,
     afterSeconds: Number(afterSeconds),
+    inputEmail: !!input?.email,
     radioSelection: !!radio,
     webhookUrl,
   });
-
   return (
     <>
       {isModalVisible && (
         <div
-          className={`flex text-center flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
-            sizes === "w-[320px]" ? "p-5 pt-10" : "p-10"
+          className={`flex text-center relative flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
+            sizes === "w-[320px]" ? "py-5 px-6" : "py-10 px-12"
           } ${
             id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
           } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
-          <div className="text-xl">PLANS</div>
+          {/* Image  */}
+          <ImageLogo
+            image={image}
+            color={color}
+            tailwindClass="w-full h-full absolute top-0"
+          />
 
           {/* Title  */}
-          <Title title={title} sizes={sizes} margin="mt-[6%]" />
+          <Title title={title} sizes={sizes} margin="mt-[8%]" />
 
           {/* Content  */}
-          <Content content={content} sizes={sizes} />
+          {content?.content1 && (
+            <div
+              className={`text-xl font-bold text-center w-full break-words text-wrap mt-[6%] rounded-full py-2 border-4 z-10 ${color.borderColor}`}
+            >
+              {content.content1}
+            </div>
+          )}
+          {content?.content2 && (
+            <div className="text-xl text-center w-[80%] break-words text-wrap mt-[6%] z-10">
+              {content.content2}
+            </div>
+          )}
+
+          {/* Input  */}
+          <Input
+            input={input}
+            value={value}
+            handleInputChange={handleInputChange}
+            sizes={sizes}
+          />
 
           {/* Radio */}
-          <div className="flex flex-col">
-            {radio?.label1 && (
-              <div className="flex gap-2 mt-6">
-                <input
-                  type="radio"
-                  id={radio.label1}
-                  value={radio.label1}
-                  onClick={handleRadioClick}
-                  className="relative appearance-none shrink-0 mt-1 w-5 h-5 border-2 border-gray-400 rounded-full cursor-pointer"
-                />
-                {value.radioSelection === radio.label1 && (
-                  <div
-                    className={`absolute mt-1 w-5 h-5 rounded-full border-[7px] ${color.borderColor}`}
-                  />
-                )}
-                <label
-                  className="flex flex-col cursor-pointer"
-                  htmlFor={radio.label1}
-                >
-                  <span className="text-lg">{radio.label1}</span>
-                  <span className="text-sm text-gray-400">{radio.label1b}</span>
-                </label>
-              </div>
-            )}
-
-            {radio?.label2 && (
-              <div className="flex gap-2 mt-6">
-                <input
-                  type="radio"
-                  id={radio.label2}
-                  value={radio.label2}
-                  onClick={handleRadioClick}
-                  className="relative appearance-none shrink-0 mt-1 w-5 h-5 border-2 border-gray-400 rounded-full cursor-pointer"
-                />
-                {value.radioSelection === radio.label2 && (
-                  <div
-                    className={`absolute mt-1 w-5 h-5 rounded-full border-[7px] ${color.borderColor}`}
-                  />
-                )}
-                <label
-                  className="flex flex-col cursor-pointer"
-                  htmlFor={radio.label2}
-                >
-                  <span className="text-lg">{radio.label2}</span>
-                  <span className="text-sm text-gray-400">{radio.label2b}</span>
-                </label>
-              </div>
-            )}
-
-            {radio?.label3 && (
-              <div className="flex gap-2 mt-6">
-                <input
-                  type="radio"
-                  id={radio.label3}
-                  value={radio.label3}
-                  onClick={handleRadioClick}
-                  className="relative appearance-none shrink-0 mt-1 w-5 h-5 border-2 border-gray-400 rounded-full cursor-pointer"
-                />
-                {value.radioSelection === radio.label3 && (
-                  <div
-                    className={`absolute mt-1 w-5 h-5 rounded-full border-[7px] ${color.borderColor}`}
-                  />
-                )}
-                <label
-                  className="flex flex-col cursor-pointer"
-                  htmlFor={radio.label3}
-                >
-                  <span className="text-lg">{radio.label3}</span>
-                  <span className="text-sm text-gray-400">{radio.label3b}</span>
-                </label>
-              </div>
-            )}
-          </div>
+          <Radio
+            radio={radio}
+            color={color}
+            handleRadioClick={handleRadioClick}
+            value={value}
+            sizes={sizes}
+          />
 
           {/* Button */}
           <Button

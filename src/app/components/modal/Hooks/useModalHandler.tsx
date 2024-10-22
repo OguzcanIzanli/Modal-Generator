@@ -85,7 +85,6 @@ export const useModalHandler = ({
   }, [isModalVisible, isModalGeneratorWebsite, afterSeconds]);
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
     const { id } = e.currentTarget;
 
     if (!isModalGeneratorWebsite) {

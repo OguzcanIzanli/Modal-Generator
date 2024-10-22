@@ -76,6 +76,7 @@ const Template6: React.FC<TemplateProps> = ({ modalData }) => {
             value={value}
             handleInputChange={handleInputChange}
             color={color}
+            sizes={sizes}
           />
 
           {/* Checkbox */}

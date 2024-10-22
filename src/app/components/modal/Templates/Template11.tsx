@@ -75,7 +75,7 @@ const Template11: React.FC<TemplateProps> = ({ modalData }) => {
             {content?.content1 && (
               <div
                 className={`${
-                  sizes === "w-[320px]" ? "text-sm mb-[6%]" : "text-xl mb-[10%]"
+                  sizes === "w-[320px]" ? "text-sm mb-[6%]" : "text-xl mb-[6%]"
                 } w-full break-words text-wrap text-gray-400`}
               >
                 {content.content1}

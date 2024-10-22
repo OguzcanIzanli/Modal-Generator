@@ -77,7 +77,7 @@ const Template9: React.FC<TemplateProps> = ({ modalData }) => {
           )}
 
           <div
-            className={`bg-white scale-75 -translate-x-[25%] rounded-xl aspect-square flex flex-col justify-between shadow-[0_0_12px_rgba(0,0,0,0.25)] z-10 ${sizes} ${
+            className={`bg-white scale-75 -translate-x-[25%] rounded-xl aspect-square flex flex-col justify-center shadow-[0_0_12px_rgba(0,0,0,0.25)] z-10 ${sizes} ${
               sizes === "w-[320px]" ? "p-5 pt-10" : "p-10"
             }`}
           >
@@ -92,6 +92,7 @@ const Template9: React.FC<TemplateProps> = ({ modalData }) => {
               input={input}
               value={value}
               handleInputChange={handleInputChange}
+              sizes={sizes}
             />
 
             {/* Button */}
@@ -103,7 +104,7 @@ const Template9: React.FC<TemplateProps> = ({ modalData }) => {
             />
 
             {/* Link */}
-            <Link handleClick={handleClick} link={link} />
+            <Link handleClick={handleClick} link={link} sizes={sizes} />
 
             {/* Close Button  */}
             <CloseButton handleClick={handleClick} />

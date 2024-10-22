@@ -11,10 +11,11 @@ import { useModalHandler } from "../Hooks/useModalHandler";
 
 // Component
 import Content from "../Components/Content";
+import Link from "../Components/Link";
 import Title from "../Components/Title";
 import CloseButton from "../Components/CloseButton";
+import Input from "../Components/Input";
 import Button from "../Components/Button";
-import ImageLogo from "../Components/ImageLogo";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -24,9 +25,10 @@ const Template4: React.FC<TemplateProps> = ({ modalData }) => {
   const {
     id,
     title,
-    image,
     content,
     button,
+    link,
+    input,
     sizes,
     position,
     color,
@@ -36,34 +38,47 @@ const Template4: React.FC<TemplateProps> = ({ modalData }) => {
     webhookUrl,
   } = modalData;
 
-  const { isModalVisible, slide, isModalGeneratorWebsite, handleClick } =
-    useModalHandler({
-      afterScroll: Number(afterScroll),
-      trafficSource,
-      afterSeconds: Number(afterSeconds),
-      webhookUrl,
-    });
+  const {
+    isModalVisible,
+    slide,
+    value,
+    isModalGeneratorWebsite,
+    handleInputChange,
+    handleClick,
+  } = useModalHandler({
+    afterScroll: Number(afterScroll),
+    trafficSource,
+    afterSeconds: Number(afterSeconds),
+    inputEmail: !!input?.email,
+    inputPhone: !!input?.phone,
+    webhookUrl,
+  });
 
   return (
     <>
       {isModalVisible && (
         <div
-          className={`flex text-center flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
-            sizes === "w-[320px]" ? "p-5 pt-10" : "p-10"
-          } ${
+          className={`flex text-center flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out border-t-8 ${
+            color.borderColor
+          } ${sizes} ${sizes === "w-[320px]" ? "p-5 pt-10" : "p-10"} ${
             id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
           } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
-          {/* Logo  */}
-          <ImageLogo image={image} color={color} />
-
           {/* Title  */}
           <Title title={title} sizes={sizes} margin="mt-[8%]" />
 
           {/* Content  */}
           <Content content={content} sizes={sizes} />
+
+          {/* Input  */}
+          <Input
+            input={input}
+            value={value}
+            handleInputChange={handleInputChange}
+            sizes={sizes}
+          />
 
           {/* Button */}
           <Button
@@ -71,8 +86,10 @@ const Template4: React.FC<TemplateProps> = ({ modalData }) => {
             handleClick={handleClick}
             color={color}
             sizes={sizes}
-            flexDirection="flex-col-reverse"
           />
+
+          {/* Link */}
+          <Link handleClick={handleClick} link={link} sizes={sizes} />
 
           {/* Close Button  */}
           <CloseButton handleClick={handleClick} />

@@ -9,12 +9,9 @@ import { ModalDataType } from "@/app/data/modalData";
 // Hook
 import { useModalHandler } from "../Hooks/useModalHandler";
 
-// Component
-import Content from "../Components/Content";
-import Link from "../Components/Link";
+// Components
 import Title from "../Components/Title";
 import CloseButton from "../Components/CloseButton";
-import Input from "../Components/Input";
 import Button from "../Components/Button";
 import ImageLogo from "../Components/ImageLogo";
 
@@ -29,8 +26,6 @@ const Template8: React.FC<TemplateProps> = ({ modalData }) => {
     image,
     content,
     button,
-    link,
-    input,
     sizes,
     position,
     color,
@@ -40,48 +35,52 @@ const Template8: React.FC<TemplateProps> = ({ modalData }) => {
     webhookUrl,
   } = modalData;
 
-  const {
-    isModalVisible,
-    slide,
-    value,
-    isModalGeneratorWebsite,
-    handleInputChange,
-    handleClick,
-  } = useModalHandler({
-    afterScroll: Number(afterScroll),
-    trafficSource,
-    afterSeconds: Number(afterSeconds),
-    inputName: !!input?.name,
-    webhookUrl,
-  });
-
+  const { isModalVisible, slide, isModalGeneratorWebsite, handleClick } =
+    useModalHandler({
+      afterScroll: Number(afterScroll),
+      trafficSource,
+      afterSeconds: Number(afterSeconds),
+      webhookUrl,
+    });
   return (
     <>
       {isModalVisible && (
         <div
-          className={`flex text-center flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
-            sizes === "w-[320px]" ? "p-5 pt-10" : "p-10"
-          } ${
+          className={`flex flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out ${
+            color.background
+          } ${sizes} ${sizes === "w-[320px]" ? "p-5 pt-10" : "p-10"} ${
             id
               ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
           } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
-          {/* Image  */}
-          <ImageLogo image={image} color={color} tailwindClass="w-1/2" />
+          <div className="flex justify-start w-full items-center">
+            {/* Logo  */}
+            {image?.imageUrl && (
+              <div
+                className={`flex items-center justify-center rounded-full w-[80px] aspect-[1/1] mr-2 ${color.background} ${color.borderColor}`}
+              >
+                <ImageLogo image={image} tailwindClass="w-2/3" />
+              </div>
+            )}
+            {content?.content1 && (
+              <div
+                className={`text-2xl font-bold w-full break-words text-wrap ${color.textBg}`}
+              >
+                {content.content1}
+              </div>
+            )}
+          </div>
 
           {/* Title  */}
           <Title title={title} sizes={sizes} margin="mt-[8%]" />
 
           {/* Content  */}
-          <Content content={content} sizes={sizes} />
-
-          {/* Input  */}
-          <Input
-            input={input}
-            value={value}
-            handleInputChange={handleInputChange}
-          />
+          {content?.content2 && (
+            <div className="text-xl text-left w-full break-words text-wrap mt-[6%]">
+              {content.content2}
+            </div>
+          )}
 
           {/* Button */}
           <Button
@@ -89,10 +88,8 @@ const Template8: React.FC<TemplateProps> = ({ modalData }) => {
             handleClick={handleClick}
             color={color}
             sizes={sizes}
+            flexDirection="flex-row-reverse"
           />
-
-          {/* Link */}
-          <Link handleClick={handleClick} link={link} />
 
           {/* Close Button  */}
           <CloseButton handleClick={handleClick} />

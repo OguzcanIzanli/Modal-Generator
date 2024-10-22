@@ -10,13 +10,6 @@ export async function POST(request: Request) {
     const {
       entry,
       title,
-      image,
-      content,
-      button,
-      link,
-      input,
-      radio,
-      feedback,
       sizes,
       color,
       position,
@@ -27,169 +20,144 @@ export async function POST(request: Request) {
       webhookUrl,
     } = userConfig;
 
+    // Image
+    const image = {
+      ...(userConfig.image.logoUrl && { logoUrl: userConfig.image.logoUrl }),
+      ...(userConfig.image.imageUrl && { imageUrl: userConfig.image.imageUrl }),
+    };
+
+    // Content
+    const content = {
+      ...(userConfig.content.content1 && {
+        content1: userConfig.content.content1,
+      }),
+      ...(userConfig.content.content2 && {
+        content2: userConfig.content.content2,
+      }),
+      ...(userConfig.content.content3 && {
+        content3: userConfig.content.content3,
+      }),
+    };
+
+    // Button
+    const button = {
+      ...(userConfig.button.buttonAnchor && {
+        buttonAnchor: userConfig.button.buttonAnchor,
+      }),
+      ...(userConfig.button.buttonAnchorLink && {
+        buttonAnchorLink: userConfig.button.buttonAnchorLink,
+      }),
+      ...(userConfig.button.buttonAnchor2 && {
+        buttonAnchor2: userConfig.button.buttonAnchor2,
+      }),
+      ...(userConfig.button.buttonAnchorLink2 && {
+        buttonAnchorLink2: userConfig.button.buttonAnchorLink2,
+      }),
+      ...(userConfig.button.buttonAnchor3 && {
+        buttonAnchor3: userConfig.button.buttonAnchor3,
+      }),
+      ...(userConfig.button.buttonAnchorLink3 && {
+        buttonAnchorLink3: userConfig.button.buttonAnchorLink3,
+      }),
+      ...(userConfig.button.button2 && { button2: userConfig.button.button2 }),
+    };
+
+    // Link
+    const link = {
+      ...(userConfig.link.link1 && { link1: userConfig.link.link1 }),
+      ...(userConfig.link.linkURL1 && { linkURL1: userConfig.link.linkURL1 }),
+      ...(userConfig.link.link2 && { link2: userConfig.link.link2 }),
+      ...(userConfig.link.linkURL2 && { linkURL2: userConfig.link.linkURL2 }),
+    };
+
+    // Input
+    const input = {
+      ...(userConfig.input.name && { name: userConfig.input.name }),
+      ...(userConfig.input.email && { email: userConfig.input.email }),
+      ...(userConfig.input.phone && { phone: userConfig.input.phone }),
+    };
+
+    // Radio
+    const radio = {
+      ...(userConfig.radio.label1 && {
+        label1: userConfig.radio.label1,
+      }),
+      ...(userConfig.radio.label1b && {
+        label1b: userConfig.radio.label1b,
+      }),
+      ...(userConfig.radio.label2 && {
+        label2: userConfig.radio.label2,
+      }),
+      ...(userConfig.radio.label2b && {
+        label2b: userConfig.radio.label2b,
+      }),
+      ...(userConfig.radio.label3 && {
+        label3: userConfig.radio.label3,
+      }),
+      ...(userConfig.radio.label3b && {
+        label3b: userConfig.radio.label3b,
+      }),
+    };
+
+    // Feedback
+    const feedback = {
+      ...(userConfig.feedback.feedbackURL1 && {
+        feedbackURL1: userConfig.feedback.feedbackURL1,
+      }),
+      ...(userConfig.feedback.feedbackURL1Label && {
+        feedbackURL1Label: userConfig.feedback.feedbackURL1Label,
+      }),
+      ...(userConfig.feedback.feedbackURL2 && {
+        feedbackURL2: userConfig.feedback.feedbackURL2,
+      }),
+      ...(userConfig.feedback.feedbackURL2Label && {
+        feedbackURL2Label: userConfig.feedback.feedbackURL2Label,
+      }),
+      ...(userConfig.feedback.feedbackURL3 && {
+        feedbackURL3: userConfig.feedback.feedbackURL3,
+      }),
+      ...(userConfig.feedback.feedbackURL3Label && {
+        feedbackURL3Label: userConfig.feedback.feedbackURL3Label,
+      }),
+      ...(userConfig.feedback.feedbackURL4 && {
+        feedbackURL4: userConfig.feedback.feedbackURL4,
+      }),
+      ...(userConfig.feedback.feedbackURL4Label && {
+        feedbackURL4Label: userConfig.feedback.feedbackURL4Label,
+      }),
+      ...(userConfig.feedback.feedbackURL5 && {
+        feedbackURL5: userConfig.feedback.feedbackURL5,
+      }),
+      ...(userConfig.feedback.feedbackURL5Label && {
+        feedbackURL5Label: userConfig.feedback.feedbackURL5Label,
+      }),
+    };
+
+    const config = {
+      ...(title && { title }),
+      ...(Object.keys(image).length && { image }),
+      ...(Object.keys(content).length && { content }),
+      ...(Object.keys(button).length && { button }),
+      ...(Object.keys(link).length && { link }),
+      ...(Object.keys(input).length && { input }),
+      ...(userConfig.checkbox1 && { checkbox1: userConfig.checkbox1 }),
+      ...(Object.keys(radio).length && { radio }),
+      ...(Object.keys(feedback).length && { feedback }),
+      sizes,
+      position,
+      color,
+      ...(device && { device }),
+      afterSeconds: afterSeconds || 0,
+      afterScroll: afterScroll || 0,
+      trafficSource: trafficSource || "",
+      ...(webhookUrl && { webhookUrl }),
+    };
+
     const embedCode = `<script type="text/javascript" src="${
       process.env.NEXT_PUBLIC_API_URL
-    }/dist/${entry}.js"></script>
-    <script>
-    window.MyModal.init({
-      ${title ? `title: "${title}",` : ""}
-       ${
-         image.logoUrl || image.imageUrl
-           ? `image: {
-          ${image.logoUrl ? `logoUrl: "${image.logoUrl}"` : ""}
-          ${image.imageUrl ? `, imageUrl: "${image.imageUrl}"` : ""}
-          },`
-           : ""
-       }
-      ${
-        content.content1 || content.content2
-          ? `content: {
-          ${content.content1 ? `content1: "${content.content1}"` : ""}
-          ${content.content2 ? `, content2: "${content.content2}"` : ""}
-          ${content.content3 ? `, content3: "${content.content3}"` : ""}},`
-          : ""
-      }
-      ${
-        button.buttonAnchor ||
-        button.buttonAnchor2 ||
-        button.buttonAnchor3 ||
-        button.button2
-          ? `button: {
-        ${button.buttonAnchor ? `buttonAnchor: "${button.buttonAnchor}"` : ""}
-        ${
-          button.buttonAnchorLink
-            ? `, buttonAnchorLink: "${button.buttonAnchorLink}"`
-            : ""
-        }
-        ${
-          button.buttonAnchor2
-            ? `, buttonAnchor2: "${button.buttonAnchor2}"`
-            : ""
-        }
-        ${
-          button.buttonAnchorLink2
-            ? `, buttonAnchorLink2: "${button.buttonAnchorLink2}"`
-            : ""
-        }
-        ${
-          button.buttonAnchor3
-            ? `, buttonAnchor3: "${button.buttonAnchor3}"`
-            : ""
-        }
-        ${
-          button.buttonAnchorLink3
-            ? `, buttonAnchorLink3: "${button.buttonAnchorLink3}"`
-            : ""
-        } 
-        ${button.button2 ? `, button2: "${button.button2}"` : ""}},`
-          : ""
-      }
-      ${
-        link.link1 || link.link2
-          ? `link: {
-          ${link.link1 ? `link1: "${link.link1}"` : ""} 
-          ${link.linkURL1 ? `, linkURL1: "${link.linkURL1}"` : ""}
-          ${link.link2 ? `, link2: "${link.link2}"` : ""} 
-          ${link.linkURL2 ? `, linkURL2: "${link.linkURL2}"` : ""}},`
-          : ""
-      }
-      ${
-        input.name || input.email || input.phone
-          ? `input: {
-          ${input.name ? `name: "${input.name}"` : ""}
-          ${input.email ? `, email: "${input.email}"` : ""}
-          ${input.phone ? `, phone: "${input.phone}"` : ""}
-          },`
-          : ""
-      }
-      ${userConfig.checkbox1 ? `checkbox1: "${userConfig.checkbox1}",` : ""}
-      ${
-        radio.label1 || radio.label2 || radio.label3
-          ? `radio: {
-        ${radio.label1 ? `label1: "${radio.label1}"` : ""}
-        ${radio.label1b ? `, label1b: "${radio.label1b}"` : ""}
-        ${radio.label2 ? `, label2: "${radio.label2}"` : ""}
-        ${radio.label2b ? `, label2b: "${radio.label2b}"` : ""}
-        ${radio.label3 ? `, label3: "${radio.label3}"` : ""}
-        ${radio.label3b ? `, label3b: "${radio.label3b}"` : ""}},`
-          : ""
-      }
-      ${
-        feedback.feedbackURL1 ||
-        feedback.feedbackURL2 ||
-        feedback.feedbackURL3 ||
-        feedback.feedbackURL4 ||
-        feedback.feedbackURL5
-          ? `feedback: {
-        ${
-          feedback.feedbackURL1
-            ? `feedbackURL1: "${feedback.feedbackURL1}"`
-            : ""
-        }
-        ${
-          feedback.feedbackURL1Label
-            ? `, feedbackURL1Label: "${feedback.feedbackURL1Label}"`
-            : ""
-        }
-        ${
-          feedback.feedbackURL2
-            ? `, feedbackURL2: "${feedback.feedbackURL2}"`
-            : ""
-        }
-        ${
-          feedback.feedbackURL2Label
-            ? `, feedbackURL2Label: "${feedback.feedbackURL2Label}"`
-            : ""
-        }
-        ${
-          feedback.feedbackURL3
-            ? `, feedbackURL3: "${feedback.feedbackURL3}"`
-            : ""
-        }
-        ${
-          feedback.feedbackURL3Label
-            ? `, feedbackURL3Label: "${feedback.feedbackURL3Label}"`
-            : ""
-        }
-         ${
-           feedback.feedbackURL4
-             ? `, feedbackURL4: "${feedback.feedbackURL4}"`
-             : ""
-         }
-        ${
-          feedback.feedbackURL4Label
-            ? `, feedbackURL4Label: "${feedback.feedbackURL4Label}"`
-            : ""
-        }
-        ${
-          feedback.feedbackURL5
-            ? `, feedbackURL5: "${feedback.feedbackURL5}"`
-            : ""
-        }
-        ${
-          feedback.feedbackURL5Label
-            ? `, feedbackURL5Label: "${feedback.feedbackURL5Label}"`
-            : ""
-        }
-        },`
-          : ""
-      }
-      sizes: "${sizes}",
-      position: { position: "${position.position}", slide: "${
-      position.slide
-    }" },
-      color: { background: "${color.background}", borderColor: "${
-      color.borderColor
-    }", text: "${color.text}", ${
-      color.textBg ? `textBg: "${color.textBg}",` : ""
-    } },
-      ${device ? `device: "${device}",` : ""}
-      ${afterSeconds ? `afterSeconds: ${afterSeconds},` : `afterSeconds: 0,`}
-      ${afterScroll ? `afterScroll: ${afterScroll},` : `afterScroll: 0,`}
-      trafficSource: "${trafficSource}",
-      ${webhookUrl ? `webhookUrl: "${webhookUrl}",` : ""}
-    });
-    </script>`
+    }/dist/${entry}.js"></script><script>window.MyModal.init(${JSON.stringify(
+      config
+    )});</script>`
       .replace(/\s\s+/g, " ")
       .trim();
 

@@ -13,8 +13,8 @@ import { useModalHandler } from "../Hooks/useModalHandler";
 import Content from "../Components/Content";
 import Title from "../Components/Title";
 import CloseButton from "../Components/CloseButton";
-import Button from "../Components/Button";
 import ImageLogo from "../Components/ImageLogo";
+import Feedback from "../Components/Feedback";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -26,7 +26,7 @@ const Template12: React.FC<TemplateProps> = ({ modalData }) => {
     title,
     image,
     content,
-    button,
+    feedback,
     sizes,
     position,
     color,
@@ -48,30 +48,54 @@ const Template12: React.FC<TemplateProps> = ({ modalData }) => {
     <>
       {isModalVisible && (
         <div
-          className={`flex text-center flex-col items-center justify-between rounded-xl font-sans shadow-[0_0_12px_rgba(0,0,0,0.25)] bg-white text-black transition-transform duration-1000 ease-out ${sizes} ${
-            sizes === "w-[320px]" ? "p-5 pt-10" : "p-10"
-          } ${
+          className={`flex text-center flex-col items-center justify-between rounded-xl font-sans relative shadow-[0_0_12px_rgba(0,0,0,0.25)] mt-20 bg-white text-black transition-transform duration-1000 ease-out ${
+            color.text
+          } ${sizes} ${
             id
-              ? "sticky top-10 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
+              ? "sticky top-20 left-1/2 scale-75 -translate-y-[12%] -translate-x-[12%]"
               : ""
           } ${!isModalGeneratorWebsite && (slide ? "" : position.slide)}`}
         >
-          {/* Logo  */}
-          <ImageLogo image={image} color={color} />
+          {/* Image */}
+          {image?.imageUrl && (
+            <div
+              className={`flex items-center w-[30%] aspect-square justify-center rounded-full absolute top-0 -translate-y-[50%] z-10 ${color.background} ${color.borderColor}`}
+            >
+              <ImageLogo image={image} tailwindClass="w-2/3" />
+            </div>
+          )}
 
-          {/* Title  */}
-          <Title title={title} sizes={sizes} margin="mt-[8%]" />
+          <div className="absolute z-10 text-black top-10 w-full px-10">
+            {/* Title  */}
+            <Title title={title} sizes={sizes} margin="mt-[16%]" />
 
-          {/* Content  */}
-          <Content content={content} sizes={sizes} />
+            {/* Content  */}
+            <Content content={content} sizes={sizes} />
+          </div>
 
-          {/* Button */}
-          <Button
-            button={button}
-            handleClick={handleClick}
-            color={color}
-            sizes={sizes}
-          />
+          <div
+            className={`flex flex-col items-center justify-between w-full font-sans relative rounded-t-xl py-14 opacity-20 ${
+              sizes === "w-[320px]" ? "px-5" : "px-10"
+            } ${color.background}`}
+          >
+            {/* Title  */}
+            {title && <div className="mt-[16%] opacity-0">{title}</div>}
+
+            {/* Content  */}
+            {content?.content1 && (
+              <div className="mt-[6%] opacity-0">{content.content1}</div>
+            )}
+          </div>
+
+          {/* Feedback  */}
+          <div className="mx-[2%] mb-[6%]">
+            <Feedback
+              feedback={feedback}
+              sizes={sizes}
+              handleClick={handleClick}
+              label={true}
+            />
+          </div>
 
           {/* Close Button  */}
           <CloseButton handleClick={handleClick} />

@@ -2,7 +2,6 @@
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Image from "next/image";
 
 // Type
 import { ModalDataType } from "@/app/data/modalData";
@@ -15,6 +14,7 @@ import Content from "../Components/Content";
 import Title from "../Components/Title";
 import CloseButton from "../Components/CloseButton";
 import Button from "../Components/Button";
+import Feedback from "../Components/Feedback";
 
 interface TemplateProps {
   modalData: ModalDataType;
@@ -73,92 +73,12 @@ const Template5: React.FC<TemplateProps> = ({ modalData }) => {
           />
 
           {/* Feedback  */}
-          <div className="flex justify-between">
-            {feedback?.feedbackURL1 && (
-              <button
-                className={`rounded-full flex items-center justify-center w-[12%] transition hover:scale-125 active:scale-110 mt-[6%]`}
-                onClick={handleClick}
-                id="Sad"
-              >
-                <Image
-                  src={feedback.feedbackURL1 ? feedback?.feedbackURL1 : ""}
-                  className="w-full"
-                  width={0}
-                  height={0}
-                  unoptimized
-                  alt=""
-                />
-              </button>
-            )}
-
-            {feedback?.feedbackURL2 && (
-              <button
-                className={`rounded-full flex items-center justify-center w-[12%] transition hover:scale-125 active:scale-110 mt-[6%]`}
-                onClick={handleClick}
-                id="Confused"
-              >
-                <Image
-                  src={feedback.feedbackURL2 ? feedback?.feedbackURL2 : ""}
-                  className="w-full"
-                  width={0}
-                  height={0}
-                  unoptimized
-                  alt=""
-                />
-              </button>
-            )}
-
-            {feedback?.feedbackURL3 && (
-              <button
-                className={`rounded-full flex items-center justify-center w-[12%] transition hover:scale-125 active:scale-110 mt-[6%]`}
-                onClick={handleClick}
-                id="Pleased"
-              >
-                <Image
-                  src={feedback.feedbackURL3 ? feedback?.feedbackURL3 : ""}
-                  className="w-full"
-                  width={0}
-                  height={0}
-                  unoptimized
-                  alt=""
-                />
-              </button>
-            )}
-
-            {feedback?.feedbackURL4 && (
-              <button
-                className={`rounded-full flex items-center justify-center w-[12%] transition hover:scale-125 active:scale-110 mt-[6%]`}
-                onClick={handleClick}
-                id="Happy"
-              >
-                <Image
-                  src={feedback.feedbackURL4 ? feedback?.feedbackURL4 : ""}
-                  className="w-full"
-                  width={0}
-                  height={0}
-                  unoptimized
-                  alt=""
-                />
-              </button>
-            )}
-
-            {feedback?.feedbackURL5 && (
-              <button
-                className={`rounded-full flex items-center justify-center w-[12%] transition hover:scale-125 active:scale-110 mt-[6%]`}
-                onClick={handleClick}
-                id="Very Happy"
-              >
-                <Image
-                  src={feedback.feedbackURL5 ? feedback?.feedbackURL5 : ""}
-                  className="w-full"
-                  width={0}
-                  height={0}
-                  unoptimized
-                  alt=""
-                />
-              </button>
-            )}
-          </div>
+          <Feedback
+            feedback={feedback}
+            sizes={sizes}
+            handleClick={handleClick}
+            label={false}
+          />
 
           {/* Close Button  */}
           <CloseButton handleClick={handleClick} color={color.text} />

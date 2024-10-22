@@ -81,6 +81,7 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
               input={input}
               value={value}
               handleInputChange={handleInputChange}
+              sizes={sizes}
             />
 
             {/* Button */}
@@ -93,7 +94,7 @@ const Template2: React.FC<TemplateProps> = ({ modalData }) => {
             />
 
             {/* Link */}
-            <Link handleClick={handleClick} link={link} />
+            <Link handleClick={handleClick} link={link} sizes={sizes} />
           </div>
 
           {/* Close Button  */}

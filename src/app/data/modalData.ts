@@ -131,7 +131,7 @@ export const modalData: ModalDataType[] = [
   },
   {
     id: 3,
-    template: "Template3",
+    template: "Template1",
     title: "Choose best for you",
     content: { content1: "Only pay for the capacity that you use." },
     button: {
@@ -162,7 +162,7 @@ export const modalData: ModalDataType[] = [
   },
   {
     id: 4,
-    template: "Template4",
+    template: "Template1",
     title: "Delete your profile",
     image: {
       logoUrl:
@@ -192,7 +192,7 @@ export const modalData: ModalDataType[] = [
   },
   {
     id: 5,
-    template: "Template2",
+    template: "Template1",
     title: "The file is on it's way",
     content: {
       content1:
@@ -242,7 +242,7 @@ export const modalData: ModalDataType[] = [
   },
   {
     id: 7,
-    template: "Template20",
+    template: "Template3",
     title: "Sign up for our newsletter",
     image: {
       imageUrl:
@@ -358,7 +358,7 @@ export const modalData: ModalDataType[] = [
   },
   {
     id: 11,
-    template: "Template8",
+    template: "Template1",
     title: "Check your email",
     image: {
       imageUrl:
@@ -475,7 +475,7 @@ export const modalData: ModalDataType[] = [
   },
   {
     id: 15,
-    template: "Template1",
+    template: "Template5",
     title: "Let’s feedback",
     feedback: {
       feedbackURL1:
@@ -504,7 +504,7 @@ export const modalData: ModalDataType[] = [
   },
   {
     id: 16,
-    template: "Template12",
+    template: "Template1",
     title: "Hey there🥳",
     image: {
       logoUrl:
@@ -628,7 +628,7 @@ export const modalData: ModalDataType[] = [
   },
   {
     id: 21,
-    template: "Template17",
+    template: "Template12",
     title: "Do you like our design?",
     image: {
       imageUrl:
@@ -667,7 +667,7 @@ export const modalData: ModalDataType[] = [
   },
   {
     id: 22,
-    template: "Template18",
+    template: "Template8",
     title: "Learn, share and connect with our community.",
     image: {
       imageUrl:
@@ -698,7 +698,7 @@ export const modalData: ModalDataType[] = [
   },
   {
     id: 23,
-    template: "Template19",
+    template: "Template4",
     title: "Get straight to growing your business well",
     content: {
       content1: "There’s good news for parents who have child born.",
@@ -727,7 +727,7 @@ export const modalData: ModalDataType[] = [
 
   {
     id: 24,
-    template: "Template8",
+    template: "Template1",
     title: "Opps",
     image: {
       imageUrl:

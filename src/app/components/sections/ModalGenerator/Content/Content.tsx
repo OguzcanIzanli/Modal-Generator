@@ -82,19 +82,7 @@ const Content = () => {
       />
       <Input
         type="text"
-        name="feedbackURL1Label"
-        name2="feedback"
-        placeholder="1st feedback"
-      />
-      <Input
-        type="text"
         name="feedbackURL2"
-        name2="feedback"
-        placeholder="2nd feedback"
-      />
-      <Input
-        type="text"
-        name="feedbackURL2Label"
         name2="feedback"
         placeholder="2nd feedback"
       />
@@ -106,31 +94,13 @@ const Content = () => {
       />
       <Input
         type="text"
-        name="feedbackURL3Label"
-        name2="feedback"
-        placeholder="3rd feedback"
-      />
-      <Input
-        type="text"
         name="feedbackURL4"
         name2="feedback"
         placeholder="4th feedback"
       />
       <Input
         type="text"
-        name="feedbackURL4Label"
-        name2="feedback"
-        placeholder="4th feedback"
-      />
-      <Input
-        type="text"
         name="feedbackURL5"
-        name2="feedback"
-        placeholder="5th feedback"
-      />
-      <Input
-        type="text"
-        name="feedbackURL5Label"
         name2="feedback"
         placeholder="5th feedback"
       />

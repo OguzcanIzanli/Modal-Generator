@@ -10,5 +10,39 @@
       }
     </style>
   </head>
-  <body></body>
+  <body>
+    <script
+      type="text/javascript"
+      src="http://localhost:3000/dist/Template17.js"
+    ></script>
+    <script>
+      window.MyModal.init({
+        title: "Let's get in touch",
+        image: {
+          imageUrl:
+            "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal26bg.png?alt=media&token=67ecc25d-77be-465b-8c35-6e4afdf31b52",
+        },
+        content: { content1: "Let's create something beautiful together." },
+        button: { buttonAnchor: "Send message" },
+        link: { link1: "GitHub", link2: "LinkedIn" },
+        input: {
+          name: "Enter your name",
+          email: "Enter your email address",
+          message: "Enter your message",
+        },
+        sizes: "w-[480px]",
+        position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },
+        color: {
+          background: "bg-violet-600",
+          borderColor: "border-2 border-violet-600",
+          text: "text-white",
+        },
+        afterSeconds: 0,
+        afterScroll: 0,
+        trafficSource: "",
+        webhookUrl:
+          "https://hook.eu2.make.com/owgs6fu2vf8fr4m2m4zfe6grgmvt6me7",
+      });
+    </script>
+  </body>
 </html>

@@ -12,7 +12,7 @@ const Link: React.FC<LinkProps> = ({ link, handleClick, sizes }) => {
     <>
       {(link?.link1 || link?.link2) && (
         <div
-          className={`flex justify-between gap-4 w-full break-words text-wrap ${
+          className={`flex justify-between gap-4 w-full break-words text-wrap z-10 ${
             sizes === "w-[320px]"
               ? "text-xs"
               : sizes === "w-[640px]"

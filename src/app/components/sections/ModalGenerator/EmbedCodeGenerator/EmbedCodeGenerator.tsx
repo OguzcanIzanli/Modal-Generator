@@ -50,7 +50,12 @@ const EmbedCodeGenerator = () => {
           link2: link?.link2,
           linkURL2: link?.linkURL2,
         },
-        input: { name: input?.name, email: input?.email, phone: input?.phone },
+        input: {
+          name: input?.name,
+          email: input?.email,
+          phone: input?.phone,
+          message: input?.message,
+        },
         checkbox1: modal.checkbox1,
         radio: {
           label1: radio?.label1,

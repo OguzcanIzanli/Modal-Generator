@@ -27,7 +27,7 @@ export interface ModalDataType {
   // Checkbox
   checkbox1?: string;
   // Input
-  input?: { name?: string; email?: string; phone?: string };
+  input?: { name?: string; email?: string; phone?: string; message?: string };
   // Radio
   radio?: {
     label1?: string;
@@ -724,7 +724,6 @@ export const modalData: ModalDataType[] = [
     trafficSource: "",
     webhookUrl: "",
   },
-
   {
     id: 24,
     template: "Template1",
@@ -763,6 +762,42 @@ export const modalData: ModalDataType[] = [
       buttonAnchorLink: "",
       buttonAnchor3: "Sign up now",
       buttonAnchorLink3: "",
+    },
+    sizes: "w-[480px]",
+    position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },
+    color: {
+      background: "bg-violet-600",
+      borderColor: "border-2 border-violet-600",
+      text: "text-white",
+    },
+    device: "",
+    afterSeconds: "",
+    afterScroll: "",
+    trafficSource: "",
+    webhookUrl: "",
+  },
+  {
+    id: 26,
+    template: "Template17",
+    title: "Let's get in touch",
+    image: {
+      imageUrl:
+        "https://firebasestorage.googleapis.com/v0/b/dropzone-cd38e.appspot.com/o/images%2Fmodal26bg.png?alt=media&token=67ecc25d-77be-465b-8c35-6e4afdf31b52",
+    },
+    content: {
+      content1: "Let's create something beautiful together.",
+    },
+    input: {
+      name: "Enter your name",
+      email: "Enter your email address",
+      message: "Enter your message",
+    },
+    button: { buttonAnchor: "Send message" },
+    link: {
+      link1: "GitHub",
+      linkURL1: "",
+      link2: "LinkedIn",
+      linkURL2: "",
     },
     sizes: "w-[480px]",
     position: { position: "bottom-5 right-5", slide: "translate-x-[120%]" },

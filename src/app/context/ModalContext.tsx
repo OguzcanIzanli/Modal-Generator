@@ -21,7 +21,7 @@ export const initialModalData = {
   },
   link: { link1: "", linkURL1: "", link2: "", linkURL2: "" },
   checkbox1: "",
-  input: { name: "", email: "", phone: "" },
+  input: { name: "", email: "", phone: "", message: "" },
   radio: {
     label1: "",
     label1b: "",

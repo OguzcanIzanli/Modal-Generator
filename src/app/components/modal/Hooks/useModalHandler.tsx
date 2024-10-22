@@ -12,8 +12,10 @@ interface UseModalHandlerProps {
   inputEmail?: boolean;
   inputName?: boolean;
   inputPhone?: boolean;
+  inputMessage?: boolean;
   radioSelection?: boolean;
   webhookUrl: string;
+  alwaysOpen?: boolean;
 }
 
 export const useModalHandler = ({
@@ -23,8 +25,10 @@ export const useModalHandler = ({
   inputEmail,
   inputName,
   inputPhone,
+  inputMessage,
   radioSelection,
   webhookUrl,
+  alwaysOpen,
 }: UseModalHandlerProps) => {
   const isModalGeneratorWebsite =
     process.env.NEXT_PUBLIC_API_URL?.includes("modal-generator");
@@ -40,11 +44,13 @@ export const useModalHandler = ({
     name: string;
     email: string;
     phone: number | null;
+    message: string;
     radioSelection: string | null;
   }>({
     name: "",
     email: "",
     phone: null,
+    message: "",
     radioSelection: "",
   });
 
@@ -69,11 +75,13 @@ export const useModalHandler = ({
     isModalTriggered && isTrafficSource && isModalOpen === "true";
 
   const { sendWebhookData } = useWebhook();
+
   const webhookData: {
     userClick?: string;
     email?: string;
     name?: string;
     phone?: number | string;
+    message?: string;
     radioSelection?: string;
   } = {};
 
@@ -82,7 +90,8 @@ export const useModalHandler = ({
       const timer = setTimeout(() => setSlide(true), afterSeconds + 500);
       return () => clearTimeout(timer);
     }
-  }, [isModalVisible, isModalGeneratorWebsite, afterSeconds]);
+    alwaysOpen && localStorage.setItem("isOpen", "true");
+  }, [isModalVisible, isModalGeneratorWebsite, afterSeconds, alwaysOpen]);
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     const { id } = e.currentTarget;
@@ -92,10 +101,11 @@ export const useModalHandler = ({
       inputEmail && (webhookData.email = value.email || "Not written.");
       inputName && (webhookData.name = value.name || "Not written.");
       inputPhone && (webhookData.phone = value.phone || "Not written.");
+      inputMessage && (webhookData.message = value.message || "Not written.");
       radioSelection &&
         (webhookData.radioSelection = value.radioSelection || "Not selected.");
 
-      localStorage.setItem("isOpen", "false");
+      !alwaysOpen && localStorage.setItem("isOpen", "false");
       sendWebhookData(webhookData, webhookUrl);
       setIsModalOpen("false");
     }

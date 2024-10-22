@@ -11,7 +11,7 @@ const Content: React.FC<ContentProps> = ({ content, sizes }) => {
     <>
       {content?.content1 && (
         <div
-          className={`w-full break-words text-wrap mt-[6%] ${
+          className={`w-full break-words text-wrap mt-[6%] z-10 ${
             sizes === "w-[320px]"
               ? "text-base"
               : sizes === "w-[640px]"
@@ -25,7 +25,7 @@ const Content: React.FC<ContentProps> = ({ content, sizes }) => {
 
       {content?.content2 && (
         <div
-          className={`w-full text-left rounded-xl py-3 px-4 mt-[6%] border-2 border-gray-400 break-words text-wrap ${
+          className={`w-full text-left rounded-xl py-3 px-4 mt-[6%] border-2 border-gray-400 break-words text-wrap z-10 ${
             sizes === "w-[320px]"
               ? "text-sm"
               : sizes === "w-[640px]"
@@ -39,7 +39,7 @@ const Content: React.FC<ContentProps> = ({ content, sizes }) => {
 
       {content?.content3 && (
         <div
-          className={`w-[80%] text-gray-400 break-words text-wrap mt-[6%] ${
+          className={`w-[80%] text-gray-400 break-words text-wrap mt-[6%] z-10 ${
             sizes === "w-[320px]"
               ? "text-sm"
               : sizes === "w-[640px]"

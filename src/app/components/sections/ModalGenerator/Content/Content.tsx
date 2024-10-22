@@ -60,14 +60,14 @@ const Content = () => {
         type="text"
         name="linkURL1"
         name2="link"
-        placeholder={`Hyperlink for ${modal.link?.link1} button`}
+        placeholder={`Hyperlink for ${modal.link?.link1} Link`}
       />
       <Input type="text" name="link2" name2="link" />
       <Input
         type="text"
         name="linkURL2"
         name2="link"
-        placeholder={`Hyperlink for ${modal.link?.link2} button`}
+        placeholder={`Hyperlink for ${modal.link?.link2} Link`}
       />
 
       {/* Checkbox  */}

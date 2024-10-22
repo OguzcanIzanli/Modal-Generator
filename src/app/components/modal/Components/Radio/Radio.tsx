@@ -22,7 +22,9 @@ const Radio: React.FC<RadioProps> = ({
 }) => {
   return (
     <div
-      className={`flex text-left ${flexDirection} gap-6 ${radio && "mt-[6%]"}`}
+      className={`flex text-left ${flexDirection} gap-6 ${
+        radio && "mt-[6%]"
+      } z-10`}
     >
       {radioLabels.map((item, index) =>
         radio?.[item as keyof typeof radio] ? (

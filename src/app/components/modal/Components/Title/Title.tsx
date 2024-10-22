@@ -12,7 +12,7 @@ const Title: React.FC<TitleProps> = ({ title, sizes, margin }) => {
     <>
       {title && (
         <div
-          className={`font-bold w-full break-words text-wrap ${margin} ${
+          className={`font-bold w-full break-words text-wrap z-10 ${margin} ${
             sizes === "w-[320px]"
               ? "text-2xl"
               : sizes === "w-[640px]"

@@ -75,6 +75,7 @@ export async function POST(request: Request) {
       ...(userConfig.input.name && { name: userConfig.input.name }),
       ...(userConfig.input.email && { email: userConfig.input.email }),
       ...(userConfig.input.phone && { phone: userConfig.input.phone }),
+      ...(userConfig.input.message && { message: userConfig.input.message }),
     };
 
     // Radio

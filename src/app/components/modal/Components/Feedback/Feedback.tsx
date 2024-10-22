@@ -26,7 +26,7 @@ const Feedback: React.FC<FeedbackProps> = ({
   return (
     <>
       {feedback && (
-        <div className="flex justify-between text-black mt-[6%]">
+        <div className="flex justify-between text-black mt-[6%] z-10">
           {feedbackUrls.map((item) => (
             <div key={item}>
               {feedback?.[item as keyof typeof feedback] && (
